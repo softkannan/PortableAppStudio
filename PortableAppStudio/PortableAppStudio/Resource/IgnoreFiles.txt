@@ -1,0 +1,17 @@
+﻿%ProgramData%\Microsoft\RAC\StateData\RacMetaData.dat
+%ProgramData%\Microsoft\RAC\StateData\RacWmiEventData.dat
+%ProgramData%\Microsoft\Search\Data\Applications\Windows\MSS*.log
+%ProgramData%\Microsoft\Search\Data\Applications\Windows\tmp.edb
+%ProgramData%\Microsoft\Search\Data\Applications\Windows\windows.edb
+%SystemDrive%\Ffastun*
+%SystemDrive%\hiberfil.sys
+%SystemDrive%\pagefile.sys
+%SystemRoot%\assembly\NativeImages_v2.0.50727_32\index*.dat
+%SystemRoot%\assembly\NativeImages_v2.0.50727_64\index*.dat
+%SystemRoot%\SchedLgU.txt
+%SystemRoot%\ServiceProfiles\*\NTUSER.DAT*
+%SystemRoot%\System32\config\system.LOG
+%SystemRoot%\System32\perflib_perfdata_*
+%SystemRoot%\Tasks\SCHEDLGU.TXT
+%SystemRoot%\WindowsUpdate.log
+%USERPROFILE%\NTUSER.DAT*

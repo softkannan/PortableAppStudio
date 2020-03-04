@@ -1,0 +1,14 @@
+﻿%COMMONPROGRAMFILES%,%COMMONPROGRAMFILES%,CommonProgramFiles,XP= C:\\Program Files\\Common Files\nVista/7/8= C:\\Program Files\\Common Files
+%PROGRAMFILES%,%PROGRAMFILES%,ProgramFiles,XP= %SystemDrive%\\Program Files\nVista/7/8=  %SystemDrive%\\Program Files
+%TEMP%,%TEMP%,Temp,XP= %SystemDrive%\\Documents and SettingsPath\\{username}\\Local SettingsPath\\Temp\nVista/7/8= %SystemDrive%\\Users\\{username}\\AppData\\Local\\Temp
+%APPDATA%,%APPDATA%,AppData,XP= C:\\Documents and SettingsPath\\{username}\\Application Data\nVista/7/8= C:\\Users\\{username}\\AppData\\Roaming
+%LOCALLOWAPPDATA%,%APPDATA%\..\LocalLow,LocalLowAppData,XP= C:\\Documents and SettingsPath\\{username}\\Local SettingsPath\\Application Data\nVista/7/8= C:\\Users\\{username}\\AppData\\Local
+%LOCALAPPDATA%,%LOCALAPPDATA%,LocalAppData,XP= C:\\Documents and SettingsPath\\{username}\\Local SettingsPath\\Application Data\nVista/7/8= C:\\Users\\{username}\\AppData\\Local
+%PROGRAMDATA%,%PROGRAMDATA%,ProgramData,XP= \nVista/7/8= %SystemDrive%\\ProgramData
+%PSModulePath%,%PSModulePath%,PSModulePath,XP= \nVista/7/8= %SystemRoot%\\system32\\WindowsPowerShell\\v1.0\\Modules\\
+%DriverData%,%DriverData%,DriverData,C:\Windows\System32\Drivers\DriverData
+%SystemRoot%,%SystemRoot%,SystemRoot,XP= C:\\Windows, formerly C:\\WINNT\nVista/7/8= %SystemDrive%\\Windows
+%windir%,%windir%,Windir,XP= %SystemDrive%\\WINDOWS\nVista/7/8= %SystemDrive%\\WINDOWS
+%USERPROFILE%,%USERPROFILE%,UserProfile,XP= C:\\Documents and SettingsPath\\{username}\nVista/7/8= C:\\Users\\{username}
+%PUBLIC%,%PUBLIC%,Public,XP= \nVista/7/8= %SystemDrive%\\Users\\Public
+%SystemDrive%,%SystemDrive%,SystemDrive,XP= C:\nVista/7/8= C:

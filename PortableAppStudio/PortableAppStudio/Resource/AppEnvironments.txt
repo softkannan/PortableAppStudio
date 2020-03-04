@@ -1,0 +1,40 @@
+﻿%PAL:Drive%,X:
+%PAL:LastDrive%,W:
+%PAL:DriveLetter%,X
+%PAL:LastDriveLetter%,W
+%PAL:AppDir%,X:\\PortableApps\\AppNamePortable\\App or\n%TEMP%\\AppNamePortableLive\\App in Live mode except when[LiveMode]:CopyApp is set to false
+%PAL:DataDir%,X:\\PortableApps\\AppNamePortable\\Data or\n%TEMP%\\AppNamePortableLive\\Data in Live mode
+%JAVA_HOME%,X:\\PortableApps\\CommonFiles\\Java or\nC:\\Program Files\\Java when not run from platform directory
+%PortableApps.comDocuments%,X:\\Documents
+%PortableApps.comPictures%,X:\\Documents\\Pictures
+%PortableApps.comMusic%,X:\\Documents\\Music
+%PortableApps.comVideos%,X:\\Documents\\Videos
+%PAL:PortableAppsDir%,X:\\PortableApps
+%PAL:PortableAppsBaseDir%,where PAL:PortableAppsDir and PortableApps.comDocuments are
+%PAL:LastPortableAppsBaseDir%,The value of PAL:PortableAppsBaseDir from the previous run
+%:DoubleBackslash%,X:\\\\PortableApps\\\\AppNamePortable\\\\App
+%:ForwardSlash%,X:/PortableApps/AppNamePortable/App
+%:java.util.prefs%,/X:///Portable/Apps///App/Name/Portable///App
+%PAL:PackagePartialDir%,The path, minus the drive letter and colon, from which the portable app is running. eg:\n\\PortableApps\\AppNamePortable
+%PAL:LastPackagePartialDir%,The path, minus the drive letter and colon, from which the portable app ran last. eg:\n\\Apps\\AppNamePortable
+%PortableApps.comLanguageCode%,e.g. “en”, “pt”, “pt-br”
+%PortableApps.comLocaleCode2%,e.g. “en”, “pt”, “pt”
+%PortableApps.comLocaleCode3%,e.g. “eng”, “por”, “por”
+%PortableApps.comLocaleglibc%,e.g. “en_US”, “pt”, “pt_BR”
+%PortableApps.comLocaleID%,e.g. “1033”, “2070”, “1046”
+%PortableApps.comLocaleName%, e.g. “LANG_ENGLISH”, “LANG_PORTUGUESE”, “LANG_PORTUGUESEBR”
+%PortableApps.comLocaleWinName%,e.g. “ENGLISH”, “PORTUGUESE”, “PORTUGUESEBR”
+%PAL:LanguageCustom%,a custom variable constructed in the [Language] and [LanguageStrings] sections.
+%COMSPEC%,XP= C:\\Windows\\System32\\cmd.exe\nVista/7/8= C:\\Windows\\System32\\cmd.exe
+%LOGONSERVER%,XP= \\{domain_logon_server}\nVista/7/8= \\{domain_logon_server}
+%PATH%,XP= C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;{plus program paths}\nVista/7/8= C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;{plus program paths}
+%PATHEXT%,XP= .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.WSF;.WSH\nVista/7/8= .com;.exe;.bat;.cmd;.vbs;.vbe;.js;.jse;.wsf;.wsh;.msc
+%PROMPT%,XP= Code for current command prompt format. Code is usually $P$G\nVista/7/8= Code for current command prompt format. Code is usually $P$G
+%TMP%,XP= %SystemDrive%\\Documents and SettingsPath\\{username}\\Local SettingsPath\\Temp\nVista/7/8= %SystemDrive%\\Users\\{username}\\AppData\\Local\\Temp
+%USERDOMAIN%,XP= {user domain}\nVista/7/8= {user domain}
+%USERNAME%,XP= {username}\nVista/7/8= {username}
+%ALLUSERSPROFILE%,XP= C:\\Documents and SettingsPath\\All Users\nVista/7/8= C:\\ProgramData
+%ALLUSERSAPPDATA%,XP= C:\\Documents and SettingsPath\\All Users\\Application Data\nVista/7/8= C:\\ProgramData
+%COMPUTERNAME%,XP= {computer name}\nVista/7/8= {computer name}
+%HOMEDRIVE%,XP= C:\nVista/7/8= C:
+%HOMEPATH%,XP= \\Documents and SettingsPath\\{username}\nVista/7/8= \\Users\\{username}

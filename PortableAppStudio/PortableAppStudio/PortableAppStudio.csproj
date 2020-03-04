@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9FF67599-01B1-4382-83D4-03D974EF95B4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PortableAppStudio</RootNamespace>
+    <AssemblyName>PortableAppStudio</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>PortableAppStudio.exe.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\CollectionEditorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PropertyEditorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PropertyEditorUserControl.Designer.cs">
+      <DependentUpon>PropertyEditorUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TreeNodeCollectionEx.cs" />
+    <Compile Include="Controls\TreeNodeEx.cs" />
+    <Compile Include="Controls\TreeViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesCleanupForceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesCleanupForceForm.Designer.cs">
+      <DependentUpon>DirectoriesCleanupForceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesCleanupIfEmptyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesCleanupIfEmptyForm.Designer.cs">
+      <DependentUpon>DirectoriesCleanupIfEmptyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesLinkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesLinkForm.Designer.cs">
+      <DependentUpon>DirectoriesLinkForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesMoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DirectoriesMoveForm.Designer.cs">
+      <DependentUpon>DirectoriesMoveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EnvironmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EnvironmentForm.Designer.cs">
+      <DependentUpon>EnvironmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FolderDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FolderDelete.Designer.cs">
+      <DependentUpon>FolderDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FolderNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FolderNameForm.Designer.cs">
+      <DependentUpon>FolderNameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FilesMoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FilesMoveForm.Designer.cs">
+      <DependentUpon>FilesMoveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\INIValueEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\INIValueEditForm.Designer.cs">
+      <DependentUpon>INIValueEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\NewPortableAppForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\NewPortableAppForm.Designer.cs">
+      <DependentUpon>NewPortableAppForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\QtKeysCleanupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\QtKeysCleanupForm.Designer.cs">
+      <DependentUpon>QtKeysCleanupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RegistrationFreeCOMForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RegistrationFreeCOMForm.Designer.cs">
+      <DependentUpon>RegistrationFreeCOMForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RegistryCleanupForceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RegistryCleanupForceForm.Designer.cs">
+      <DependentUpon>RegistryCleanupForceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RegistryCleanupIfEmptyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RegistryCleanupIfEmptyForm.Designer.cs">
+      <DependentUpon>RegistryCleanupIfEmptyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RegistryKeysForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RegistryKeysForm.Designer.cs">
+      <DependentUpon>RegistryKeysForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RegistryValueBackupDeleteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RegistryValueBackupDeleteForm.Designer.cs">
+      <DependentUpon>RegistryValueBackupDeleteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RegistryValueWriteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RegistryValueWriteForm.Designer.cs">
+      <DependentUpon>RegistryValueWriteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="INI\INIFile.cs" />
+    <Compile Include="INI\NativeINIMethods.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoControlSection.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoDependenciesSection.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoDetailsSection.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoFormatSection.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoINI.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoINIParser.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoLicenseSection.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoSpecialPathsSection.cs" />
+    <Compile Include="Model\AppInfoINI\AppInfoVersionSection.cs" />
+    <Compile Include="Dialogs\IgnoreListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IgnoreListForm.Designer.cs">
+      <DependentUpon>IgnoreListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppInfoINI\TypeConverters.cs" />
+    <Compile Include="Model\COM\ComClassRegInfo.cs" />
+    <Compile Include="Model\COM\ComFileInfo.cs" />
+    <Compile Include="Model\COM\ComInterfaceExternalProxyStubRegInfo.cs" />
+    <Compile Include="Model\COM\ComInterfaceProxyStubRegInfo.cs" />
+    <Compile Include="Model\COM\ComRegInfo.cs" />
+    <Compile Include="Model\COM\ComTypeLibRegInfo.cs" />
+    <Compile Include="Model\EnvironmentInfo.cs" />
+    <Compile Include="Model\FilePath.cs" />
+    <Compile Include="Model\FilePathEx.cs" />
+    <Compile Include="Model\IINIList.cs" />
+    <Compile Include="Model\INIKeyValuePairBase.cs" />
+    <Compile Include="Model\FileInfo.cs" />
+    <Compile Include="Model\FolderInfo.cs" />
+    <Compile Include="Model\FolderLayout\AppFolder.cs" />
+    <Compile Include="Model\FolderLayout\AppFolderBase.cs" />
+    <Compile Include="Model\FolderLayout\DataFolder.cs" />
+    <Compile Include="Model\FolderLayout\OtherFolder.cs" />
+    <Compile Include="Model\FolderLayout\PortableApp.cs" />
+    <Compile Include="Model\IINIKeyValuePair.cs" />
+    <Compile Include="Model\INISectionList.cs" />
+    <Compile Include="Model\INIUtility.cs" />
+    <Compile Include="Model\InstallerINI\InstallerINI.cs" />
+    <Compile Include="Model\INIValueList.cs" />
+    <Compile Include="Model\InteliSense.cs" />
+    <Compile Include="Model\ISectionINI.cs" />
+    <Compile Include="Model\KeyValueSection.cs" />
+    <Compile Include="Model\LaunchINI\DirectoriesLinkSection.cs" />
+    <Compile Include="Model\LaunchINI\RegistrationFreeCOMSection.cs" />
+    <Compile Include="Model\LaunchINI\WaitForEXENValue.cs" />
+    <Compile Include="Model\Manifest\assembly.cs" />
+    <Compile Include="Model\Manifest\assemblyComInterfaceExternalProxyStub.cs" />
+    <Compile Include="Model\Manifest\assemblyFile.cs" />
+    <Compile Include="Model\Manifest\assemblyFileComClass.cs" />
+    <Compile Include="Model\Manifest\assemblyFileTypelib.cs" />
+    <Compile Include="Model\Manifest\trustInfo.cs" />
+    <Compile Include="Model\Manifest\trustInfoSecurity.cs" />
+    <Compile Include="Model\Manifest\trustInfoSecurityRequestedPrivileges.cs" />
+    <Compile Include="Model\Manifest\trustInfoSecurityRequestedPrivilegesRequestedExecutionLevel.cs" />
+    <Compile Include="Model\RegInfo.cs" />
+    <Compile Include="Model\SectionINI.cs" />
+    <Compile Include="Model\LaunchINI\CollectionEditors.cs" />
+    <Compile Include="Model\LaunchINI\LaunchINIParser.cs" />
+    <Compile Include="Model\LaunchINI\TypeConverters.cs" />
+    <Compile Include="Model\LaunchINI\ActivateSection.cs" />
+    <Compile Include="Model\LaunchINI\DirectoriesCleanupForceSection.cs" />
+    <Compile Include="Model\LaunchINI\DirectoriesCleanupIfEmptySection.cs" />
+    <Compile Include="Model\LaunchINI\DirectoriesMoveSection.cs" />
+    <Compile Include="Model\LaunchINI\EnvironmentSection.cs" />
+    <Compile Include="Model\LaunchINI\FilesMoveSection.cs" />
+    <Compile Include="Model\LaunchINI\FileWriteNSection.cs" />
+    <Compile Include="Model\LaunchINI\LanguageFileSection.cs" />
+    <Compile Include="Model\LaunchINI\LanguageSection.cs" />
+    <Compile Include="Model\LaunchINI\LanguageStringsSection.cs" />
+    <Compile Include="Model\LaunchINI\LaunchINI.cs" />
+    <Compile Include="Model\LaunchINI\LaunchSection.cs" />
+    <Compile Include="Model\LaunchINI\LaunchEnums.cs" />
+    <Compile Include="Model\LaunchINI\LiveModeSection.cs" />
+    <Compile Include="Model\LaunchINI\QtKeysCleanupSection.cs" />
+    <Compile Include="Model\LaunchINI\RegistryCleanupForceSection.cs" />
+    <Compile Include="Model\LaunchINI\RegistryCleanupIfEmptySection.cs" />
+    <Compile Include="Model\LaunchINI\RegistryKeysSection.cs" />
+    <Compile Include="Model\LaunchINI\RegistryValueBackupDeleteSection.cs" />
+    <Compile Include="Model\LaunchINI\RegistryValueWriteSection.cs" />
+    <Compile Include="Model\PortableINI.cs" />
+    <Compile Include="Model\TypeConverters.cs" />
+    <Compile Include="Model\TypeEnums.cs" />
+    <Compile Include="Parser\AppVParser.cs" />
+    <Compile Include="Parser\FolderParser.cs" />
+    <Compile Include="Parser\RegFileExport.cs" />
+    <Compile Include="Parser\RegFileParser.cs" />
+    <Compile Include="Parser\ParserBase.cs" />
+    <Compile Include="Parser\CommonEnums.cs" />
+    <Compile Include="Parser\RegHiveParser.cs" />
+    <Compile Include="Parser\RegistryHive.cs" />
+    <Compile Include="Parser\RegistryKeyEx.cs" />
+    <Compile Include="Parser\RegShotParser.cs" />
+    <Compile Include="Parser\ThinAppParser.cs" />
+    <Compile Include="Parser\X_RegshotParser.cs" />
+    <Compile Include="Model\Reference\AppEnvironments.cs" />
+    <Compile Include="Studio.Intelsense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.TreeEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Utility.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.FilesTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utility\ControlExtensions.cs" />
+    <Compile Include="Utility\FolderBrowserDialogExtensionMethods.cs" />
+    <Compile Include="Utility\IconFactory.cs" />
+    <Compile Include="Utility\IconHelper.cs" />
+    <Compile Include="Utility\MiscExtensions.cs" />
+    <Compile Include="Utility\PathManager.cs" />
+    <Compile Include="Model\Reference\RegistryParser.cs" />
+    <Compile Include="Utility\StringExtensionMethods.cs" />
+    <Compile Include="Studio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Designer.cs">
+      <DependentUpon>Studio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreeModel\NodeBase.cs" />
+    <Compile Include="TreeModel\TreeItem.cs" />
+    <Compile Include="TreeModel\Utility.cs" />
+    <Compile Include="Utility\FileUtility.cs" />
+    <Compile Include="Utility\TaskUtility.cs" />
+    <Compile Include="Utility\TreeViewExtensionMethods.cs" />
+    <Compile Include="Utility\TypeInfoExtensionMethods.cs" />
+    <Compile Include="Utility\TypeLib.cs" />
+    <EmbeddedResource Include="Controls\CollectionEditorUserControl.resx">
+      <DependentUpon>CollectionEditorUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PropertyEditorUserControl.resx">
+      <DependentUpon>PropertyEditorUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DirectoriesCleanupForceForm.resx">
+      <DependentUpon>DirectoriesCleanupForceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DirectoriesCleanupIfEmptyForm.resx">
+      <DependentUpon>DirectoriesCleanupIfEmptyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DirectoriesLinkForm.resx">
+      <DependentUpon>DirectoriesLinkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DirectoriesMoveForm.resx">
+      <DependentUpon>DirectoriesMoveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EnvironmentForm.resx">
+      <DependentUpon>EnvironmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FolderDelete.resx">
+      <DependentUpon>FolderDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FolderNameForm.resx">
+      <DependentUpon>FolderNameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FilesMoveForm.resx">
+      <DependentUpon>FilesMoveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IgnoreListForm.resx">
+      <DependentUpon>IgnoreListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\INIValueEditForm.resx">
+      <DependentUpon>INIValueEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\NewPortableAppForm.resx">
+      <DependentUpon>NewPortableAppForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\QtKeysCleanupForm.resx">
+      <DependentUpon>QtKeysCleanupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RegistrationFreeCOMForm.resx">
+      <DependentUpon>RegistrationFreeCOMForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RegistryCleanupForceForm.resx">
+      <DependentUpon>RegistryCleanupForceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RegistryCleanupIfEmptyForm.resx">
+      <DependentUpon>RegistryCleanupIfEmptyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RegistryKeysForm.resx">
+      <DependentUpon>RegistryKeysForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RegistryValueBackupDeleteForm.resx">
+      <DependentUpon>RegistryValueBackupDeleteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RegistryValueWriteForm.resx">
+      <DependentUpon>RegistryValueWriteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Studio.resx">
+      <DependentUpon>Studio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="PortableAppStudio.exe.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resource\appinfo.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Activate.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Control.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Dependencies.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Details.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\DirectoriesCleanupForce.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\DirectoriesCleanupIfEmpty.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\DirectoriesMove.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Environment.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\FilesMove.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\FileWriteN.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Format.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Language.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\LanguageFile.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\LanguageStrings.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Launch.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\License.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\LiveMode.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\QtKeysCleanup.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\RegistryCleanupForce.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\RegistryCleanupIfEmpty.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\RegistryKeys.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\RegistryValueBackupDelete.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\RegistryValueWrite.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\SpecialPaths.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\Version.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\WaitForEXEN.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\installer.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\launch.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\PortableApp\App\AppInfo\Launcher\Custom.nsh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\RegHive.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Studio.RegistryTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Source.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appicon.ico" />
+    <Content Include="Resource\AppEnvironments.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\EnvIntellisense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\appicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\app_v.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\app_v.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\ClearCollection_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Edit_16x.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Edit_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\EnvironmentDefinition_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Environment_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\FileCollection_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\FileOK_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\FileSystemEditor_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\FolderOpen_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\HelpApplication_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\ImportFile_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\ImportPackage_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Import_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\NewScript_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Refresh_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Registry_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\RegShot.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\regshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\Save_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\thinapp.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\thinapp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\x_regshot.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\x_regshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\IgnoreFiles.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\IgnoreFolders.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\IgnoreRegistryKeys.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Plugins\registry.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PortableApp\App\AppInfo\Launcher\readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PortableApp\App\DefaultData\Readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PortableApp\App\readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PortableApp\Data\readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PortableApp\Other\help.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PortableApp\Other\_how_to.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\SystemEnvironments_x64.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\SystemEnvironments_x86.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

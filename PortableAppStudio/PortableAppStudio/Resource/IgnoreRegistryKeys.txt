@@ -1,0 +1,32 @@
+﻿HKEY_CURRENT_USER\Printers
+HKEY_CURRENT_USER\SessionInformation
+HKEY_CURRENT_USER\Software\Classes\Local Settings\MrtCache
+HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell
+HKEY_CURRENT_USER\Software\Microsoft
+HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft
+HKEY_CURRENT_USER\Volatile Environment
+HKEY_LOCAL_MACHINE\Components
+HKEY_LOCAL_MACHINE\HARDWARE
+HKEY_LOCAL_MACHINE\SAM
+HKEY_LOCAL_MACHINE\schema
+HKEY_LOCAL_MACHINE\Security
+HKEY_LOCAL_MACHINE\SOFTWARE\Adobe\Adobe Acrobat\DC\Installer
+HKEY_LOCAL_MACHINE\Software\Classes\.dll
+HKEY_LOCAL_MACHINE\Software\Classes\.ocx
+HKEY_LOCAL_MACHINE\Software\Classes\.sys
+HKEY_LOCAL_MACHINE\Software\Classes\certificatefile
+HKEY_LOCAL_MACHINE\Software\Classes\CertificateStoreFile
+HKEY_LOCAL_MACHINE\Software\Classes\certificate_wab_auto_file
+HKEY_LOCAL_MACHINE\Software\Classes\MIME\Database\Charset
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\.dll
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\.ocx
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\.sys
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\certificatefile
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\CertificateStoreFile
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\certificate_wab_auto_file
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Classes\MIME\Database\Charset
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft
+HKEY_LOCAL_MACHINE\SYSTEM
