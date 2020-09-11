@@ -300,5 +300,41 @@ namespace PortableAppStudio.Utility
             stringBuilder.Append(str.Substring(startIndex1));
             return stringBuilder.ToString();
         }
+
+        public static string ToStringMultiline(this List<string> pThis)
+        {
+            if(pThis == null)
+            {
+                return "";
+            }
+            StringBuilder retVal = new StringBuilder();
+            foreach(var item in pThis)
+            {
+                retVal.AppendLine(item);
+            }
+
+            return retVal.ToString();
+        }
+
+        public static List<string> ToListStr(this string pThis)
+        {
+            var retVal = new List<string>();
+
+            if(!string.IsNullOrWhiteSpace(pThis))
+            {
+                var clipItems = pThis.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                foreach(var item in clipItems)
+                {
+                    var tempVal = item.Trim();
+                    if(!string.IsNullOrWhiteSpace(tempVal))
+                    {
+                        retVal.Add(item);
+                    }
+                }
+            }
+
+            return retVal;
+        }
+
     }
 }

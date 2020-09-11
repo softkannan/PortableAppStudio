@@ -23,11 +23,16 @@ namespace PortableAppStudio.Dialogs
         private void bttnOk_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            SelectedPath = string.Format("{0}\\{1}Portable", baseFolderTextBox.Text, appNameTextBox.Text.Replace(" ","_"));
+            SelectedPath = string.Format("{0}\\{1}", baseFolderTextBox.Text, appNameTextBox.Text.Replace(" ","_"));
 
             try
             {
                 string fullPath = Path.GetFullPath(SelectedPath);
+                if(Directory.Exists(fullPath))
+                {
+                    SelectedPath = string.Format("{0}\\{1}_Portable", baseFolderTextBox.Text, appNameTextBox.Text.Replace(" ", "_"));
+                    fullPath = Path.GetFullPath(SelectedPath);
+                }
 
                 if (!Directory.Exists(fullPath))
                 {

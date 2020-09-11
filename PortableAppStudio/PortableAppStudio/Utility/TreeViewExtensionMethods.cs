@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PortableAppStudio.Model;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -27,6 +28,31 @@ namespace PortableAppStudio.Utility
                 pThis.Text.Replace(" ", "_"));
             return retVal;
         }
+        public static string ToDirectoryName(this string pThis)
+        {
+            string retVal = "";
+            var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
+            if (foundEnv != null)
+            {
+                string tailPart;
+                string envSection;
+
+                envSection = foundEnv.Item3.DisplayName;
+
+                if (foundEnv.Item1)
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length).Replace('\\', '_');
+                }
+                else
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length).Replace('\\', '_'); ;
+                }
+
+                retVal = string.Format("{0}_{1}", envSection,
+                tailPart.Replace(" ", "_"));
+            }
+            return retVal;
+        }
         public static string ToDirectoryPair(this TreeNode pThis)
         {
             string retVal = "";
@@ -44,6 +70,54 @@ namespace PortableAppStudio.Utility
                 pThis.Text.Replace(" ", "_"),
                 pThis.GetFullPath());
             return retVal;
+        }
+        public static string ToDirectoryPair(this string pThis)
+        {
+            string retVal = "";
+            var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
+            if (foundEnv != null)
+            {
+                string tailPart;
+                string envSection;
+
+                envSection = foundEnv.Item3.DisplayName;
+
+                if (foundEnv.Item1)
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length).Replace('\\','_');
+                }
+                else
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length).Replace('\\', '_'); ;
+                }
+
+                retVal = string.Format("{0}_{1}={2}", envSection,
+                    tailPart.Replace(" ", "_"),
+                    PathManager.Init.GetExpandablePath(pThis));
+            }
+            return retVal;
+        }
+        public static string ToFilePair(this TreeNode pThis, TreeNode topNode)
+        {
+            string retVal = "";
+            Model.EnvironmentInfo envInfo;
+            string dirInfo;
+            if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.GetTopNodeName(), out envInfo))
+            {
+                dirInfo = envInfo.DisplayName;
+            }
+            else
+            {
+                dirInfo = topNode.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+            }
+
+            var relativePath = pThis.GetRelativePath(topNode);
+
+            retVal = string.Format("{0}_{1}_{2}\\{3}={4}",
+                dirInfo, topNode.Parent.Text, topNode.Text,relativePath, pThis.GetFullPath());
+            return retVal;
+
+
         }
         public static string ToFilePair(this TreeNode pThis)
         {
@@ -216,15 +290,49 @@ namespace PortableAppStudio.Utility
             return retVal;
         }
 
+        public static string GetRelativePath(this TreeNode pThis, TreeNode upToNode = null)
+        {
+            if (upToNode == null)
+            {
+                return GetFullPathInternal1(pThis);
+            }
+            else //if (pThis.IsDescendantOf(upToNode))
+            {
+                return GetFullPathInternal1(pThis, upToNode);
+            }
+            //return "";
+        }
+
+        private static string GetFullPathInternal1(TreeNode pThis, TreeNode upToNode = null)
+        {
+            string retVal = "";
+            if (pThis.Parent != null)
+            {
+                if (pThis.Parent != upToNode)
+                {
+                    retVal = string.Format("{0}\\{1}", GetFullPathInternal1(pThis.Parent, upToNode), pThis.Text);
+                }
+                else
+                {
+                    return pThis.Text;
+                }
+            }
+            else
+            {
+                retVal = pThis.Text;
+            }
+            return retVal;
+        }
+
         public static string GetFullPath(this TreeNode pThis, string upTo = null)
         {
-            if(upTo == null)
+            if (upTo == null)
             {
                 return GetFullPathInternal(pThis);
             }
-            else if(pThis.IsDescendantOf(upTo))
+            else if (pThis.IsDescendantOf(upTo))
             {
-                return GetFullPathInternal(pThis,upTo);
+                return GetFullPathInternal(pThis, upTo);
             }
             return "";
         }
@@ -264,5 +372,51 @@ namespace PortableAppStudio.Utility
 
             return retVal;
         }
+
+        private static void GetChildNodes(TreeNode topNode, List<TreeNode> nodeList)
+        {
+            foreach(TreeNode item in topNode.Nodes)
+            {
+                if(item.Tag is FileInfo)
+                {
+                    nodeList.Add(item);
+                }
+                else
+                {
+                    GetChildNodes(item, nodeList);
+                }
+            }
+        }
+
+        public static List<TreeNode> GetChildFileNodes(this TreeNode pThis)
+        {
+            List<TreeNode> retVal = new List<TreeNode>();
+            GetChildNodes(pThis, retVal);
+            return retVal;
+        }
+
+        private static void SearchandReplaceInternal(this TreeNode pThis, string searchStr, string replaceStr)
+        {
+            if (pThis.Nodes != null && pThis.Nodes.Count > 0)
+            {
+                foreach (TreeNode item in pThis.Nodes)
+                {
+                    SearchandReplaceInternal(item, searchStr, replaceStr);
+                }
+            }
+
+            if(pThis.Tag != null)
+            {
+                Model.RegInfo regInfo = pThis.Tag as Model.RegInfo;
+                regInfo.SearchAndReplace(searchStr, replaceStr);
+                pThis.Text = string.Format("{0}={1}:{2}", regInfo.ValueName, regInfo.Kind, regInfo.Value);
+            }
+        }
+
+        public static void SearchandReplace(this TreeNode pThis, string searchStr,string replaceStr)
+        {
+            SearchandReplaceInternal(pThis, searchStr, replaceStr);
+        }
+
     }
 }

@@ -56,6 +56,8 @@ namespace PortableAppStudio.Parser
 
         public override void Parse(string fileName)
         {
+            Model.InteliSense.Inst.UpdateSearchReplaceList("ThinAppIntellisense.txt");
+
             ParseInternal(fileName);
         }
 

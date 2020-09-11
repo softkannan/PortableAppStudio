@@ -31,6 +31,15 @@ namespace PortableAppStudio.Model
             }
         }
 
+        public void SearchAndReplace(string search,string replace)
+        {
+            if(Kind == "REG_SZ")
+            {
+                string tempVal = Value;
+                Value = tempVal.Replace(search, replace,StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
         private string GetValue()
         {
             string regValue = "";

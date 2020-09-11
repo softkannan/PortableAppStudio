@@ -163,6 +163,21 @@ namespace PortableAppStudio
                                 totalHandledCount++;
                             }
                         }
+                        else if(topNode.TreeView != srcNode.TreeView && srcNode.Parent != null)
+                        {
+                            var fileNodes = srcNode.GetChildFileNodes();
+                            foreach (TreeNode item in fileNodes)
+                            {
+                                string cleanUpForce = item.ToFilePair(srcNode);
+                                var existingNode = topNode.Nodes.FindNode(cleanUpForce);
+                                if (existingNode == null)
+                                {
+                                    var newNode = new TreeNode(cleanUpForce);
+                                    topNode.Nodes.Add(newNode);
+                                    totalHandledCount++;
+                                }
+                            }
+                        }
                         else
                         {
                             errMsgTemp.Append(string.Format("Cannot drop folders on \"[FilesMove]\" node : {0}", srcNode.Text));
@@ -212,7 +227,7 @@ namespace PortableAppStudio
                             }
                         }
                     }
-                    UpdateDynamicIntelisense();
+                    UpdateFileDynamicIntelisense();
                 }
                 else if (dropNodeAction == ProcessAction.NotSupported)
                 {
@@ -227,6 +242,10 @@ namespace PortableAppStudio
 
         public void ShowFilesMenu(TreeViewEx selectedTree, int x, int y)
         {
+            _fileCopyItems.Enabled = false;
+            _fileCopyItems.Tag = null;
+            _filePasteItems.Enabled = false;
+            _filePasteItems.Tag = null;
             _addDestFilesItem.Enabled = false;
             _expandAllItem.Enabled = false;
             _expandAllItem.Tag = null;
@@ -263,6 +282,9 @@ namespace PortableAppStudio
                     {
                         _addDestFilesItem.Enabled = !selectedTree.IsMultiSelected;
                         _addDestFilesItem.Tag = firstNode;
+                        var enablePasteItem = !selectedTree.IsMultiSelected && firstNode.Text != "App" && firstNode.Text != LaunchINI.FilesMove_Tag;
+                        _filePasteItems.Enabled = enablePasteItem;
+                        _filePasteItems.Tag = firstNode;
                         _destFileContextMenu.Show(selectedTree, x, y);
                     }
                     break;
@@ -294,19 +316,22 @@ namespace PortableAppStudio
                             _removeDestFilesItem.Tag = _addDestFilesItem.Tag;
                             _duplicateDestFilesItem.Tag = _addDestFilesItem.Tag;
                             _convert64To32Env.Tag = _addDestFilesItem.Tag;
+                            _fileCopyItems.Tag = _addDestFilesItem.Tag;
 
                             _addDestFilesItem.Enabled = false;
                             _editDestFilesItem.Enabled = !selectedTree.IsMultiSelected;
                             _removeDestFilesItem.Enabled = true;
                             _duplicateDestFilesItem.Enabled = true;
                             _convert64To32Env.Enabled = true;
+                            _fileCopyItems.Enabled = true;
                             _destFileContextMenu.Show(selectedTree, x, y);
                         }
                         else if(showfileMenu)
                         {
                             _addDestFilesItem.Enabled = !(firstNode.Tag is Model.FileInfo) && !selectedTree.IsMultiSelected;
                             _editDestFilesItem.Enabled = firstNode.Tag == null && !selectedTree.IsMultiSelected;
-                            _removeDestFilesItem.Enabled = !firstNode.IsDescendantOf("settings"); 
+                            _removeDestFilesItem.Enabled = !firstNode.IsDescendantOf("settings");
+                            _fileCopyItems.Enabled = true;
                             _destFileContextMenu.Show(selectedTree, x, y);
                         }
                     }

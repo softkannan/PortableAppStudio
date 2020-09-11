@@ -355,6 +355,8 @@ namespace PortableAppStudio
 
                 progressBar.ShutDown();
 
+                this.BringToFront();
+
                 ErrorLog.Inst.ShowInfo("File name conversion completed. \"{0}\"", selectedDestFolder);
             }
         }
@@ -362,6 +364,24 @@ namespace PortableAppStudio
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm form = new AboutForm();
+
+            form.ShowDialog(this);
+        }
+
+        private void appVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new SearchReplaceHelperForm();
+
+            form.Initialize("AppVIntellisense.txt");
+
+            form.ShowDialog(this);
+        }
+
+        private void thinAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new SearchReplaceHelperForm();
+
+            form.Initialize("ThinAppIntellisense.txt");
 
             form.ShowDialog(this);
         }

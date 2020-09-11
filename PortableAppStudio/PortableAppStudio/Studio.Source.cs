@@ -28,7 +28,11 @@ namespace PortableAppStudio
         {
             _removeSourceItem.Enabled = false;
             _removeSourceItem.Tag = null;
-           
+            _searchAndReplaceSourceItem.Enabled = false;
+            _searchAndReplaceSourceItem.Tag = null;
+            _copySourceItem.Enabled = false;
+            _copySourceItem.Tag = null;
+
             TreeNode firstNode = selectedTree?.SelectedNode;
             if (firstNode == null)
             {
@@ -48,8 +52,10 @@ namespace PortableAppStudio
 
                         if (showMenuFlag)
                         {
+                            _searchAndReplaceSourceItem.Enabled = true;
                             _removeSourceItem.Enabled = true;
                             _expandAllSourceItem.Enabled = true;
+                            _copySourceItem.Enabled = true;
                             _expandAllSourceItem.Tag = firstNode;
                             _sourceContextMenu.Show(selectedTree, x, y);
                         }

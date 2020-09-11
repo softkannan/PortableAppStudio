@@ -25,13 +25,34 @@ namespace PortableAppStudio.Utility
             }
         }
 
+        private string LastGoodPath(string lastKnownPath)
+        {
+            if (string.IsNullOrWhiteSpace(lastKnownPath))
+            {
+                return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            }
+            if (!Directory.Exists(lastKnownPath))
+            {
+                var parentDir = Directory.GetParent(lastKnownPath);
+                if (parentDir != null && parentDir.Exists)
+                {
+                    return parentDir.FullName;
+                }
+                else
+                {
+                    return LastGoodPath(parentDir.FullName);
+                }
+            }
+            return lastKnownPath;
+        }
+
         public string GetLastPath(string lastKnownPath)
         {
             if (string.IsNullOrWhiteSpace(lastKnownPath))
             {
                 return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             }
-            return lastKnownPath;
+            return LastGoodPath(lastKnownPath);
         }
 
         public Dictionary<string, Model.EnvironmentInfo> SystemEnvironments { get; private set; }
@@ -119,23 +140,53 @@ namespace PortableAppStudio.Utility
             return string.Format(@"{0}\\{1}", ResourcePath, resourceFilename);
         }
 
-        public string GetExpandablePath(string filePath)
+        public Tuple<bool,string,Model.EnvironmentInfo> GetEnvironmentInfo(string filePath)
         {
-            string retVal = filePath;
-
-            foreach(KeyValuePair<string,Model.EnvironmentInfo> item in SystemEnvironments)
+            Tuple<bool,string, Model.EnvironmentInfo> retVal = null;
+            foreach (KeyValuePair<string, Model.EnvironmentInfo> item in SystemEnvironments)
             {
-                if(filePath.IndexOf(item.Value.ShortPath,StringComparison.InvariantCultureIgnoreCase) == 0)
+                if (filePath.IndexOf(item.Value.ShortPath, StringComparison.InvariantCultureIgnoreCase) == 0)
                 {
-                    retVal = string.Format("{0}{1}", item.Key, filePath.Substring(item.Value.ShortPath.Length));
+                    retVal = new Tuple<bool,string, Model.EnvironmentInfo>(true, item.Key, item.Value);
                     break;
                 }
                 else if (filePath.IndexOf(item.Value.LongPath, StringComparison.InvariantCultureIgnoreCase) == 0)
                 {
-                    retVal = string.Format("{0}{1}", item.Key, filePath.Substring(item.Value.LongPath.Length));
+                    retVal = new Tuple<bool,string, Model.EnvironmentInfo>(false, item.Key, item.Value);
                     break;
                 }
             }
+            return retVal;
+        }
+
+        public string GetExpandablePath(string filePath)
+        {
+            string retVal = filePath;
+            var foundEnv = GetEnvironmentInfo(filePath);
+            if(foundEnv != null)
+            {
+                if(foundEnv.Item1)
+                {
+                    retVal = string.Format("{0}{1}", foundEnv.Item2, filePath.Substring(foundEnv.Item3.ShortPath.Length));
+                }
+                else
+                {
+                    retVal = string.Format("{0}{1}", foundEnv.Item2, filePath.Substring(foundEnv.Item3.LongPath.Length));
+                }
+            }
+            //foreach(KeyValuePair<string,Model.EnvironmentInfo> item in SystemEnvironments)
+            //{
+            //    if(filePath.IndexOf(item.Value.ShortPath,StringComparison.InvariantCultureIgnoreCase) == 0)
+            //    {
+            //        retVal = string.Format("{0}{1}", item.Key, filePath.Substring(item.Value.ShortPath.Length));
+            //        break;
+            //    }
+            //    else if (filePath.IndexOf(item.Value.LongPath, StringComparison.InvariantCultureIgnoreCase) == 0)
+            //    {
+            //        retVal = string.Format("{0}{1}", item.Key, filePath.Substring(item.Value.LongPath.Length));
+            //        break;
+            //    }
+            //}
 
             return retVal;
         }

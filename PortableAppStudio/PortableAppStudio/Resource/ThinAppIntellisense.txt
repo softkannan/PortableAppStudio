@@ -1,0 +1,15 @@
+﻿%AppData%=%APPDATA%
+%Common AppData%=%PROGRAMDATA%
+%Local AppData%=%LOCALAPPDATA%
+%Local AppData%Low=%LOCALLOWAPPDATA%
+%USERPROFILE%=%USERPROFILE%
+%Program Files Common(x64)%=%COMMONPROGRAMFILES%
+%Program Files Common%=%COMMONPROGRAMFILES(x86)%
+%ProgramFilesDir(x64)%=%PROGRAMFILES%
+%ProgramFilesDir%=%PROGRAMFILES(X86)%
+%Program Files Common(x64)%=%CommonProgramW6432%
+%Program Files Common%=%COMMONPROGRAMFILES(x86)%
+%ProgramFilesDir(x64)%=%ProgramW6432%
+%ProgramFilesDir%=%PROGRAMFILES(X86)%
+%Program Files Common%=%COMMONPROGRAMFILES%
+%ProgramFilesDir%=%PROGRAMFILES%

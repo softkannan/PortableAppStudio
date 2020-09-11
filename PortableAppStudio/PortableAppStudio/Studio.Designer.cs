@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("DEBUG_SEGMENT_[Launch]");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("DEBUG_SEGMENT_[Launch]");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Studio));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +50,9 @@
             this.ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ignoreFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ignoreRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchReplaceInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.appVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thinAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTab = new System.Windows.Forms.TabControl();
@@ -69,6 +72,7 @@
             this.launchTree = new PortableAppStudio.Controls.TreeViewEx();
             this.optionsPage = new System.Windows.Forms.TabPage();
             this.groupBoxFileConvert = new System.Windows.Forms.GroupBox();
+            this.labelFileConvert = new System.Windows.Forms.Label();
             this.registryGroupBox = new System.Windows.Forms.GroupBox();
             this.generateManifestChk = new System.Windows.Forms.CheckBox();
             this.generateRegFilesCheck = new System.Windows.Forms.CheckBox();
@@ -98,7 +102,6 @@
             this.mainStatus = new System.Windows.Forms.StatusStrip();
             this.statusLabelMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelKeyPress = new System.Windows.Forms.ToolStripStatusLabel();
-            this.labelFileConvert = new System.Windows.Forms.Label();
             this.mainMenu.SuspendLayout();
             this.mainTab.SuspendLayout();
             this.filesPage.SuspendLayout();
@@ -216,21 +219,22 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fixDirectoriesToolStripMenuItem,
             this.deleteFoldersToolStripMenuItem,
-            this.ignoreListToolStripMenuItem});
+            this.ignoreListToolStripMenuItem,
+            this.searchReplaceInfoToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // fixDirectoriesToolStripMenuItem
             // 
             this.fixDirectoriesToolStripMenuItem.Name = "fixDirectoriesToolStripMenuItem";
-            this.fixDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.fixDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.fixDirectoriesToolStripMenuItem.Text = "Fix Directories";
             // 
             // deleteFoldersToolStripMenuItem
             // 
             this.deleteFoldersToolStripMenuItem.Name = "deleteFoldersToolStripMenuItem";
-            this.deleteFoldersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.deleteFoldersToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.deleteFoldersToolStripMenuItem.Text = "Delete Folders";
             // 
             // ignoreListToolStripMenuItem
@@ -240,7 +244,7 @@
             this.ignoreFilesToolStripMenuItem,
             this.ignoreRegistryToolStripMenuItem});
             this.ignoreListToolStripMenuItem.Name = "ignoreListToolStripMenuItem";
-            this.ignoreListToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ignoreListToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.ignoreListToolStripMenuItem.Text = "IgnoreList";
             // 
             // ignoreFoldersToolStripMenuItem
@@ -260,6 +264,29 @@
             this.ignoreRegistryToolStripMenuItem.Name = "ignoreRegistryToolStripMenuItem";
             this.ignoreRegistryToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.ignoreRegistryToolStripMenuItem.Text = "Registry";
+            // 
+            // searchReplaceInfoToolStripMenuItem
+            // 
+            this.searchReplaceInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.appVToolStripMenuItem,
+            this.thinAppToolStripMenuItem});
+            this.searchReplaceInfoToolStripMenuItem.Name = "searchReplaceInfoToolStripMenuItem";
+            this.searchReplaceInfoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.searchReplaceInfoToolStripMenuItem.Text = "SearchReplaceInfo";
+            // 
+            // appVToolStripMenuItem
+            // 
+            this.appVToolStripMenuItem.Name = "appVToolStripMenuItem";
+            this.appVToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.appVToolStripMenuItem.Text = "App-V";
+            this.appVToolStripMenuItem.Click += new System.EventHandler(this.appVToolStripMenuItem_Click);
+            // 
+            // thinAppToolStripMenuItem
+            // 
+            this.thinAppToolStripMenuItem.Name = "thinAppToolStripMenuItem";
+            this.thinAppToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.thinAppToolStripMenuItem.Text = "ThinApp";
+            this.thinAppToolStripMenuItem.Click += new System.EventHandler(this.thinAppToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -477,6 +504,16 @@
             this.groupBoxFileConvert.TabStop = false;
             this.groupBoxFileConvert.Text = "Folder / File Convert";
             // 
+            // labelFileConvert
+            // 
+            this.labelFileConvert.AllowDrop = true;
+            this.labelFileConvert.Location = new System.Drawing.Point(6, 16);
+            this.labelFileConvert.Name = "labelFileConvert";
+            this.labelFileConvert.Size = new System.Drawing.Size(366, 194);
+            this.labelFileConvert.TabIndex = 0;
+            this.labelFileConvert.Text = "Folder / File Convert";
+            this.labelFileConvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // registryGroupBox
             // 
             this.registryGroupBox.Controls.Add(this.generateManifestChk);
@@ -491,8 +528,6 @@
             // generateManifestChk
             // 
             this.generateManifestChk.AutoSize = true;
-            this.generateManifestChk.Checked = true;
-            this.generateManifestChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.generateManifestChk.Location = new System.Drawing.Point(23, 59);
             this.generateManifestChk.Name = "generateManifestChk";
             this.generateManifestChk.Size = new System.Drawing.Size(113, 17);
@@ -536,9 +571,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DEBUG_SEGMENT_List.CheckBoxes = true;
-            listViewItem2.StateImageIndex = 0;
+            this.DEBUG_SEGMENT_List.HideSelection = false;
+            listViewItem1.StateImageIndex = 0;
             this.DEBUG_SEGMENT_List.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.DEBUG_SEGMENT_List.Location = new System.Drawing.Point(15, 116);
             this.DEBUG_SEGMENT_List.Name = "DEBUG_SEGMENT_List";
             this.DEBUG_SEGMENT_List.Size = new System.Drawing.Size(346, 423);
@@ -599,8 +635,6 @@
             // DEBUG_ALL_Check
             // 
             this.DEBUG_ALL_Check.AutoSize = true;
-            this.DEBUG_ALL_Check.Checked = true;
-            this.DEBUG_ALL_Check.CheckState = System.Windows.Forms.CheckState.Checked;
             this.DEBUG_ALL_Check.Location = new System.Drawing.Point(10, 34);
             this.DEBUG_ALL_Check.Name = "DEBUG_ALL_Check";
             this.DEBUG_ALL_Check.Size = new System.Drawing.Size(89, 17);
@@ -753,16 +787,6 @@
             this.statusLabelKeyPress.Text = "toolStripStatusLabelKeyPress";
             this.statusLabelKeyPress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelFileConvert
-            // 
-            this.labelFileConvert.AllowDrop = true;
-            this.labelFileConvert.Location = new System.Drawing.Point(6, 16);
-            this.labelFileConvert.Name = "labelFileConvert";
-            this.labelFileConvert.Size = new System.Drawing.Size(366, 194);
-            this.labelFileConvert.TabIndex = 0;
-            this.labelFileConvert.Text = "Folder / File Convert";
-            this.labelFileConvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Studio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -873,6 +897,9 @@
         private System.Windows.Forms.CheckBox generateManifestChk;
         private System.Windows.Forms.GroupBox groupBoxFileConvert;
         private System.Windows.Forms.Label labelFileConvert;
+        private System.Windows.Forms.ToolStripMenuItem searchReplaceInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem appVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thinAppToolStripMenuItem;
     }
 }
 

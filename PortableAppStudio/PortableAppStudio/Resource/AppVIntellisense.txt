@@ -1,0 +1,17 @@
+﻿[{AppData}]=%APPDATA%
+[{Common AppData}]=%PROGRAMDATA%
+[{Local AppData}]=%LOCALAPPDATA%
+[{LocalAppDataLow}]=%LOCALLOWAPPDATA%
+[{Profile}]=%USERPROFILE%
+[{System}]=%WINDIR%\\System32
+[{Fonts}]=%WINDIR%\\Fonts
+[{Windows}]=%WINDIR%
+[{AppVPackageDrive}]=%SystemDrive%
+[{AppVSystem32Spool}]=%WINDIR%\\System32\\Spool
+[{ProgramFilesCommonX64}]=%CommonProgramW6432%
+[{ProgramFilesCommonX86}]=%COMMONPROGRAMFILES(x86)%
+[{ProgramFilesX64}]=%PAL:AppDir%
+[{ProgramFilesX86}]=%PAL:AppDir%
+[{SystemX86}]=%WINDIR%\\SysWOW64
+[{ProgramFilesCommon}]=%COMMONPROGRAMFILES%
+[{ProgramFiles}]=%PAL:AppDir%

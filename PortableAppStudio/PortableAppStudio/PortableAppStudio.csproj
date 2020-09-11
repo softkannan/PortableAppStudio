@@ -190,6 +190,18 @@
     <Compile Include="Dialogs\RegistryValueWriteForm.Designer.cs">
       <DependentUpon>RegistryValueWriteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SearchAndReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchAndReplaceForm.Designer.cs">
+      <DependentUpon>SearchAndReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SearchReplaceHelperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchReplaceHelperForm.Designer.cs">
+      <DependentUpon>SearchReplaceHelperForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ErrorLog.cs" />
     <Compile Include="INI\INIFile.cs" />
     <Compile Include="INI\NativeINIMethods.cs" />
@@ -390,6 +402,12 @@
     <EmbeddedResource Include="Dialogs\RegistryValueWriteForm.resx">
       <DependentUpon>RegistryValueWriteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchAndReplaceForm.resx">
+      <DependentUpon>SearchAndReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchReplaceHelperForm.resx">
+      <DependentUpon>SearchReplaceHelperForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Studio.resx">
       <DependentUpon>Studio.cs</DependentUpon>
     </EmbeddedResource>
@@ -522,6 +540,12 @@
   <ItemGroup>
     <Content Include="appicon.ico" />
     <Content Include="Resource\AppEnvironments.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\ThinAppIntellisense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\AppVIntellisense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resource\EnvIntellisense.txt">

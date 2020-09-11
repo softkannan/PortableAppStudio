@@ -103,8 +103,8 @@ namespace PortableAppStudio.Parser
 
         public void GenerateRegTextFile(TreeNode node, StreamWriter writer)
         {
-            byte[] bomData = { 0xFF, 0xFE };
-            writer.Write(bomData);
+            //byte[] bomData = { 0xFF, 0xFE };
+            //writer.Write(bomData,0, bomData.Length);
             writer.WriteLine(REGEDIT5);
             GenerateRegTextFileInternal(node, writer);
         }

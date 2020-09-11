@@ -26,7 +26,11 @@ namespace PortableAppStudio.Parser
             {"Fonts","%WINDIR%\\Fonts"},
             {"Windows","%WINDIR%"},
             {"AppVPackageDrive" ,"%SystemDrive%"},
-            {"AppVSystem32Spool" ,"%WINDIR%\\System32\\Spool"}
+            {"AppVSystem32Spool" ,"%WINDIR%\\System32\\Spool"},
+            {"Common Documents","%PUBLIC%\\Documents"},
+            {"UserProfiles","%USERPROFILE%" },
+            {"AppVAllUsersDir","%ALLUSERSPROFILE%" },
+            {"Public","%PUBLIC%" },
             };
             if (Environment.Is64BitProcess)
             {
@@ -45,6 +49,8 @@ namespace PortableAppStudio.Parser
 
         public override void Parse(string fileName)
         {
+            Model.InteliSense.Inst.UpdateSearchReplaceList("AppVIntellisense.txt");
+
             ParseInternal(fileName);
         }
 

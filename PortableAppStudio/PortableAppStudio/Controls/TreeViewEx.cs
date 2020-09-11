@@ -252,8 +252,8 @@ namespace PortableAppStudio.Controls
             try
             {
                 TreeNode n0 = (TreeNode)_selectedNodes[0];
-                Color back = n0.TreeView.BackColor;
-                Color fore = n0.TreeView.ForeColor;
+                Color back = n0.TreeView != null ? n0.TreeView.BackColor : n0.BackColor;
+                Color fore = n0.TreeView != null ? n0.TreeView.ForeColor : n0.BackColor;
 
                 foreach (TreeNode n in _selectedNodes)
                 {

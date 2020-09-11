@@ -188,7 +188,7 @@ namespace PortableAppStudio
             {
                 ClosePortableApp();
                 PortableApp.Inst.LoadFolder(string.Format(@"\\?\{0}", portableAppFolder), existing);
-                UpdateDynamicIntelisense();
+                UpdateFileDynamicIntelisense();
             }
             catch(Exception ex)
             {

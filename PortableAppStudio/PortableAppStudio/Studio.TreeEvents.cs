@@ -115,16 +115,21 @@ namespace PortableAppStudio
         ContextMenuStrip _destRegFreeComContextMenu = new ContextMenuStrip();
         private ToolStripItem _importCOMDllRegItem;
         private ToolStripItem _generateCOMDllRegItem;
+        
 
         ContextMenuStrip _destRegContextMenu = new ContextMenuStrip();
         private ToolStripItem _addDestRegItem;
         private ToolStripItem _editDestRegItem;
         private ToolStripItem _removeDestRegItem;
         private ToolStripItem _duplicateDestRegItem;
+        private ToolStripItem _addFireWallregItem;
+        private ToolStripItem _addCOMComponentsregItem;
 
         ContextMenuStrip _sourceContextMenu = new ContextMenuStrip();
         private ToolStripItem _removeSourceItem;
         private ToolStripItem _expandAllSourceItem;
+        private ToolStripItem _searchAndReplaceSourceItem;
+        private ToolStripItem _copySourceItem;
 
 
         ContextMenuStrip _destFileContextMenu = new ContextMenuStrip();
@@ -134,11 +139,16 @@ namespace PortableAppStudio
         private ToolStripItem _duplicateDestFilesItem;
         private ToolStripItem _expandAllItem;
         private ToolStripItem _convert64To32Env;
-
+        private ToolStripItem _filePasteItems;
+        private ToolStripItem _fileCopyItems;
 
         private void UpdateTreeContextMenus()
         {
             _destFileContextMenu.Items.Clear();
+            _fileCopyItems = _destFileContextMenu.Items.Add("Copy");
+            _fileCopyItems.Click += FileCopyItems_Click;
+            _filePasteItems = _destFileContextMenu.Items.Add("Paste");
+            _filePasteItems.Click += FilePasteItems_Click;
             _expandAllItem = _destFileContextMenu.Items.Add("ExpandAll");
             _expandAllItem.Click += ExpandAllItem_Click;
             _addDestFilesItem = _destFileContextMenu.Items.Add("Add");
@@ -157,6 +167,10 @@ namespace PortableAppStudio
             _expandAllSourceItem.Click += ExpandAllItem_Click;
             _removeSourceItem = _sourceContextMenu.Items.Add("Remove");
             _removeSourceItem.Click += RemoveSourceItem_Click;
+            _searchAndReplaceSourceItem = _sourceContextMenu.Items.Add("SearchAndReplace");
+            _searchAndReplaceSourceItem.Click += SearchAndReplaceSourceItem_Click;
+            _copySourceItem = _sourceContextMenu.Items.Add("Copy");
+            _copySourceItem.Click += CopySourceItem_Click;
 
 
             _destRegContextMenu.Items.Clear();
@@ -168,6 +182,10 @@ namespace PortableAppStudio
             _removeDestRegItem.Click += RemoveItem_Click;
             _duplicateDestRegItem = _destRegContextMenu.Items.Add("Duplicate");
             _duplicateDestRegItem.Click += DuplicateRegItem_Click;
+            _addFireWallregItem = _destRegContextMenu.Items.Add("Add Firewall Block");
+            _addFireWallregItem.Click += AddFireWallregItem_Click;
+            _addCOMComponentsregItem = _destRegContextMenu.Items.Add("Add COM Components");
+            _addCOMComponentsregItem.Click += _addCOMComponentsregItem_Click;
 
             _destRegFreeComContextMenu.Items.Clear();
             _importCOMDllRegItem = _destRegFreeComContextMenu.Items.Add("Auto Import COM");
@@ -175,6 +193,8 @@ namespace PortableAppStudio
             _generateCOMDllRegItem = _destRegFreeComContextMenu.Items.Add("Generate Manifest");
             _generateCOMDllRegItem.Click += GenerateCOMDllRegItem_Click;
         }
+
+        
 
         private void GenerateCOMDllRegItem_Click(object sender, EventArgs e)
         {
@@ -218,6 +238,20 @@ namespace PortableAppStudio
                 }
             }
         }
+
+        private void ExpandAllItem_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tempItem = sender as ToolStripItem;
+            if (tempItem != null)
+            {
+                var selectedNode = tempItem.Tag as TreeNode;
+                if (selectedNode != null)
+                {
+                    selectedNode.ExpandAll();
+                }
+            }
+        }
+
         private void RemoveSourceItem_Click(object sender, EventArgs e)
         {
             foreach (TreeNode selectedNode in _selectedTree.MultiSelectedNodes)
@@ -226,6 +260,41 @@ namespace PortableAppStudio
                 {
                     selectedNode.Parent.Nodes.Remove(selectedNode);
                 }
+            }
+        }
+
+        private void SearchAndReplaceSourceItem_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = _selectedTree.MultiSelectedNodes.FirstOrDefault();
+            string startSearchStr = Clipboard.GetText().Trim();
+            if(string.IsNullOrWhiteSpace(startSearchStr))
+            {
+                if(selectedNode != null)
+                {
+                    startSearchStr = selectedNode.Text;
+                }
+            }
+
+            SearchAndReplaceForm form = new SearchAndReplaceForm();
+            form.Search = startSearchStr;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (selectedNode != null)
+                {
+                    if(!string.IsNullOrWhiteSpace(form.Search) && !string.IsNullOrWhiteSpace(form.Replace))
+                    {
+                        selectedNode.SearchandReplace(form.Search, form.Replace);
+                    }
+                }
+            }
+        }
+
+        private void CopySourceItem_Click(object sender, EventArgs e)
+        {
+            var item = _selectedTree.MultiSelectedNodes.FirstOrDefault();
+            if(item != null)
+            {
+                Clipboard.SetText(item.Text);
             }
         }
 
@@ -315,19 +384,240 @@ namespace PortableAppStudio
             }
         }
 
-        private void ExpandAllItem_Click(object sender, EventArgs e)
+
+        private void _addCOMComponentsregItem_Click(object sender, EventArgs e)
         {
             ToolStripItem tempItem = sender as ToolStripItem;
             if (tempItem != null)
             {
                 var selectedNode = tempItem.Tag as TreeNode;
-                if (selectedNode != null)
+                var firstNode = _selectedTree.MultiSelectedNodes.FirstOrDefault();
+                if (firstNode != null)
                 {
-                    selectedNode.ExpandAll();
+                    foreach (var item in Model.COMComponentsListStringConverter.GetRegistryWriteList())
+                    {
+                        firstNode.Nodes.Add(item);
+                    }
                 }
             }
         }
 
+        private void AddFireWallregItem_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tempItem = sender as ToolStripItem;
+            if (tempItem != null)
+            {
+                var selectedNode = tempItem.Tag as TreeNode;
+                var firstNode = _selectedTree.MultiSelectedNodes.FirstOrDefault();
+                if (firstNode != null)
+                {
+                    foreach (var item in Model.FirewallListStringConverter.GetRegistryWriteList())
+                    {
+                        firstNode.Nodes.Add(item);
+                    }
+                }
+            }
+        }
+
+        private void FilePasteItems_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tempItem = sender as ToolStripItem;
+            if (tempItem != null)
+            {
+                var firstNode = _selectedTree.MultiSelectedNodes.FirstOrDefault();
+                if (firstNode != null)
+                {
+                    var clipTxt = Clipboard.GetText();
+                    List<string> clipListData = null;
+                    bool isFileDrop = false;
+
+                    if(!string.IsNullOrWhiteSpace(clipTxt))
+                    {
+                        clipListData = clipTxt.ToListStr();
+                    }
+                    else
+                    {
+                        // Get the DataObject.
+                        IDataObject data_object = Clipboard.GetDataObject();
+                        
+                        if(data_object != null)
+                        {
+                            var fileDropData = data_object.GetData(DataFormats.FileDrop, true) as string[];
+                            if (fileDropData != null)
+                            {
+                                clipListData = new List<string>();
+                                isFileDrop = true;
+                                foreach (var item in fileDropData)
+                                {
+                                    clipListData.Add(item);
+                                }
+                            }
+                        }
+                    }
+
+                    if (clipListData != null && clipListData.Count > 0)
+                    {
+                        
+                        bool dataFromDirMoveOrLinkNode = clipListData.Count > 1 ? clipListData[0] == LaunchINI.DirectoriesMove_Tag || clipListData[0] == LaunchINI.DirectoriesLink_Tag : false;
+                        int startIndex = dataFromDirMoveOrLinkNode ? 1 : 0;
+
+                        switch (firstNode.Text)
+                        {
+                            case "DefaultData":
+                            case "Data":
+                                {
+                                    if (isFileDrop)
+                                    {
+                                        for (int index = startIndex; index < clipListData.Count; index++)
+                                        {
+                                            if (Directory.Exists(clipListData[index]))
+                                            {
+                                                var foundEnv = PathManager.Init.GetEnvironmentInfo(clipListData[index]);
+                                                var folderInfo = new Model.FolderInfo(clipListData[index]);
+                                                string dirPair = clipListData[index].ToDirectoryPair();
+                                                if (!string.IsNullOrWhiteSpace(dirPair))
+                                                {
+                                                    firstNode.Nodes.Add(dirPair);
+                                                }
+
+                                                string folderName = clipListData[index].ToDirectoryName();
+                                                var existingNode = firstNode.Nodes.FindNode(folderName);
+                                                if (existingNode == null)
+                                                {
+                                                    var destTreeNode = new TreeNode(folderName);
+                                                    firstNode.Nodes.Add(destTreeNode);
+                                                    firstNode.Expand();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case LaunchINI.DirectoriesMove_Tag:
+                            case LaunchINI.DirectoriesLink_Tag:
+                                {
+                                    if(isFileDrop)
+                                    {
+                                        for (int index = startIndex; index < clipListData.Count; index++)
+                                        {
+                                            if (Directory.Exists(clipListData[index]))
+                                            {
+                                                string dirPair = clipListData[index].ToDirectoryPair();
+                                                if (!string.IsNullOrWhiteSpace(dirPair))
+                                                {
+                                                    firstNode.Nodes.Add(dirPair);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int index = startIndex; index < clipListData.Count; index++)
+                                        {
+                                            if (clipListData[index].IndexOf('=') != -1)
+                                            {
+                                                firstNode.Nodes.Add(clipListData[index]);
+                                            }
+                                            else if(clipListData[index].IndexOf('%') == 0)
+                                            {
+                                                firstNode.Nodes.Add(string.Format("-={0}",clipListData[index]));
+                                            }
+                                            else
+                                            {
+                                                string dirPair = clipListData[index].ToDirectoryPair();
+                                                if (!string.IsNullOrWhiteSpace(dirPair))
+                                                {
+                                                    firstNode.Nodes.Add(dirPair);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case LaunchINI.DirectoriesCleanupForce_Tag:
+                            case LaunchINI.DirectoriesCleanupIfEmpty_Tag:
+                                {
+                                    int dirIndex = firstNode.Nodes.Count + 1;
+                                    if (isFileDrop)
+                                    {
+                                        for (int index = startIndex; index < clipListData.Count; index++)
+                                        {
+                                            if (Directory.Exists(clipListData[index]))
+                                            {
+                                                string dirPair = PathManager.Init.GetExpandablePath(clipListData[index]);
+                                                if (!string.IsNullOrWhiteSpace(dirPair))
+                                                {
+                                                    firstNode.Nodes.Add(string.Format("{0}={1}",dirIndex,dirPair));
+                                                    dirIndex++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int index = startIndex; index < clipListData.Count; index++)
+                                        {
+                                            if (clipListData[index].IndexOf('=') != -1)
+                                            {
+                                                var spiltVals = clipListData[index].Split('=');
+                                                if (spiltVals.Length > 1)
+                                                {
+                                                    firstNode.Nodes.Add(string.Format("{0}={1}", dirIndex, spiltVals[1]));
+                                                    dirIndex++;
+                                                }
+                                            }
+                                            else if (clipListData[index].IndexOf('%') == 0)
+                                            {
+                                                firstNode.Nodes.Add(string.Format("{0}={1}", dirIndex,clipListData[index]));
+                                                dirIndex++;
+                                            }
+                                            else
+                                            {
+                                                string dirPair = PathManager.Init.GetExpandablePath(clipListData[index]);
+                                                if (!string.IsNullOrWhiteSpace(dirPair))
+                                                {
+                                                    firstNode.Nodes.Add(string.Format("{0}={1}", dirIndex, dirPair));
+                                                    dirIndex++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void FileCopyItems_Click(object sender, EventArgs e)
+        {
+            List<string> listOfItemsCopied = new List<string>();
+            var firstNode = _selectedTree.MultiSelectedNodes.FirstOrDefault();
+            if (firstNode != null)
+            {
+                listOfItemsCopied.Add(firstNode.Parent.Text);
+            }
+
+            foreach (TreeNode selectedNode in _selectedTree.MultiSelectedNodes)
+            {
+                if (selectedNode.Parent != null)
+                {
+                    var valuePair = selectedNode.Tag as Model.IINIKeyValuePair;
+                    var fileInfo = selectedNode.Tag as Model.FileInfo;
+                    var folderInfo = selectedNode.Tag as Model.FolderInfo;
+                    if (valuePair != null)
+                    {
+                        listOfItemsCopied.Add(valuePair.FullValue);
+                    }
+                }
+            }
+            var clipTxt = listOfItemsCopied.ToStringMultiline();
+            if (!string.IsNullOrWhiteSpace(clipTxt))
+            {
+                Clipboard.SetText(clipTxt);
+            }
+        }
         private void AddItem_Click(object sender, EventArgs e)
         {
             ToolStripItem tempItem = sender as ToolStripItem;
