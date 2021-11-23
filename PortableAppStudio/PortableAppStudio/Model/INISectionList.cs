@@ -51,7 +51,7 @@ namespace PortableAppStudio.Model
 
             foreach (var sectionName in file.ReadSections())
             {
-                if (sectionName.IndexOf(sectionNamePrefix) == 0)
+                if (sectionName.IndexOf(sectionNamePrefix, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     var fileWriteSection = new T();
                     fileWriteSection.LoadSection(sectionName, file);
@@ -69,7 +69,7 @@ namespace PortableAppStudio.Model
 
             foreach (var sectionName in file.ReadSections())
             {
-                if (sectionName.IndexOf(sectionNamePrefix) == 0)
+                if (sectionName.IndexOf(sectionNamePrefix, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     file.DeleteSection(sectionName);
                 }
@@ -98,5 +98,7 @@ namespace PortableAppStudio.Model
             }
             return retVal.ToString();
         }
+
+       
     }
 }

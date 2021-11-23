@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms.Design;
 using System.Windows.Forms.VisualStyles;
 using System.ComponentModel.Design;
+using PortableAppStudio.Utility;
 
 namespace PortableAppStudio.Controls
 {
@@ -37,6 +38,7 @@ namespace PortableAppStudio.Controls
                 UpdateUI();
             }
         }
+
         private void UpdateColumn(Model.IINIKeyValuePair sampleItem)
         {
             listView.Columns.Clear();
@@ -277,13 +279,28 @@ namespace PortableAppStudio.Controls
         {
             try
             {
-                Model.IINIKeyValuePair newItem = CreateNewItem();
                 if (_selectedList != null)
                 {
-                    _selectedList.Add(newItem);
+                    Model.IINIKeyValuePair newItem = null;
+                    var listValue = _selectedList.InvokeMethod("CreateNewItem") as List<string>;
+                    if (listValue == null)
+                    {
+                        newItem = CreateNewItem();
+                        _selectedList.Add(newItem);
+                        _selectedList.UpdateIndex();
+                    }
+                    else if (listValue.Count > 0)
+                    {
+                        foreach (var item in listValue)
+                        {
+                            newItem = CreateNewItem();
+                            newItem.IniValue = item;
+                            _selectedList.Add(newItem);
+                            _selectedList.UpdateIndex();
+                        }
+                    }
+                    FireValuePropertyValueChanged();
                 }
-                _selectedList.UpdateIndex();
-                FireValuePropertyValueChanged();
             }
             catch (Exception e)
             {

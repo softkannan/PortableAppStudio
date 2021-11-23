@@ -27,6 +27,7 @@ namespace PortableAppStudio.Parser
 
         public override void Parse(string fileName)
         {
+            this.ParserType = RegSourceType.RegShot;
             ParseInternal(fileName);
         }
 
@@ -135,7 +136,7 @@ namespace PortableAppStudio.Parser
                     continue;
                 }
                 //look for end of section then jump
-                else if (tempVal.IndexOf(SECTION_END) == 0)
+                else if (tempVal.IndexOf(SECTION_END, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     AddRegShotValue(lastKey, lastValueName, lastValueKind, lastRegValue);
                     lastKey = null;
@@ -150,7 +151,7 @@ namespace PortableAppStudio.Parser
                     if (lastSectionType == SectionType.RegValues)
                     {
                         //skip HKU
-                        if(tempVal.IndexOf(HKU_SHORT, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        if(tempVal.IndexOf(HKU_SHORT, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             AddRegShotValue(lastKey, lastValueName, lastValueKind, lastRegValue);
                             lastKey = null;
@@ -160,8 +161,8 @@ namespace PortableAppStudio.Parser
                             continue;
                         }
                         //new value start
-                        else if (tempVal.IndexOf(HKLM_SHORT, StringComparison.InvariantCultureIgnoreCase) == 0 ||
-                            tempVal.IndexOf(HKCU_SHORT, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        else if (tempVal.IndexOf(HKLM_SHORT, StringComparison.OrdinalIgnoreCase) == 0 ||
+                            tempVal.IndexOf(HKCU_SHORT, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             AddRegShotValue(lastKey, lastValueName, lastValueKind, lastRegValue);
                             lastKey = null;

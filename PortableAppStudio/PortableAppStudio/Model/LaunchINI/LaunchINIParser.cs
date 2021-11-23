@@ -16,6 +16,7 @@ namespace PortableAppStudio.Model.LaunchINI
     partial class LaunchINI
     {
         public const string WaitForEXEN_Tag = "WaitForEXEN";
+        public const string KillProcN_Tag = "KillProcN";
         private INIFile _iniFile = null;
         private string _debugFile = string.Empty;
         public string DebugFile
@@ -131,6 +132,9 @@ namespace PortableAppStudio.Model.LaunchINI
                         case "DirectoriesLink":
                             DirectoriesLink.LoadSection("DirectoriesLink",_iniFile);
                             break;
+                        case "PrefixPATHEnv":
+                            PrefixPATHEnv.LoadSection("PrefixPATHEnv", _iniFile);
+                            break;
                     }
 
                 }
@@ -149,49 +153,55 @@ namespace PortableAppStudio.Model.LaunchINI
                     {
                         case "RegistryKeys":
                             {
-                                var topNode = RegistryKeys.BuildTreeUI("RegistryKeys", rootNode);
+                                var topNode = RegistryKeys.BuildTreeUI("RegistryKeys", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "RegistryValueWrite":
                             {
-                                var topNode = RegistryValueWrite.BuildTreeUI("RegistryValueWrite", rootNode);
+                                var topNode = RegistryValueWrite.BuildTreeUI("RegistryValueWrite", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "RegistryCleanupIfEmpty":
                             {
-                                var topNode = RegistryCleanupIfEmpty.BuildTreeUI("RegistryCleanupIfEmpty", rootNode);
+                                var topNode = RegistryCleanupIfEmpty.BuildTreeUI("RegistryCleanupIfEmpty", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "RegistryCleanupForce":
                             {
-                                var topNode = RegistryCleanupForce.BuildTreeUI("RegistryCleanupForce", rootNode);
+                                var topNode = RegistryCleanupForce.BuildTreeUI("RegistryCleanupForce", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "RegistryValueBackupDelete":
                             {
-                                var topNode = RegistryValueBackupDelete.BuildTreeUI("RegistryValueBackupDelete", rootNode);
+                                var topNode = RegistryValueBackupDelete.BuildTreeUI("RegistryValueBackupDelete", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
-                        case "RegistrationFreeCOM":
+                        case "FileWriteN":
                             {
-                                var topNode = RegistrationFreeCOM.BuildTreeUI("RegistrationFreeCOM", rootNode);
+                                var topNode = FileWriteN.BuildTreeUI("FileWriteN", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
-                        case "Environment":
-                            {
-                                var topNode = Environment.BuildTreeUI("Environment", rootNode);
-                                topNode.Expand();
-                            }
-                            break;
+                        //case "RegistrationFreeCOM":
+                        //    {
+                        //        var topNode = RegistrationFreeCOM.BuildTreeUI("RegistrationFreeCOM", rootNode, item);
+                        //        topNode.Expand();
+                        //    }
+                        //    break;
+                        //case "Environment":
+                        //    {
+                        //        var topNode = Environment.BuildTreeUI("Environment", rootNode, item);
+                        //        topNode.Expand();
+                        //    }
+                        //    break;
                         case "QtKeysCleanup":
                             {
-                                var topNode = QtKeysCleanup.BuildTreeUI("QtKeysCleanup", rootNode);
+                                var topNode = QtKeysCleanup.BuildTreeUI("QtKeysCleanup", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
@@ -217,31 +227,43 @@ namespace PortableAppStudio.Model.LaunchINI
                     {
                         case "FilesMove":
                             {
-                                var topNode = FilesMove.BuildTreeUI("FilesMove", rootNode);
+                                var topNode = FilesMove.BuildTreeUI("FilesMove", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "DirectoriesMove":
                             {
-                                var topNode = DirectoriesMove.BuildTreeUI("DirectoriesMove", rootNode);
+                                var topNode = DirectoriesMove.BuildTreeUI("DirectoriesMove", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "DirectoriesCleanupIfEmpty":
                             {
-                                var topNode = DirectoriesCleanupIfEmpty.BuildTreeUI("DirectoriesCleanupIfEmpty", rootNode);
+                                var topNode = DirectoriesCleanupIfEmpty.BuildTreeUI("DirectoriesCleanupIfEmpty", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "DirectoriesCleanupForce":
                             {
-                                var topNode = DirectoriesCleanupForce.BuildTreeUI("DirectoriesCleanupForce", rootNode);
+                                var topNode = DirectoriesCleanupForce.BuildTreeUI("DirectoriesCleanupForce", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "DirectoriesLink":
                             {
-                                var topNode = DirectoriesLink.BuildTreeUI("DirectoriesLink", rootNode);
+                                var topNode = DirectoriesLink.BuildTreeUI("DirectoriesLink", rootNode, item);
+                                topNode.Expand();
+                            }
+                            break;
+                        case "Environment":
+                            {
+                                var topNode = Environment.BuildTreeUI("Environment", rootNode, item);
+                                topNode.Expand();
+                            }
+                            break;
+                        case "PrefixPATHEnv":
+                            {
+                                var topNode = PrefixPATHEnv.BuildTreeUI("PrefixPATHEnv", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
@@ -264,60 +286,60 @@ namespace PortableAppStudio.Model.LaunchINI
                     {
                         case "Launch":
                             {
-                                var topNode = Launch.BuildTreeUI("Launch", rootNode);
+                                var topNode = Launch.BuildTreeUI("Launch", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "Activate":
                             {
-                                var topNode = Activate.BuildTreeUI("Activate", rootNode);
+                                var topNode = Activate.BuildTreeUI("Activate", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "LiveMode":
                             {
-                                var topNode = LiveMode.BuildTreeUI("LiveMode", rootNode);
+                                var topNode = LiveMode.BuildTreeUI("LiveMode", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         //case "Environment":
                         //    {
-                        //        var topNode = Environment.BuildTreeUI("Environment", rootNode);
+                        //        var topNode = Environment.BuildTreeUI("Environment", rootNode, item);
                         //        topNode.Expand();
                         //    }
                         //    break;
                         //case "QtKeysCleanup":
                         //    {
-                        //        var topNode = QtKeysCleanup.BuildTreeUI("QtKeysCleanup", rootNode);
+                        //        var topNode = QtKeysCleanup.BuildTreeUI("QtKeysCleanup", rootNode, item);
                         //        topNode.Expand();
                         //    }
                         //    break;
-                        case "FileWriteN":
-                            {
-                                TreeNode topNode = new TreeNode("FileWriteN");
-                                foreach (var fileWriteSection in FileWriteN)
-                                {
-                                    fileWriteSection.BuildTreeUI(fileWriteSection.SectionName, topNode);
-                                }
-                                rootNode.Nodes.Add(topNode);
-                                topNode.Expand();
-                            }
-                            break;
+                        //case "FileWriteN":
+                        //    {
+                        //        TreeNode topNode = new TreeNode("FileWriteN");
+                        //        foreach (var fileWriteSection in FileWriteN)
+                        //        {
+                        //            fileWriteSection.BuildTreeUI(fileWriteSection.SectionName, topNode, item);
+                        //        }
+                        //        rootNode.Nodes.Add(topNode);
+                        //        topNode.Expand();
+                        //    }
+                        //    break;
                         case "Language":
                             {
-                                var topNode = Language.BuildTreeUI("Language", rootNode);
+                                var topNode = Language.BuildTreeUI("Language", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "LanguageStrings":
                             {
-                                var topNode = LanguageStrings.BuildTreeUI("LanguageStrings", rootNode);
+                                var topNode = LanguageStrings.BuildTreeUI("LanguageStrings", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "LanguageFile":
                             {
-                                var topNode = LanguageFile.BuildTreeUI("LanguageFile", rootNode);
+                                var topNode = LanguageFile.BuildTreeUI("LanguageFile", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
@@ -370,6 +392,12 @@ namespace PortableAppStudio.Model.LaunchINI
                     break;
                 case "QtKeysCleanup":
                     QtKeysCleanup.SaveNode(node);
+                    break;
+                case "PrefixPATHEnv":
+                    PrefixPATHEnv.SaveNode(node);
+                    break;
+                case "FileWriteN":
+                    FileWriteN.SaveNode(node);
                     break;
             }
         }
@@ -442,6 +470,9 @@ namespace PortableAppStudio.Model.LaunchINI
                         case "DirectoriesLink":
                             DirectoriesLink.SaveSection("DirectoriesLink", _iniFile);
                             break;
+                        case "PrefixPATHEnv":
+                            PrefixPATHEnv.SaveSection("PrefixPATHEnv", _iniFile);
+                            break;
                     }
                 }
             }
@@ -457,6 +488,11 @@ namespace PortableAppStudio.Model.LaunchINI
                 case WaitForEXEN_Tag:
                     {
                         retListValue = Launch.WaitForEXEN;
+                    }
+                    break;
+                case KillProcN_Tag:
+                    {
+                        retListValue = Launch.KillProcN;
                     }
                     break;
                 case "[Launch]":
@@ -522,7 +558,7 @@ namespace PortableAppStudio.Model.LaunchINI
 
             QtKeysCleanup = new INIValueList<QtKeysCleanupSection>();
 
-            FileWriteN = new INISectionList<FileWriteNSection>();
+            FileWriteN = new FileWriteNSectionList();
             FilesMove = new INIValueList<FilesMoveSection>();
 
             DirectoriesMove = new INIValueList<DirectoriesMoveSection>();
@@ -535,6 +571,7 @@ namespace PortableAppStudio.Model.LaunchINI
 
             LanguageFile = new LanguageFileSection();
             DirectoriesLink = new INIValueList<DirectoriesLinkSection>();
+            PrefixPATHEnv = new INIValueList<PrefixPATHEnvSection>();
         }
     }
 }

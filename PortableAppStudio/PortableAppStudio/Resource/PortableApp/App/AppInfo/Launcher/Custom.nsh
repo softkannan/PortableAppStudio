@@ -1,49 +1,588 @@
 ${SegmentFile}
 
-${SegmentInit}
-    ${If} $Bits = 64
-        ;${SetEnvironmentVariablesPath} 
-    ${Else}
-        ;${SetEnvironmentVariablesPath} 
-    ${EndIf}
-	StrCpy $0 "%APPDATA%\..\LocalLow"
-	${ParseLocations} $0
-	System::Call 'kernel32::GetFullPathName(t r0, i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3'
-	System::Call 'Kernel32::SetEnvironmentVariable(t, t) i("LOCALLOWAPPDATA", t r2).r0'
+; Ghost Script "Ghostscript=find" Start
+; PrefixPATHEnv Allows Prefix PATH environment variable
+; DirectoriesLink Allows directory link creation instead of directory move
+
+; Coding Tips
+; StrCpy $Var1 ""  to clear the variable value before copy new value, StrCpy $example "" ;This clears the variable.
+
+Var CustomBits
+
+Var GSMode
+Var GSDirectory
+Var GSRegExists
+Var GSExecutable
+
+Var JavaModeCustom
+Var JavaDirectoryCustom
+Var JavaClassPathCustom
+
+Var Fonts_Found
+
+!include WinMessages.nsh
+
+!macro LoopTest Message
+ MessageBox MB_OKCANCEL|MB_ICONINFORMATION "${Message}" IDOK +2
+  Abort
+!macroend
+!define LoopTest "!insertmacro LoopTest"
+
+Function _Ghostscript_ValidateInstall
+	${If} $Bits = 64
+		${If} ${FileExists} $GSDirectory\bin\gswin64c.exe
+			StrCpy $GSExecutable $GSDirectory\bin\gswin64c.exe
+			;${DebugMsg} "Found valid 64-bit Ghostscript install at $GSDirectory."
+			StrCpy $R8 "Found valid 64-bit Ghostscript install at $GSDirectory."
+			Push true
+			Goto End
+		${Else}
+			;${DebugMsg} "64-bit Windows but gswin64c.exe not found; trying gswin32c.exe instead."
+			StrCpy $R8 "64-bit Windows but gswin64c.exe not found; trying gswin32c.exe instead.$\r$\n"
+		${EndIf}
+	${EndIf}
+
+	${IfNot} ${FileExists} $GSDirectory\bin\gswin32c.exe
+		;${DebugMsg} "No valid Ghostscript install found at $GSDirectory."
+		StrCpy $R8 "$R8No valid Ghostscript install found at $GSDirectory."
+		StrCpy $GSDirectory ""
+		StrCpy $GSExecutable ""
+		Push false
+		Goto End
+	${EndIf}
+
+	StrCpy $GSExecutable $GSDirectory\bin\gswin32c.exe
+	;${DebugMsg} "Found valid 32-bit Ghostscript install at $GSDirectory."
+	StrCpy $R8 "$R8Found valid 32-bit Ghostscript install at $GSDirectory."
+	Push true
+	Goto End
+
+	End:
+FunctionEnd
+; Ghostscript is valid install
+; if we use LOGICLIB then macro has to be defined in certain way, like below
+!macro _Ghostscript_ValidateInstall _a _b _t _f
+	!insertmacro _LOGICLIB_TEMP
+	${DebugMsg} "Checking for Ghostscript in $GSDirectory..."
+	Call _Ghostscript_ValidateInstall
+	${DebugMsg} `$R8`
+	Pop $_LOGICLIB_TEMP
+	!insertmacro _== $_LOGICLIB_TEMP true `${_t}` `${_f}`
+!macroend
+!define IsValidGhostscriptInstall `"" Ghostscript_ValidateInstall ""`
+; Ghost Script "Ghostscript=find" End
+
+; .onInit: things which must go in the NSIS .onInit function (see the NSIS documentation for details about .onInit)
+${Segment.onInit}
+
+	${DebugMsg} "Custom Segment onInit Start"
+	
+	; ${LoopTest} "Test"
+
+	; Borrowed the following from PAL 2.2, Remove on release of PAL 2.2
+	; Work out if it's 64-bit or 32-bit
+	System::Call kernel32::GetCurrentProcess()i.s
+	System::Call kernel32::IsWow64Process(is,*i.r0)
+	${If} $0 == 0
+		StrCpy $Bits 32
+	${Else}
+		StrCpy $Bits 64
+	${EndIf}
+	
+	StrCpy $0 $Bits
+	${SetEnvironmentVariable} CustomBits $0
+	
+	${DebugMsg} "Custom Segment onInit End"
 !macroend
 
-${SegmentPrePrimary}
-	${ForEachINIPair} DirectoriesLink $0 $1
+; Init: load data into variables, abort the launcher if necessary, and do anything else of a “starting up” nature”.
+${SegmentInit}
+
+	${DebugMsg} "Custom Segment Init Start"
+	
+	StrCpy $0 "%APPDATA%\..\LocalLow"
+	${ParseLocations} $0
+	${DebugMsg} "Custom Setting LocalLowAppData path $0"
+	System::Call "Kernel32::GetFullPathName(t '$0', i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3"
+	${DebugMsg} "Custom LocalLowAppData full path $2"
+	System::Call "Kernel32::SetEnvironmentVariable(t 'LOCALLOWAPPDATA', t '$R2') i .r3"
+
+	;Ensure we have a proper Documents path
+	ExpandEnvStrings $1 "%PortableApps.comDocuments%"
+	${If} $1 == ""
+	${OrIfNot} ${FileExists} "$1\*.*"
+		${GetParent} $EXEDIR $3
+		${GetParent} $3 $1
+		${If} $1 == "" ;Be sure we didn't just GetParent on Root
+			StrCpy $1 $3
+		${EndIf}
+		${If} ${FileExists} "$1\Documents\*.*"
+			StrCpy $2 "$1\Documents"
+		${Else}
+			${GetRoot} $EXEDIR $1
+			${If} ${FileExists} "$1\Documents\*.*"
+				StrCpy $2 "$1\Documents"
+			${Else}
+				StrCpy $2 "$1"
+			${EndIf}
+		${EndIf}
+		System::Call 'Kernel32::SetEnvironmentVariable(t, t) i("PortableApps.comDocuments", "$2").r0'
+	${EndIf}
 		
+	${DebugMsg} "Custom Segment Init End"
+	
+!macroend
+
+; Pre: do things to make the application portable which must always be done,
+; whether the launcher is dealing with a primary or secondary instance of the application.
+${SegmentPre}
+
+	${DebugMsg} "Custom Segment Pre Start"
+	ClearErrors
+	
+	
+	${DebugMsg} "Custom Segment Pre Perform Prefix PATH"
+	${ForEachINIPair} PrefixPATHEnv $0 $1
+	
+		; parse the right side of ini entry target directory
+		${ParseLocations} $1
+		System::Call "Kernel32::GetFullPathName(t '$1', i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3"
+		${DebugMsg} "PrefixPATHEnv full path $2"
+		
+		; Prefix the given directory to path environment variable
+		ReadEnvStr $4 PATH
+		StrCpy $4 "$2;$4"
+		${SetEnvironmentVariablesPath} PATH $4
+		
+	${NextINIPair}
+	
+	${DebugMsg} "Custom Segment Pre Perform Prefix PATH End"
+	
+	${DebugMsg} "Custom Segment Pre Perform DirectoriesLink"
+	; Perform Directory Link
+	${ForEachINIPair} DirectoriesLink $0 $1
+	
+		${DebugMsg} "DirectoriesLink prepare $0=$1"
 		${If} $0 == -
 			MessageBox MB_ICONSTOP "DirectoriesLink key -, not supported use DirectoriesMove $0 (no file copy)."
-		${ElseIf} $0 == settings
+		${ElseIf} $0 == $DataDirectory\settings
 			MessageBox MB_ICONSTOP "DON'T YOU DARE DO THAT! (You can't [DirectoriesMove] settings)"
 		${EndIf}
 
-		StrCpy $0 $DataDirectory\$0
+		; Expand the left side of ini entry src directory
+		StrCpy $5 "$DataDirectory\$0"
+		; parse the right side of ini entry target directory
 		${ParseLocations} $1
-		System::Call 'kernel32::GetFullPathName(t r1, i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3'
-		${DebugMsg} "Link Path $2"
-		${If} ${FileExists} $2
+		System::Call "Kernel32::GetFullPathName(t '$1', i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3"
+		${DebugMsg} "DirectoriesLink right side expanded full path $2"
+		StrCpy $6 $2
+		
+		; See if the parent local directory exists. If not, create it and
+		; note down to delete it at the end if it's empty.
+		${GetParent} $1 $4
+		${IfNot} ${FileExists} $4
+			${DebugMsg} "DirectoriesLink creating parent directory $4"
+			CreateDirectory $4
+		${EndIf}
+		
+		${DebugMsg} "DirectoriesLink Source path for Link $5"
+		${If} ${FileExists} $6
 			; backup already left over files by someone
-			${DebugMsg} "Backing up $2 to $2.BackupBy$AppID"
-			Rename $2 $2.BackupBy$AppID
+			${DebugMsg} "DirectoriesLink Backing up $6 to $6.BackupBy$AppID"
+			Rename $6 $6.BackupBy$AppID
 		${EndIf}
 
-		${DebugMsg} "Linking $2 to $0"
-		System::Call "kernel32::CreateSymbolicLink(t r2, t r0, i 3) i .s" 
+		${DebugMsg} "DirectoriesLink Linking $6 to $5"
+		System::Call "Kernel32::CreateSymbolicLink(t '$6', t '$5', i 3)i .r0"
+		
 	${NextINIPair}
+	
+	${DebugMsg} "Custom Segment Pre Perform DirectoriesLink End"
+	
+	; If [Activate]:Ghostscript=find|require, search for Ghostscript in the
+	; following locations (in order):
+	;
+	;  - PortableApp (..\CommonFiles\Ghostscript)
+	;  - C:\Program Files\gs\
+	;  - GS_PROG (which will be $GSDirectory\bin\gswin(32|64)c.exe)
+	;  - Anywhere in %PATH% (with SearchPath)
+	;
+	; If it's in none of those, give up. [Activate]:Ghostscript=require will
+	; then abort, [Activate]:Ghostscript=find will not set it.
+	${DebugMsg} "Custom Segment Pre Probe Ghostscript"
+	StrCpy $GSExecutable ""
+	${ReadLauncherConfig} $GSMode Activate Ghostscript
+			
+	${If} $GSMode == find
+	${OrIf} $GSMode == require
+	${OrIf} $GSMode == find32
+	${OrIf} $GSMode == require32
+	${OrIf} $GSMode == find64
+	${OrIf} $GSMode == require64
+		; ..\CommonFiles\Ghostscript / ..\Ghostscript
+		
+		StrCpy $0 ""
+		${If} ${FileExists} "%PAL:AppDir%\Ghostscript"
+			StrCpy $0 '%PAL:AppDir%\Ghostscript'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\Ghostscript"
+			StrCpy $0 '%PAL:DataDir%\..\..\Ghostscript'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\CommonFiles\Ghostscript"
+			StrCpy $0 '%PAL:DataDir%\..\..\CommonFiles\Ghostscript'
+		${Else}
+			; C:\Program Files\gs
+			
+			${If} $GSMode == find
+			${OrIf} $GSMode == find64
+			${OrIf} $GSMode == require64
+			${OrIf} $GSMode == require
+				StrCpy $0 '$PROGRAMFILES64\gs'
+			${Else}
+			
+				${If} $GSMode == find32
+				${OrIf} $GSMode == require32
+					StrCpy $0 '$PROGRAMFILES\gs'
+				${EndIf}
+				
+			${EndIf}
+			
+		${EndIf}
+		
+		${ParseLocations} $0
+		System::Call "Kernel32::GetFullPathName(t '$0', i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3"
+		StrCpy $GSDirectory $2
+		${IfNot} ${IsValidGhostscriptInstall}
+		
+			; before setting new value force the value empty, required
+			StrCpy $GSDirectory ""
+			ReadEnvStr $GSDirectory GS_PROG
+			${GetParent} $GSDirectory $GSDirectory
+			${GetParent} $GSDirectory $GSDirectory
+			${IfNot} ${IsValidGhostscriptInstall}
+			
+				; before setting new value force the value empty, required
+				StrCpy $GSDirectory ""
+				SearchPath $GSDirectory gswin64c.exe
+				${GetParent} $GSDirectory $GSDirectory
+				${GetParent} $GSDirectory $GSDirectory
+				${IfNot} ${IsValidGhostscriptInstall}
+				
+					; before setting new value force the value empty, required
+					StrCpy $GSDirectory ""
+					SearchPath $GSDirectory gswin32c.exe
+					${GetParent} $GSDirectory $GSDirectory
+					${GetParent} $GSDirectory $GSDirectory
+					${IfNot} ${IsValidGhostscriptInstall}
+					
+						; If not valid, ${IsValidGhostscriptInstall} will clear
+						; $GSDirectory for us.
+						Nop
+					${EndIf}
+					
+				${EndIf}
+				
+			${EndIf}
+			
+		${EndIf}
+
+		; If Ghostscript is required and not found, quit
+		${If} $GSMode == require
+		${AndIf} $GSExecutable == ""
+			MessageBox MB_OK|MB_ICONSTOP "Unable to find Ghostscript path"
+			Quit
+		${EndIf}
+
+		; This may be created; check if it exists before: 0 = exists
+		${registry::KeyExists} "HKCU\Software\GPL Ghostscript" $GSRegExists
+		
+		${If} $GSExecutable == ""
+			${DebugMsg} "Unable to find Ghostscript path: $GSDirectory"
+		${Else}
+			${DebugMsg} "Selected Ghostscript path: $GSDirectory"
+			${DebugMsg} "Selected Ghostscript executable: $GSExecutable"
+			ReadEnvStr $0 PATH
+			StrCpy $0 "$GSDirectory\lib;$GSDirectory\bin;$0"
+			${SetEnvironmentVariablesPath} PATH $0
+			${SetEnvironmentVariablesPath} GS_PROG $GSExecutable
+			${SetEnvironmentVariablesPath} GS_DIR $GSDirectory
+		${EndIf}
+		
+	${EndIf}
+	
+	${DebugMsg} "Custom Segment Pre Probe Ghostscript End"
+	
+	; If [Activate]:JavaRuntime=find|require, search for JavaRuntime in the
+	; following locations (in order):
+	;
+	;  - PortableApp (..\CommonFiles\OpenJDKJRE / ..\CommonFiles\OpenJDK / ..\CommonFiles\Java / ..\CommonFiles\JDK)
+	;
+	; If it's in none of those, give up. [Activate]:JavaRuntime=require will
+	; then abort, [Activate]:JavaRuntime=find will not set it.
+	${DebugMsg} "Custom Segment Pre Probe JavaRuntime"
+	StrCpy $JavaDirectoryCustom ""
+	StrCpy $JavaClassPathCustom ""
+	${ReadLauncherConfig} $JavaModeCustom Activate Java
+	
+	${If} $JavaModeCustom == find
+	${OrIf} $JavaModeCustom == require
+
+		${If} ${FileExists} "%PAL:AppDir%\Java\bin\javaw.exe"
+			StrCpy $0 '%PAL:AppDir%\Java'
+		${ElseIf} ${FileExists} "%PAL:AppDir%\OpenJDKJRE\bin\javaw.exe"
+			StrCpy $0 '%PAL:AppDir%\OpenJDKJRE'
+		${ElseIf} ${FileExists} "%PAL:AppDir%\OpenJDK\bin\javaw.exe"
+			StrCpy $0 '%PAL:AppDir%\OpenJDK'
+		${ElseIf} ${FileExists} "%PAL:AppDir%\JDK\jre\bin\javaw.exe"
+			StrCpy $0 '%PAL:AppDir%\JDK\jre'
+			
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\OpenJDKJRE\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\OpenJDKJRE'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\OpenJDK\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\OpenJDK'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\Java\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\Java'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\JDK\jre\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\JDK\jre'
+			
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\CommonFiles\OpenJDKJRE\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\CommonFiles\OpenJDKJRE'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\CommonFiles\OpenJDK\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\CommonFiles\OpenJDK'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\CommonFiles\Java\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\CommonFiles\Java'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\CommonFiles\JDK\jre\bin\javaw.exe"
+			StrCpy $0 '%PAL:DataDir%\..\..\CommonFiles\JDK\jre'
+			
+		${Else}
+			ReadEnvStr $0 JAVA_HOME
+		${EndIf}
+		
+		${ParseLocations} $0
+		System::Call "Kernel32::GetFullPathName(t '$0', i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3"
+		StrCpy $JavaDirectoryCustom $2
+		
+		${If} ${FileExists} "$JavaDirectoryCustom\bin\javaw.exe"
+			${DebugMsg} "Selected java path: $JavaDirectoryCustom"
+			; Set our environment variables
+			${SetEnvironmentVariablesPath} JAVAHOME $JavaDirectoryCustom
+			; System::Call 'Kernel32::SetEnvironmentVariable(t, t) i("JAVAHOME", "$JavaDirectoryCustom").r0'
+			; System::Call 'Kernel32::SetEnvironmentVariable(t, t) i("CLASSPATH", ".").r0'
+		${Else}
+		
+			; If Java is required and not found, quit
+			${If} $JavaModeCustom == require
+				MessageBox MB_OK|MB_ICONSTOP "Unable to find JAVA_HOME"
+				Quit
+			${EndIf}
+			
+		${EndIf}
+		
+	${EndIf}
+	
+	${DebugMsg} "Custom Segment Pre Probe JavaRuntime End"
+	
+	StrCpy $Fonts_Found false
+	;Load user ttf fonts
+	FindFirst $0 $1 "$EXEDIR\Data\fonts\*.ttf"
+	${DoWhile} $1 != ""
+		StrCpy $Fonts_Found true
+		System::Call "gdi32::AddFontResource(t'$EXEDIR\Data\fonts\$1')i .r2"
+		FindNext $0 $1
+	${Loop}
+	FindClose $0
+	
+	;Load user otf fonts
+	FindFirst $0 $1 "$EXEDIR\Data\fonts\*.otf"
+	${DoWhile} $1 != ""
+		StrCpy $Fonts_Found true
+		System::Call "gdi32::AddFontResource(t'$EXEDIR\Data\fonts\$1')i .r2"
+		FindNext $0 $1
+	${Loop}
+	FindClose $0
+	
+	${If} $Fonts_Found == true
+		;Let all running apps know
+		SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=1
+	${EndIf}
+	
+	${DebugMsg} "Custom Segment Pre End"
 !macroend
 
-${SegmentPostPrimary}
-	${ForEachINIPair} DirectoriesLink $0 $1
+; PrePrimary: actions to make the application portable which should only be run with a primary instance of an application.
+${SegmentPrePrimary}
+	${DebugMsg} "Custom Segment PrePrimary Start"
+	${DebugMsg} "Custom Segment PrePrimary End"
+!macroend
 
+; PreSecondary: actions to make the application portable which should only be run with a secondary
+; or subsequent instance of an application. I haven’t yet thought of an instance when this would be useful but there could be.
+${SegmentPreSecondary}
+	${DebugMsg} "Custom Segment PreSecondary Start"
+	${DebugMsg} "Custom Segment PreSecondary End"
+!macroend
+
+; PreExec: just before the program gets executed, there’s an opportunity to do something here. Try to use the Pre hook instead.
+${SegmentPreExec}
+	${DebugMsg} "Custom Segment PreExec Start"
+	${DebugMsg} "Custom Segment PreExec End"
+!macroend
+
+; PreExecPrimary: PreExec for primary instances.
+${SegmentPreExecPrimary}
+	${DebugMsg} "Custom Segment PreExecPrimary Start"
+	${DebugMsg} "Custom Segment PreExecPrimary End"
+!macroend
+
+; PreExecSecondary: PreExec for secondary and subsequent instances.
+${SegmentPreExecSecondary}
+	${DebugMsg} "Custom Segment PreExecSecondary Start"
+	${DebugMsg} "Custom Segment PreExecSecondary End"
+!macroend
+
+; PostPrimary: Post for primary instances.
+${SegmentPostPrimary}
+	${DebugMsg} "Custom Segment PostPrimary Start"
+	${DebugMsg} "Custom Segment PostPrimary End"
+!macroend
+
+; PostSecondary: Post for secondary and subsequent instances.
+${SegmentPostSecondary}
+	${DebugMsg} "Custom Segment PostSecondary Start"
+	${DebugMsg} "Custom Segment PostSecondary End"
+!macroend
+
+; Post: clean up the application and handle restoration of settings and related things in here.
+${SegmentPost}
+	${DebugMsg} "Custom Segment Post Start"
+	
+	StrCpy $Fonts_Found false
+	;Remove user ttf fonts
+	FindFirst $0 $1 "$EXEDIR\Data\fonts\*.ttf"
+	${DoWhile} $1 != ""
+		StrCpy $Fonts_Found true
+		System::Call "gdi32::RemoveFontResource(t'$EXEDIR\Data\fonts\$1')i .r2"
+		FindNext $0 $1
+	${Loop}
+	FindClose $0
+	
+	;Remove user otf fonts
+	FindFirst $0 $1 "$EXEDIR\Data\fonts\*.otf"
+	${DoWhile} $1 != ""
+		StrCpy $Fonts_Found true
+		System::Call "gdi32::RemoveFontResource(t'$EXEDIR\Data\fonts\$1')i .r2"
+		FindNext $0 $1
+	${Loop}
+	FindClose $0
+	
+	${If} $Fonts_Found == true
+		;Let all running apps know
+		SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=1
+	${EndIf}
+	
+	; Perform directory link, restore directory names
+	${ForEachINIPair} DirectoriesLink $0 $1
 		${ParseLocations} $1
-		System::Call 'kernel32::GetFullPathName(t r1, i ${NSIS_MAX_STRLEN}, t .r2, i 0) i .r3'
-		${DebugMsg} "Removing Link $1"
-		RMDir $2
-		${DebugMsg} "Restoring from $2 to $2.BackupBy$AppID"
-		Rename $2.BackupBy$AppID $2
+		${DebugMsg} "DirectoriesLink Removing Link $1"
+		RMDir $1
+		${DebugMsg} "DirectoriesLink Restoring from $1 to $1.BackupBy$AppID"
+		Rename $1.BackupBy$AppID $1
 	${NextINIPair}
+
+	; Cleanup Ghostscript registry keys
+	${If} $GSRegExists != 0  ; Didn't exist before
+	${AndIf} ${RegistryKeyExists} "HKCU\Software\GPL Ghostscript"
+		${registry::DeleteKey} "HKCU\Software\GPL Ghostscript" $R9
+	${EndIf}
+	
+	${DebugMsg} "Custom Segment Post End"
+!macroend
+
+; Unload: unload plug-ins and clean up traces from the launcher itself.
+${SegmentUnload}
+	${DebugMsg} "Custom Segment Unload Start"
+	${DebugMsg} "Custom Segment Unload End"
+!macroend
+
+${OverrideExecute}
+	; Users can override this function in Custom.nsh
+	; like this (see Segments.nsh for the OverrideExecute define):
+	;
+	;   ${OverrideExecute}
+	;       [code to replace this function]
+	;   !macroend
+	${!getdebug}
+	!ifdef DEBUG
+		${If} $WaitForProgram != false
+			${DebugMsg} "OverrideExecute About to execute the following string and wait till it's done: $ExecString"
+		${Else}
+			${DebugMsg} "OverrideExecute About to execute the following string and finish: $ExecString"
+		${EndIf}
+	!endif
+	${EmptyWorkingSet}
+	ClearErrors
+	${ReadLauncherConfig} $0 Launch HideCommandLineWindow
+	${If} $0 == true
+		; TODO: do this without a plug-in or at least some way it won't wait with secondary
+		ExecDos::exec $ExecString
+		Pop $0
+	${Else}
+		${IfNot} ${Errors}
+		${AndIf} $0 != false
+			${InvalidValueError} [Launch]:HideCommandLineWindow $0
+		${EndIf}
+		${If} $WaitForProgram != false
+			ExecWait $ExecString
+		${Else}
+			Exec $ExecString
+		${EndIf}
+	${EndIf}
+	${DebugMsg} "$ExecString has finished."
+	
+	${If} $WaitForProgram != false
+		; Wait till it's done
+		ClearErrors
+		${ReadLauncherConfig} $0 Launch WaitForOtherInstances
+		${If} $0 == true
+		${OrIf} ${Errors}
+			${GetFileName} $ProgramExecutable $1
+			${DebugMsg} "Waiting till any other instances of $1 and any [Launch]:WaitForEXE[N] values are finished."
+			${EmptyWorkingSet}
+			${Do}
+				${ProcessWaitClose} $1 -1 $R9
+				${IfThen} $R9 > 0 ${|} ${Continue} ${|}
+			
+				StrCpy $0 1
+				${Do}
+					ClearErrors
+					${ReadLauncherConfig} $2 Launch KillProc$0
+					${IfThen} ${Errors} ${|} ${ExitDo} ${|}
+					
+					${Do}
+						; Kill still running process forcefully
+						${DebugMsg} "KillProcess $2"
+						${TerminateProcess} $2 $3
+						${IfThen} $3 = 0 ${|} ${ExitDo} ${|}
+						${DebugMsg} "KillProcess Completed $2 Exit Code $3"
+					${Loop}
+					
+					IntOp $0 $0 + 1
+				${Loop}
+				
+				StrCpy $0 1
+				${Do}
+					ClearErrors
+					${ReadLauncherConfig} $2 Launch WaitForEXE$0
+					${IfThen} ${Errors} ${|} ${ExitDo} ${|}
+					; Process wait for close
+					${DebugMsg} "ProcessWaitClose $2"
+					${ProcessWaitClose} $2 -1 $R9
+					${DebugMsg} "ProcessWaitClose Completed $2 ExitCode $R9"
+					${IfThen} $R9 > 0 ${|} ${ExitDo} ${|}
+					IntOp $0 $0 + 1
+				${Loop}
+			${LoopWhile} $R9 > 0
+			${DebugMsg} "All instances are finished."
+		${ElseIf} $0 != false
+			${InvalidValueError} [Launch]:WaitForOtherInstances $0
+		${EndIf}
+	${EndIf}
 !macroend

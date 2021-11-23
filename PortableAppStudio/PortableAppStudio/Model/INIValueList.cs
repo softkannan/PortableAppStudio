@@ -39,9 +39,19 @@ namespace PortableAppStudio.Model
             }
         }
 
-        public virtual TreeNode BuildTreeUI(string nodeName, TreeNode rootNode)
+        public virtual TreeNode BuildTreeUI(string nodeName, TreeNode rootNode, PropertyDescriptor propDescrip)
         {
             TreeNode topNode = new TreeNode(string.Format("[{0}]", nodeName));
+
+            if(propDescrip != null)
+            {
+                var descripAttrib = propDescrip.Attributes.OfType<DescriptionAttribute>().FirstOrDefault();
+                if(descripAttrib != null)
+                {
+                    topNode.ToolTipText = descripAttrib.Description;
+                }
+            }
+
             foreach(var item in this)
             {
                 var tempNode = new TreeNode(item.FullValue);

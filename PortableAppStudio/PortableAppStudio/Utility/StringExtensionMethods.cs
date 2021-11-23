@@ -241,6 +241,7 @@ namespace PortableAppStudio.Utility
             return new Regex(oldValue, RegexOptions.IgnoreCase | RegexOptions.Multiline).Replace(originalString, newValue);
         }
 
+        private const int MAX_SEGMENT_LEN = 6;
         private static Dictionary<string, string> thinAppReplace = null;
 
         private static Dictionary<string,string> ThinApp
@@ -274,7 +275,7 @@ namespace PortableAppStudio.Utility
                 var tempResult = pThis;
                 foreach(var item in ThinApp)
                 {
-                    var tempStr = tempResult.Replace(item.Key, item.Value);
+                    var tempStr = tempResult.Replace(item.Key, item.Value, StringComparison.OrdinalIgnoreCase);
                     tempResult = tempStr;
                 }
                 return tempResult;
@@ -334,6 +335,36 @@ namespace PortableAppStudio.Utility
             }
 
             return retVal;
+        }
+
+        public static string RegKeyToFileName(this string pThis)
+        {
+            var retVal = new StringBuilder();
+
+            if(string.IsNullOrWhiteSpace(pThis))
+            {
+                return string.Empty;
+            }
+
+            var acc = pThis.Trim();
+            do
+            {
+                var folderIdx = acc.IndexOf('\\');
+                if(folderIdx == -1)
+                {
+                    retVal.Append(acc);
+                    break;
+                }
+                var trimLen = folderIdx > MAX_SEGMENT_LEN ? MAX_SEGMENT_LEN : folderIdx;
+
+                retVal.Append(acc.Substring(0, trimLen));
+                retVal.Append('_');
+
+                acc = acc.Substring(folderIdx + 1);
+
+            } while (true);
+
+            return retVal.ToString();
         }
 
     }

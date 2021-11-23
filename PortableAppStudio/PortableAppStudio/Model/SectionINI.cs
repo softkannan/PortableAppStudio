@@ -28,9 +28,11 @@ namespace PortableAppStudio.Model
         [Browsable(false)]
         public bool IsRemoved { get; set; }
 
-        public virtual TreeNode BuildTreeUI(string nodeName, TreeNode rootNode)
+        public virtual TreeNode BuildTreeUI(string nodeName, TreeNode rootNode, PropertyDescriptor propDescrip)
         {
             TreeNode topNode = new TreeNode(string.Format("[{0}]", nodeName));
+            topNode.Tag = this;
+
             foreach (PropertyDescriptor item in TypeDescriptor.GetProperties(this))
             {
                 if (item.IsBrowsable)
@@ -54,7 +56,8 @@ namespace PortableAppStudio.Model
                             IList listData = rawData as IList;
                             if(listData != null)
                             {
-                                foreach(var listItem in listData)
+                                topNodeN.Nodes.Clear();
+                                foreach (var listItem in listData)
                                 {
                                     topNodeN.Nodes.Add(listItem.ToString());
                                 }
@@ -189,14 +192,50 @@ namespace PortableAppStudio.Model
             }
             else
             {
-                string tempVal = iniData.ToString();
+                string tempVal = null;
+                Type propertyType = item.PropertyType;
+
+                if (item.PropertyType.GenericTypeArguments.Length > 0)
+                {
+                    propertyType = item.PropertyType.GenericTypeArguments.FirstOrDefault();
+                }
+
+                if (item.PropertyType == typeof(string))
+                {
+                    tempVal = (iniData as string)?.Trim();
+                }
+                else if (propertyType == typeof(int))
+                {
+                    tempVal = iniData.ToString();
+                }
+                else if (propertyType == typeof(bool))
+                {
+                    tempVal = iniData.ToString().ToLower();
+                }
+                else if (propertyType == typeof(double))
+                {
+                    tempVal = iniData.ToString();
+                }
+                else if (propertyType == typeof(long))
+                {
+                    tempVal = iniData.ToString();
+                }
+                else if (propertyType == typeof(float))
+                {
+                    tempVal = iniData.ToString();
+                }
+                else
+                {
+                    tempVal = iniData.ToString()?.Trim();
+                }
+
                 if (string.IsNullOrWhiteSpace(tempVal))
                 {
                     file.DeleteKey(section, item.Name);
                 }
                 else
                 {
-                    file.WriteValue(section, item.Name, iniData.ToString());
+                    file.WriteValue(section, item.Name, tempVal);
                 }
             }
         }

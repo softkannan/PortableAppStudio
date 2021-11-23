@@ -11,24 +11,138 @@ namespace PortableAppStudio.Utility
 {
     public static class TreeViewExtensionMethods
     {
-        public static string ToDirectoryName(this TreeNode pThis)
+        public static string GetRegistryKey(this TreeNode pThis, TreeNode upToNode = null)
         {
-            string retVal = "";
-            Model.EnvironmentInfo envInfo;
-            string dirInfo;
-            if(PathManager.Init.SystemEnvironments.TryGetValue(pThis.GetTopNodeName(),out envInfo))
+            string retVal = GetFullPathInternal1(pThis);
+            if(pThis.Tag != null)
             {
-                dirInfo = envInfo.DisplayName;
+                string keyPart = retVal.Replace(string.Format("\\{0}",pThis.Text), "");
+                retVal = keyPart;
+            }
+
+            return retVal;
+        }
+
+        public static void Merge(this TreeNode pThis, TreeNode srcNode)
+        {
+            MergeInternal(pThis, srcNode);
+        }
+
+        private static void MergeInternal(TreeNode destNode, TreeNode srcNode)
+        {
+            var foundNode = destNode.Nodes.FindNode(srcNode.Text);
+            if (foundNode == null)
+            {
+                destNode.Nodes.Add(srcNode.Clone() as TreeNode);
             }
             else
             {
-                dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+                foreach (TreeNode item in srcNode.Nodes)
+                {
+                    MergeInternal(foundNode, item);
+                }
             }
-            retVal = string.Format("{0}_{1}", dirInfo,
-                pThis.Text.Replace(" ", "_"));
+        }
+
+        public static string ToPortableFileRelativePath(this TreeNode pThis)
+        {
+            string retVal = "";
+            var topNode = pThis.GetTopNode();
+            retVal = pThis.GetRelativePath(topNode);
             return retVal;
         }
-        public static string ToDirectoryName(this string pThis)
+
+        public static string ToDiskRelativePath(this string pThis)
+        {
+            string retVal = pThis;
+            var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
+            if (foundEnv != null)
+            {
+                string tailPart;
+                string envSection;
+
+                envSection = foundEnv.Item3.RelativePath;
+
+                if (foundEnv.Item1)
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length);
+                }
+                else
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length);
+                }
+
+                retVal = string.Format("{0}{1}", envSection, tailPart);
+            }
+            return retVal;
+        }
+
+        // Parse the folder name based on the backward slash and create new nodes.
+        public static TreeNode CreateFolderNodes(this TreeNode pThis, string folderName)
+        {
+            TreeNode retVal = null;
+            int backSlash = folderName.IndexOf('\\');
+            if (backSlash == -1)
+            {
+                var newStartNode = pThis.Nodes.FindNode(folderName);
+                if (newStartNode == null)
+                {
+                    newStartNode = pThis.Nodes.Add(folderName);
+                }
+                retVal = newStartNode;
+            }
+            else
+            {
+                string topFoldername = folderName.Substring(0, backSlash);
+                string remainFolderName = folderName.Substring(backSlash + 1);
+                var newStartNode = pThis.Nodes.FindNode(topFoldername);
+                if (newStartNode == null)
+                {
+                    newStartNode = pThis.Nodes.Add(topFoldername);
+                }
+                retVal = CreateFolderNodes(newStartNode, remainFolderName);
+            }
+            return retVal;
+        }
+        //Always pass soruce tree node to get name
+        public static string ToDataDirectoryName(this TreeNode pThis)
+        {
+            string retVal = "";
+            Model.EnvironmentInfo envInfo;
+            var topNode = pThis.GetTopNode();
+            if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.Text, out envInfo))
+            {
+                var relativePath = pThis.GetRelativePath(topNode);
+                retVal = string.Format("{0}\\{1}", envInfo.DisplayName, relativePath);
+            }
+            else
+            {
+                string dirInfo;
+                dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+                retVal = string.Format("{0}_{1}", dirInfo, pThis.Text.Replace(" ", "_"));
+            }
+            return retVal;
+        }
+
+        //Gets the flatened directory name, obsolute donot use
+        //public static string ToFlatDirectoryName(this TreeNode pThis)
+        //{
+        //    string retVal = "";
+        //    Model.EnvironmentInfo envInfo;
+        //    string dirInfo;
+        //    if (PathManager.Init.SystemEnvironments.TryGetValue(pThis.GetTopNodeName(), out envInfo))
+        //    {
+        //        dirInfo = envInfo.DisplayName;
+        //    }
+        //    else
+        //    {
+        //        dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+        //    }
+        //    retVal = string.Format("{0}_{1}", dirInfo, pThis.Text.Replace(" ", "_"));
+        //    return retVal;
+        //}
+
+        public static string ToDataDirectoryName(this string pThis)
         {
             string retVal = "";
             var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
@@ -41,37 +155,102 @@ namespace PortableAppStudio.Utility
 
                 if (foundEnv.Item1)
                 {
-                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length).Replace('\\', '_');
+                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length);
                 }
                 else
                 {
-                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length).Replace('\\', '_'); ;
+                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length);
                 }
 
-                retVal = string.Format("{0}_{1}", envSection,
-                tailPart.Replace(" ", "_"));
+                retVal = string.Format("{0}{1}", envSection, tailPart);
             }
             return retVal;
         }
-        public static string ToDirectoryPair(this TreeNode pThis)
+
+       
+
+        //public static string ToFlatDirectoryName(this string pThis)
+        //{
+        //    string retVal = "";
+        //    var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
+        //    if (foundEnv != null)
+        //    {
+        //        string tailPart;
+        //        string envSection;
+
+        //        envSection = foundEnv.Item3.DisplayName;
+
+        //        if (foundEnv.Item1)
+        //        {
+        //            tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length).Replace('\\', '_');
+        //        }
+        //        else
+        //        {
+        //            tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length).Replace('\\', '_'); ;
+        //        }
+
+        //        retVal = string.Format("{0}_{1}", envSection, tailPart.Replace(" ", "_"));
+        //    }
+        //    return retVal;
+        //}
+
+        public static string ToDataDirectoryPair(this TreeNode pThis, bool skipLeftSide = false)
         {
             string retVal = "";
-            Model.EnvironmentInfo envInfo;
-            string dirInfo;
-            if (PathManager.Init.SystemEnvironments.TryGetValue(pThis.GetTopNodeName(), out envInfo))
+
+            if (skipLeftSide)
             {
-                dirInfo = envInfo.DisplayName;
+                retVal = string.Format("-={0}", pThis.GetFullPath());
             }
             else
             {
-                dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+                Model.EnvironmentInfo envInfo;
+                string dirInfo = "-";
+                var topNode = pThis.GetTopNode();
+                if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.Text, out envInfo))
+                {
+                    dirInfo = envInfo.DisplayName;
+                    var relPath = pThis.GetRelativePath(topNode);
+                    retVal = string.Format("{0}\\{1}={2}", dirInfo, relPath, pThis.GetFullPath());
+                }
+                else
+                {
+                    dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+                    retVal = string.Format("{0}_{1}={2}", dirInfo, pThis.Text.Replace(" ", "_"), pThis.GetFullPath());
+                }
             }
-            retVal = string.Format("{0}_{1}={2}", dirInfo ,
-                pThis.Text.Replace(" ", "_"),
-                pThis.GetFullPath());
             return retVal;
         }
-        public static string ToDirectoryPair(this string pThis)
+
+        //public static string ToFlatDirectoryPair(this TreeNode pThis, bool skipLeftSide = false)
+        //{
+        //    string retVal = "";
+
+        //    if (skipLeftSide)
+        //    {
+        //        retVal = string.Format("-={0}",pThis.GetFullPath());
+        //    }
+        //    else
+        //    {
+        //        Model.EnvironmentInfo envInfo;
+        //        string dirInfo = "-";
+        //        if (PathManager.Init.SystemEnvironments.TryGetValue(pThis.GetTopNodeName(), out envInfo))
+        //        {
+        //            dirInfo = envInfo.DisplayName;
+        //        }
+        //        else
+        //        {
+        //            dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+        //        }
+        //        retVal = string.Format("{0}_{1}={2}", dirInfo,
+        //            pThis.Text.Replace(" ", "_"),
+        //            pThis.GetFullPath());
+        //    }
+        //    return retVal;
+        //}
+
+
+        public static string ToDataDirectoryPair(this string pThis)
         {
             string retVal = "";
             var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
@@ -79,65 +258,155 @@ namespace PortableAppStudio.Utility
             {
                 string tailPart;
                 string envSection;
-
                 envSection = foundEnv.Item3.DisplayName;
-
                 if (foundEnv.Item1)
                 {
-                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length).Replace('\\','_');
+                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length);
                 }
                 else
                 {
-                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length).Replace('\\', '_'); ;
+                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length);
                 }
-
-                retVal = string.Format("{0}_{1}={2}", envSection,
-                    tailPart.Replace(" ", "_"),
-                    PathManager.Init.GetExpandablePath(pThis));
-            }
-            return retVal;
-        }
-        public static string ToFilePair(this TreeNode pThis, TreeNode topNode)
-        {
-            string retVal = "";
-            Model.EnvironmentInfo envInfo;
-            string dirInfo;
-            if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.GetTopNodeName(), out envInfo))
-            {
-                dirInfo = envInfo.DisplayName;
+                retVal = string.Format("{0}{1}={2}", envSection, tailPart, PathManager.Init.GetExpandablePath(pThis));
             }
             else
             {
-                dirInfo = topNode.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+                retVal = string.Format("-={0}", PathManager.Init.GetExpandablePath(pThis));
             }
-
-            var relativePath = pThis.GetRelativePath(topNode);
-
-            retVal = string.Format("{0}_{1}_{2}\\{3}={4}",
-                dirInfo, topNode.Parent.Text, topNode.Text,relativePath, pThis.GetFullPath());
             return retVal;
-
-
         }
-        public static string ToFilePair(this TreeNode pThis)
+
+        //public static string ToFlatDirectoryPair(this string pThis)
+        //{
+        //    string retVal = "";
+        //    var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
+        //    if (foundEnv != null)
+        //    {
+        //        string tailPart;
+        //        string envSection;
+
+        //        envSection = foundEnv.Item3.DisplayName;
+
+        //        if (foundEnv.Item1)
+        //        {
+        //            tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length).Replace('\\', '_');
+        //        }
+        //        else
+        //        {
+        //            tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length).Replace('\\', '_'); ;
+        //        }
+
+        //        retVal = string.Format("{0}_{1}={2}", envSection, tailPart.Replace(" ", "_"), PathManager.Init.GetExpandablePath(pThis));
+        //    }
+        //    return retVal;
+        //}
+
+
+        //public static string ToDataFilePair(this TreeNode pThis, TreeNode topNode)
+        //{
+        //    string retVal = "";
+        //    Model.EnvironmentInfo envInfo;
+        //    string dirInfo;
+        //    if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.GetTopNodeName(), out envInfo))
+        //    {
+        //        dirInfo = envInfo.DisplayName;
+        //        var relPath = pThis.GetRelativePath(topNode);
+        //        retVal = string.Format("{0}\\{1}={2}", dirInfo, relPath, pThis.GetFullPath());
+        //    }
+        //    else
+        //    {
+        //        dirInfo = topNode.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+        //        var relativePath = pThis.GetRelativePath(topNode);
+        //        retVal = string.Format("{0}_{1}_{2}\\{3}={4}", dirInfo, topNode.Parent.Text, topNode.Text, relativePath, pThis.GetFullPath());
+        //    }
+        //    return retVal;
+        //}
+
+        //public static string ToFlatFilePair(this TreeNode pThis, TreeNode topNode)
+        //{
+        //    string retVal = "";
+        //    Model.EnvironmentInfo envInfo;
+        //    string dirInfo;
+        //    if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.GetTopNodeName(), out envInfo))
+        //    {
+        //        dirInfo = envInfo.DisplayName;
+        //    }
+        //    else
+        //    {
+        //        dirInfo = topNode.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+        //    }
+        //    var relativePath = pThis.GetRelativePath(topNode);
+        //    retVal = string.Format("{0}_{1}_{2}\\{3}={4}", dirInfo, topNode.Parent.Text, topNode.Text, relativePath, pThis.GetFullPath());
+        //    return retVal;
+
+
+        //}
+
+        public static string ToDataFilePair(this TreeNode pThis)
         {
             string retVal = "";
             Model.EnvironmentInfo envInfo;
             string dirInfo;
-            if (PathManager.Init.SystemEnvironments.TryGetValue(pThis.GetTopNodeName(), out envInfo))
+            var topNode = pThis.GetTopNode();
+            if (PathManager.Init.SystemEnvironments.TryGetValue(topNode.Text, out envInfo))
             {
                 dirInfo = envInfo.DisplayName;
+                var relPath = pThis.GetRelativePath(topNode);
+                retVal = string.Format("{0}\\{1}={2}", dirInfo, relPath, pThis.GetFullPath());
             }
             else
             {
                 dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+                retVal = string.Format("{0}_{1}\\{2}={3}", dirInfo, pThis.Parent.Text, pThis.Text, pThis.GetFullPath());
             }
-            retVal = string.Format("{0}_{1}\\{2}={3}",
-                dirInfo, pThis.Parent.Text, pThis.Text, pThis.GetFullPath());
             return retVal;
-
-            
         }
+
+        //public static string ToFlatFilePair(this TreeNode pThis)
+        //{
+        //    string retVal = "";
+        //    Model.EnvironmentInfo envInfo;
+        //    string dirInfo;
+        //    if (PathManager.Init.SystemEnvironments.TryGetValue(pThis.GetTopNodeName(), out envInfo))
+        //    {
+        //        dirInfo = envInfo.DisplayName;
+        //    }
+        //    else
+        //    {
+        //        dirInfo = pThis.GetTopNodeName().Trim('%').Replace(" ", "_").Replace("(", "_").Replace(")", "_");
+        //    }
+        //    retVal = string.Format("{0}_{1}\\{2}={3}",
+        //        dirInfo, pThis.Parent.Text, pThis.Text, pThis.GetFullPath());
+        //    return retVal;
+        //}
+
+        public static string ToDataFilePair(this string pThis)
+        {
+            string retVal = "";
+            var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
+            if (foundEnv != null)
+            {
+                string tailPart;
+                string envSection;
+                envSection = foundEnv.Item3.DisplayName;
+                if (foundEnv.Item1)
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.ShortPath.Length);
+                }
+                else
+                {
+                    tailPart = pThis.Substring(foundEnv.Item3.LongPath.Length);
+                }
+
+                retVal = string.Format("{0}{1}={2}", envSection, tailPart, PathManager.Init.GetExpandablePath(pThis));
+            }
+            else
+            {
+                retVal = string.Format("-={0}", PathManager.Init.GetExpandablePath(pThis));
+            }
+            return retVal;
+        }
+
         public static bool IsDescendantOf(this TreeNode pThis,string parentNode)
         {
             if (string.Compare(pThis.Text,parentNode,true) == 0)

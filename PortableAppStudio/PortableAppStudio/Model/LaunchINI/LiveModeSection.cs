@@ -11,6 +11,7 @@ namespace PortableAppStudio.Model.LaunchINI
     {
         [Browsable(true)]
         [Category("[LiveMode]")]
-        public bool? CopyApp { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string CopyApp { get; set; }
     }
 }

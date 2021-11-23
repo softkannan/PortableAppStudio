@@ -20,6 +20,36 @@ namespace PortableAppStudio.Model
             list.Add("");
             list.Add("no");
             list.Add("yes");
+            list.Add("optional");
+            return new StandardValuesCollection(list);
+        }
+    }
+
+    public class BooleanStringConverter : StringConverter
+    {
+        public override Boolean GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override Boolean GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            List<String> list = new List<String>();
+            list.Add("");
+            list.Add("false");
+            list.Add("true");
+            return new StandardValuesCollection(list);
+        }
+    }
+
+    public class BooleanWithOptionalStringConverter : StringConverter
+    {
+        public override Boolean GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override Boolean GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            List<String> list = new List<String>();
+            list.Add("");
+            list.Add("false");
+            list.Add("true");
+            list.Add("optional");
             return new StandardValuesCollection(list);
         }
     }
@@ -215,5 +245,33 @@ namespace PortableAppStudio.Model
         private static List<string> _list = new List<string>();
 
         public static List<string> ExeFileNameList { get { return _list; } }
+    }
+
+    public class GhostScriptProbePathStringConverter : StringConverter
+    {
+        public override Boolean GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override Boolean GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(_list);
+        }
+     
+        private static List<string> _list = new List<string>() { "", @"%PAL:DataDir%\..\..\CommonFiles\Ghostscript", @"$PROGRAMFILES64\gs", @"$PROGRAMFILES\gs"};
+
+        public static List<string> PathList { get { return _list; } }
+    }
+
+    public class JavaRuntimeProbePathStringConverter : StringConverter
+    {
+        public override Boolean GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override Boolean GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(_list);
+        }
+
+        private static List<string> _list = new List<string>() { "", @"%PAL:DataDir%\..\..\CommonFiles\Java", @"$PROGRAMFILES64\Java", @"$PROGRAMFILES\Java" };
+
+        public static List<string> PathList { get { return _list; } }
     }
 }

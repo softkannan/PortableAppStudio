@@ -225,7 +225,6 @@ namespace PortableAppStudio.Model.FolderLayout
                         listOfComFile.Add(tempVal.IniValue);
                     }
                 }
-
             }
 
             Launch.Save();

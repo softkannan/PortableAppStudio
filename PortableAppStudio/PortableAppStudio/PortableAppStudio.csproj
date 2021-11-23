@@ -8,9 +8,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>PortableAppStudio</RootNamespace>
     <AssemblyName>PortableAppStudio</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -88,11 +89,29 @@
     <Compile Include="Dialogs\DirectoriesCleanupForceForm.Designer.cs">
       <DependentUpon>DirectoriesCleanupForceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\FileWriteNForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FileWriteNForm.Designer.cs">
+      <DependentUpon>FileWriteNForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\DirectoriesCleanupIfEmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\DirectoriesCleanupIfEmptyForm.Designer.cs">
       <DependentUpon>DirectoriesCleanupIfEmptyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddProcForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddProcForm.Designer.cs">
+      <DependentUpon>AddProcForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PrefixPATHEnvForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PrefixPATHEnvForm.Designer.cs">
+      <DependentUpon>PrefixPATHEnvForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\DirectoriesLinkForm.cs">
       <SubType>Form</SubType>
@@ -247,8 +266,12 @@
     <Compile Include="Model\InteliSense.cs" />
     <Compile Include="Model\ISectionINI.cs" />
     <Compile Include="Model\KeyValueSection.cs" />
+    <Compile Include="Model\LaunchINI\FileWriteNSectionList.cs" />
+    <Compile Include="Model\LaunchINI\PrefixPATHEnvSection.cs" />
     <Compile Include="Model\LaunchINI\DirectoriesLinkSection.cs" />
     <Compile Include="Model\LaunchINI\RegistrationFreeCOMSection.cs" />
+    <Compile Include="Model\LaunchINI\KillProcNValue.cs" />
+    <Compile Include="Model\LaunchINI\ExeProcessList.cs" />
     <Compile Include="Model\LaunchINI\WaitForEXENValue.cs" />
     <Compile Include="Model\Manifest\assembly.cs" />
     <Compile Include="Model\Manifest\assemblyComInterfaceExternalProxyStub.cs" />
@@ -300,25 +323,51 @@
     <Compile Include="Parser\ThinAppParser.cs" />
     <Compile Include="Parser\X_RegshotParser.cs" />
     <Compile Include="Model\Reference\AppEnvironments.cs" />
+    <Compile Include="Studio.AppInfoTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.LaunchTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Tools.Menus.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Studio.Intelsense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Studio.TreeEvents.cs">
+    <Compile Include="Studio.Tree.File.Menus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Tree.Registry.Menus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Tree.Menus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Import.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Studio.Misc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Studio.Utility.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Studio.FilesTree.cs">
+    <Compile Include="Studio.Tree.Files.DragDrop.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utility\ClipBoardExInfo.cs" />
     <Compile Include="Utility\ControlExtensions.cs" />
+    <Compile Include="Utility\DescendingComparer.cs" />
+    <Compile Include="Utility\ExeFileInfo.cs" />
     <Compile Include="Utility\FolderBrowserDialogExtensionMethods.cs" />
     <Compile Include="Utility\IconFactory.cs" />
     <Compile Include="Utility\IconHelper.cs" />
+    <Compile Include="Utility\ProcessExtensions.cs" />
     <Compile Include="Utility\MiscExtensions.cs" />
     <Compile Include="Utility\PathManager.cs" />
     <Compile Include="Model\Reference\RegistryParser.cs" />
+    <Compile Include="Utility\ResolvePath.cs" />
     <Compile Include="Utility\StringExtensionMethods.cs" />
     <Compile Include="Studio.cs">
       <SubType>Form</SubType>
@@ -336,6 +385,7 @@
     <Compile Include="Utility\TreeViewExtensionMethods.cs" />
     <Compile Include="Utility\TypeInfoExtensionMethods.cs" />
     <Compile Include="Utility\TypeLib.cs" />
+    <Compile Include="Utility\UserSettings.cs" />
     <EmbeddedResource Include="Controls\CollectionEditorUserControl.resx">
       <DependentUpon>CollectionEditorUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -348,8 +398,17 @@
     <EmbeddedResource Include="Dialogs\DirectoriesCleanupForceForm.resx">
       <DependentUpon>DirectoriesCleanupForceForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FileWriteNForm.resx">
+      <DependentUpon>FileWriteNForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DirectoriesCleanupIfEmptyForm.resx">
       <DependentUpon>DirectoriesCleanupIfEmptyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddProcForm.resx">
+      <DependentUpon>AddProcForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PrefixPATHEnvForm.resx">
+      <DependentUpon>PrefixPATHEnvForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DirectoriesLinkForm.resx">
       <DependentUpon>DirectoriesLinkForm.cs</DependentUpon>
@@ -455,6 +514,12 @@
     <None Include="Resource\Help\DirectoriesCleanupIfEmpty.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resource\Help\PrefixPATHEnv.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\Help\DirectoriesLink.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resource\Help\DirectoriesMove.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -512,6 +577,9 @@
     <None Include="Resource\Help\Version.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resource\Help\KillProcN.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resource\Help\WaitForEXEN.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -521,16 +589,19 @@
     <None Include="Resource\launch.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resource\Other\ProcMonConfig.pmc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resource\PortableApp\App\AppInfo\Launcher\Custom.nsh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Resource\PortableApp\BlockAllExe.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resource\RegHive.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="Studio.RegistryTree.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Studio.Source.cs">
+    <Compile Include="Studio.Tree.Registry.DragDrop.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -665,7 +736,15 @@
     <Content Include="Resource\SystemEnvironments_x86.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="UserSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resource\3rdPartyApps\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)\Resource\3rdPartyApps\*" "$(TargetDir)\Resource\3rdPartyApps\" /E /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

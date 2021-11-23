@@ -107,7 +107,77 @@ namespace PortableAppStudio.Model.LaunchINI
         [Browsable(false)]
         public string IniValue { get; set; }
         [Browsable(false)]
-        public string FullValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string FullValue
+        {
+            get
+            {
+                StringBuilder rightVal = new StringBuilder();
+
+                rightVal.Append(Type);
+                rightVal.Append(";");
+
+                //ConfigWrite, INI, Replace, XML attribute, XML text
+                if (string.Equals(Type, "ConfigWrite", StringComparison.OrdinalIgnoreCase))
+                {
+                    rightVal.Append(Entry);
+                    rightVal.Append(";");
+                    rightVal.Append(Value);
+                }
+                else if (string.Equals(Type, "INI", StringComparison.OrdinalIgnoreCase))
+                {
+                    rightVal.Append(Section);
+                    rightVal.Append(";");
+                    rightVal.Append(Key);
+                    rightVal.Append(";");
+                    rightVal.Append(Value);
+                }
+                else if (string.Equals(Type, "Replace", StringComparison.OrdinalIgnoreCase))
+                {
+                    rightVal.Append(Find);
+                    rightVal.Append(";");
+                    rightVal.Append(Replace);
+                }
+                else if (string.Equals(Type, "XML attribute", StringComparison.OrdinalIgnoreCase))
+                {
+                    rightVal.Append(Value);
+                    rightVal.Append(";");
+                    rightVal.Append(Attribute);
+                    rightVal.Append(";");
+                    rightVal.Append(XPath);
+                }
+                else if (string.Equals(Type, "XML text", StringComparison.OrdinalIgnoreCase))
+                {
+                    rightVal.Append(Value);
+                    rightVal.Append(";");
+                    rightVal.Append(XPath);
+                }
+
+                return string.Format("{0}={1}", this.IniKey, rightVal.ToString());
+            }
+            set
+            {
+                //if (string.IsNullOrWhiteSpace(value))
+                //{
+                //    IniKey = "";
+                //    IniValue = "";
+                //    return;
+                //}
+
+                //int startIndex = value.IndexOf('=');
+
+                //if (startIndex != -1)
+                //{
+                //    IniKey = value.Substring(0, startIndex);
+                //    IniValue = value.Substring(startIndex + 1);
+                //}
+                //else
+                //{
+                //    IniKey = value;
+                //    IniValue = "";
+                //}
+
+            }
+        }
 
         public FileWriteNSection():base()
         {
@@ -121,6 +191,25 @@ namespace PortableAppStudio.Model.LaunchINI
         public void UpdateIndex(int index)
         {
             IniKey = string.Format("FileWrite{0}", index);
+        }
+
+        public FileWriteNSection Clone()
+        {
+            var retVal = new FileWriteNSection();
+
+            retVal.Attribute = Attribute;
+            retVal.CaseSensitive = CaseSensitive;
+            retVal.Encoding = Encoding;
+            retVal.Entry = Entry;
+            retVal.File = File;
+            retVal.Find = Find;
+            retVal.Replace = Replace;
+            retVal.Type = Type;
+            retVal.Value = Value;
+            retVal.XPath = XPath;
+            retVal.Key = Key;
+
+            return retVal;
         }
 
         //public override string ToString()

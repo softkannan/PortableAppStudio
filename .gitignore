@@ -348,4 +348,4 @@ bin-ppc/
 *.blf
 *.regtrans-ms
 .vscode/
-LaunchEnvironment_Root/Common/**
+PortableAppStudio/PortableAppStudio/Resource/3rdPartyApps/**

@@ -11,30 +11,34 @@ namespace PortableAppStudio.Model.AppInfoINI
     {
         [Browsable(true)]
         [Category("[License]")]
-        public bool? Shareable { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string Shareable { get; set; }
 
         [Browsable(true)]
         [Category("[License]")]
-        public bool? OpenSource { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string OpenSource { get; set; }
 
         [Browsable(true)]
         [Category("[License]")]
-        public bool? Freeware { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string Freeware { get; set; }
 
         [Browsable(true)]
         [Category("[License]")]
-        public bool? CommercialUse { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string CommercialUse { get; set; }
 
         [Browsable(true)]
         [Category("[License]")]
-        public int? EULAVersion { get; set; }
+        public string EULAVersion { get; set; }
         public AppInfoLicenseSection()
         {
-            Shareable = true;
-            OpenSource = true;
-            Freeware = true;
-            CommercialUse = true;
-            EULAVersion = 1;
+            Shareable = "true";
+            OpenSource = "true";
+            Freeware = "true";
+            CommercialUse = "true";
+            EULAVersion = "1";
         }
     }
 }

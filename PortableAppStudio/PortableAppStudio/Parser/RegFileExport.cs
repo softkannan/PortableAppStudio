@@ -28,11 +28,11 @@ namespace PortableAppStudio.Parser
 
                         string regKey;
                         string tempRegKey = node.FullPath;
-                        if (tempRegKey.IndexOf(HKLM_SHORT) == 0)
+                        if (tempRegKey.IndexOf(HKLM_SHORT, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regKey = string.Format("[{0}{1}]", HKLM_LONG, tempRegKey.Substring(HKLM_SHORT.Length));
                         }
-                        else if (tempRegKey.IndexOf(HKCU_SHORT) == 0)
+                        else if (tempRegKey.IndexOf(HKCU_SHORT, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regKey = string.Format("[{0}{1}]", HKCU_LONG, tempRegKey.Substring(HKCU_SHORT.Length));
                         }

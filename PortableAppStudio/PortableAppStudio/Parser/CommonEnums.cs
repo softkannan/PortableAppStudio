@@ -22,4 +22,13 @@ namespace PortableAppStudio.Parser
         Files,
         Folders
     }
+
+    public class RegSourceType
+    {
+        public const string RegFile = "RegFile";
+        public const string AppV = "AppV";
+        public const string RegShot = "RegShot";
+        public const string ThinApp = "ThinApp";
+        public const string X_RegShot = "X_RegShot";
+    }
 }

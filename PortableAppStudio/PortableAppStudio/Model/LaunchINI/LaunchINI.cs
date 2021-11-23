@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace PortableAppStudio.Model.LaunchINI
         public const string QtKeysCleanup_Tag = "[QtKeysCleanup]";
         public const string Environment_Tag = "[Environment]";
         public const string DirectoriesLink_Tag = "[DirectoriesLink]";
+        public const string PrefixPATHEnv_Tag = "[PrefixPATHEnv]";
 
         public LaunchINI()
         {
@@ -33,7 +35,8 @@ namespace PortableAppStudio.Model.LaunchINI
 
         public LiveModeSection LiveMode { get; set; }
 
-        public  INIValueList<EnvironmentSection> Environment { get; set; }
+        [Description(@"The location of the user variables in the registry is: HKEY_CURRENT_USER\Environment. The location of the system variables in the registry is: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment")]
+        public INIValueList<EnvironmentSection> Environment { get; set; }
 
         public INIValueList<RegistryKeysSection> RegistryKeys { get; set; }
 
@@ -47,7 +50,7 @@ namespace PortableAppStudio.Model.LaunchINI
 
         public INIValueList<QtKeysCleanupSection> QtKeysCleanup { get; set; }
 
-        public INISectionList<FileWriteNSection> FileWriteN { get; set; }
+        public FileWriteNSectionList FileWriteN { get; set; }
 
         public INIValueList<FilesMoveSection> FilesMove { get; set; }
 
@@ -66,6 +69,8 @@ namespace PortableAppStudio.Model.LaunchINI
         public INIValueList<RegistrationFreeCOMSection> RegistrationFreeCOM { get; set; }
 
         public INIValueList<DirectoriesLinkSection> DirectoriesLink { get; set; }
+
+        public INIValueList<PrefixPATHEnvSection> PrefixPATHEnv { get; set; }
 
     }
 }

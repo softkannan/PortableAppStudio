@@ -53,7 +53,7 @@ namespace PortableAppStudio.Model.FolderLayout
             return this.RootNode;
         }
 
-        protected void SaveFileNode(TreeNode node)
+        protected void SaveFileNode(TreeNode node, bool forceUpdate = false)
         {
             if (node.Tag == null)
             {
@@ -67,7 +67,7 @@ namespace PortableAppStudio.Model.FolderLayout
             {
                 Model.FileInfo fileInfo = node.Tag as Model.FileInfo;
                 string fileName = string.Format("{0}\\{1}", this.PortableAppFolder, node.GetFullPath());
-                if (fileName.ToLower() != fileInfo.AbsolutePath.ToLower())
+                if (fileName.ToLower() != fileInfo.AbsolutePath.ToLower() || forceUpdate)
                 {
                     if (File.Exists(fileInfo.AbsolutePath))
                     {
@@ -88,7 +88,7 @@ namespace PortableAppStudio.Model.FolderLayout
             {
                 foreach (TreeNode childNode in node.Nodes)
                 {
-                    SaveFileNode(childNode);
+                    SaveFileNode(childNode, forceUpdate);
                 }
             }
         }

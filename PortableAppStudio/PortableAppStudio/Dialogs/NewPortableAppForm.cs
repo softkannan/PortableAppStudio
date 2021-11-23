@@ -20,17 +20,32 @@ namespace PortableAppStudio.Dialogs
             this.SelectedPath = string.Empty;
         }
         public string SelectedPath { get; set; }
+        public string ImportFolderName { get; set; }
         private void bttnOk_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            SelectedPath = string.Format("{0}\\{1}", baseFolderTextBox.Text, appNameTextBox.Text.Replace(" ","_"));
+            var appName = "";
+            if(string.IsNullOrWhiteSpace(appNameTextBox.Text))
+            {
+                ErrorLog.Inst.ShowError("Invalid AppName, Portable App did not created");
+                return;
+            }
+
+            appName = appNameTextBox.Text.Trim();
+            if(string.IsNullOrWhiteSpace(appName))
+            {
+                ErrorLog.Inst.ShowError("Invalid AppName, Portable App did not created");
+                return;
+            }
+
+            SelectedPath = string.Format("{0}\\{1}", baseFolderTextBox.Text, appName.Replace(" ","_"));
 
             try
             {
                 string fullPath = Path.GetFullPath(SelectedPath);
                 if(Directory.Exists(fullPath))
                 {
-                    SelectedPath = string.Format("{0}\\{1}_Portable", baseFolderTextBox.Text, appNameTextBox.Text.Replace(" ", "_"));
+                    SelectedPath = string.Format("{0}\\{1}Portable", baseFolderTextBox.Text, appName.Replace(" ", "_"));
                     fullPath = Path.GetFullPath(SelectedPath);
                 }
 
@@ -47,7 +62,6 @@ namespace PortableAppStudio.Dialogs
             }
 
             this.Close();
-
         }
 
         private void bttnBrowse_Click(object sender, EventArgs e)
@@ -61,7 +75,15 @@ namespace PortableAppStudio.Dialogs
 
         private void NewPortableApp_Load(object sender, EventArgs e)
         {
-            appNameTextBox.Text = "<Enter New App Name>";
+            var folderName = ImportFolderName?.Trim();
+            if (string.IsNullOrWhiteSpace(folderName))
+            {
+                appNameTextBox.Text = "<Enter New App Name>";
+            }
+            else
+            {
+                appNameTextBox.Text = string.Format("{0}Portable", Path.GetFileName(folderName).Replace("_Fixed", "",StringComparison.OrdinalIgnoreCase));
+            }
             if(string.IsNullOrWhiteSpace(SelectedPath))
             {
                 SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

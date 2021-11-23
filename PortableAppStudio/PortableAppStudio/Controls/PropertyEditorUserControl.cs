@@ -116,13 +116,13 @@ namespace PortableAppStudio.Controls
                 if (match != null && match.Success)
                 {
                     int matchIndex = match.Index;
-                    textBox.Select(matchIndex, matchIndex+1);
+                    textBox.Select(matchIndex, 0);
                     textBox.ScrollToCaret();
                     containerGroupBox.Select();
                 }
                 else
                 {
-                    textBox.Select(1, 2);
+                    textBox.Select(1, 0);
                     textBox.ScrollToCaret();
                     containerGroupBox.Select();
                 }

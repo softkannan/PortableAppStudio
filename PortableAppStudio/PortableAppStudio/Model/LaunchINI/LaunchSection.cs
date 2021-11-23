@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using PortableAppStudio.INI;
 
 namespace PortableAppStudio.Model.LaunchINI
@@ -40,7 +42,12 @@ namespace PortableAppStudio.Model.LaunchINI
         [Browsable(true)]
         [Category("[Launch]")]
         [Editor(typeof(WaitForExeListEditor), typeof(UITypeEditor))]
-        public INIValueList<WaitForEXENValue> WaitForEXEN { get; set; }
+        public ExeProcessList<WaitForEXENValue> WaitForEXEN { get; set; }
+
+        [Browsable(true)]
+        [Category("[Launch]")]
+        [Editor(typeof(KillProcListEditor), typeof(UITypeEditor))]
+        public ExeProcessList<KillProcNValue> KillProcN { get; set; }
 
         [Browsable(true)]
         [TypeConverter(typeof(ExeFileListStringConverter))]
@@ -104,15 +111,18 @@ namespace PortableAppStudio.Model.LaunchINI
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? CleanTemp { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string CleanTemp { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? SinglePortableAppInstance { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string SinglePortableAppInstance { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? SingleAppInstance { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string SingleAppInstance { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
@@ -124,15 +134,18 @@ namespace PortableAppStudio.Model.LaunchINI
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? LaunchAppAfterSplash { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string LaunchAppAfterSplash { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? WaitForOtherInstances { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string WaitForOtherInstances { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? HideCommandLineWindow { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string HideCommandLineWindow { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
@@ -141,7 +154,8 @@ namespace PortableAppStudio.Model.LaunchINI
 
         [Browsable(true)]
         [Category("[Launch]")]
-        public bool? NoSpacesInPath { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string NoSpacesInPath { get; set; }
 
         [Browsable(true)]
         [Category("[Launch]")]
@@ -155,24 +169,68 @@ namespace PortableAppStudio.Model.LaunchINI
 
         public LaunchSection()
         {
-            WaitForEXEN = new Model.INIValueList<WaitForEXENValue>();
+            WaitForEXEN = new ExeProcessList<WaitForEXENValue>();
+            KillProcN = new ExeProcessList<KillProcNValue>();
         }
 
-        public void UpdateWaitForExeN(List<string> exeFileNames)
+        public void UpdateWaitForExeList(List<string> exeFileNames, bool forceUpdate = false, TreeNode topNode = null)
         {
-            int startCount = WaitForEXEN.Count + 1;
-            List<string> existingNames = WaitForEXEN.ConvertAll((item) => item.ExeName);
-            foreach (var item in exeFileNames)
+            if (WaitForEXEN.Count == 0 || forceUpdate)
             {
-                if(string.IsNullOrWhiteSpace(item))
+                int startCount = WaitForEXEN.Count + 1;
+                List<string> existingNames = WaitForEXEN.ConvertAll((item) => item.ExeName);
+                foreach (var item in exeFileNames)
                 {
-                    continue;
+                    if (string.IsNullOrWhiteSpace(item))
+                    {
+                        continue;
+                    }
+                    if (!existingNames.Exists((file) => string.Compare(file, item, true) == 0))
+                    {
+                        var tempVal = new WaitForEXENValue(startCount, item);
+                        WaitForEXEN.Add(tempVal);
+                        startCount++;
+                    }
                 }
-                if (!existingNames.Exists((file) => string.Compare(file, item, true) == 0))
+
+                if (topNode != null)
                 {
-                    var tempVal = new WaitForEXENValue(startCount,item);
-                    WaitForEXEN.Add(tempVal);
-                    startCount++;
+                    topNode.Nodes.Clear();
+                    foreach (var listItem in WaitForEXEN)
+                    {
+                        topNode.Nodes.Add(listItem.ToString());
+                    }
+                }
+            }
+        }
+
+        public void UpdateKillProcList(List<string> exeFileNames, bool forceUpdate = false, TreeNode topNode = null)
+        {
+            if (KillProcN.Count == 0 || forceUpdate)
+            {
+                int startCount = KillProcN.Count + 1;
+                List<string> existingNames = KillProcN.ConvertAll((item) => item.ExeName);
+                foreach (var item in exeFileNames)
+                {
+                    if (string.IsNullOrWhiteSpace(item))
+                    {
+                        continue;
+                    }
+                    if (!existingNames.Exists((file) => string.Compare(file, item, true) == 0))
+                    {
+                        var tempVal = new KillProcNValue(startCount, item);
+                        KillProcN.Add(tempVal);
+                        startCount++;
+                    }
+                }
+
+                if (topNode != null)
+                {
+                    topNode.Nodes.Clear();
+                    foreach (var listItem in KillProcN)
+                    {
+                        topNode.Nodes.Add(listItem.ToString());
+                    }
                 }
             }
         }
@@ -194,6 +252,19 @@ namespace PortableAppStudio.Model.LaunchINI
                                 break;
                             }
                             WaitForEXEN.Add(new WaitForEXENValue(index,iniData));
+                        }
+                    }
+                    else if (item.Name == "KillProcN")
+                    {
+                        for (int index = 1; index < MaxWaitExeCount; index++)
+                        {
+                            var key = string.Format("KillProc{0}", index);
+                            var iniData = file.ReadValue(section, key, null);
+                            if (string.IsNullOrWhiteSpace(iniData))
+                            {
+                                break;
+                            }
+                            KillProcN.Add(new KillProcNValue(index, iniData));
                         }
                     }
                     else
@@ -226,6 +297,25 @@ namespace PortableAppStudio.Model.LaunchINI
                         for (int index = 0; index < WaitForEXEN.Count; index++)
                         {
                             var key = string.Format("WaitForEXE{0}", index + 1);
+                            file.WriteValue(section, key, WaitForEXEN[index].ExeName);
+                        }
+                    }
+                    else if (item.Name == "KillProcN")
+                    {
+                        for (int index = 1; index < MaxWaitExeCount; index++)
+                        {
+                            var key = string.Format("KillProc{0}", index);
+                            var iniData = file.ReadValue(section, key, null);
+                            if (string.IsNullOrWhiteSpace(iniData))
+                            {
+                                break;
+                            }
+                            file.DeleteKey(section, key);
+                        }
+
+                        for (int index = 0; index < WaitForEXEN.Count; index++)
+                        {
+                            var key = string.Format("KillProc{0}", index + 1);
                             file.WriteValue(section, key, WaitForEXEN[index].ExeName);
                         }
                     }

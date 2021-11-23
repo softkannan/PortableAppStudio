@@ -21,6 +21,8 @@ namespace PortableAppStudio.Dialogs
             bttnOk.Click += BttnOk_Click;
 
             helpTextBox.Rtf = PathManager.Init.GetHelpData("RegistryValueWrite");
+
+            regValueTextBox.AutoCompleteCustomSource = Model.InteliSense.Inst.EnvVaraibles;
         }
 
         private void BttnOk_Click(object sender, EventArgs e)

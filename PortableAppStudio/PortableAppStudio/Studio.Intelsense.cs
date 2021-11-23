@@ -20,7 +20,7 @@ using System.Windows.Forms;
 
 namespace PortableAppStudio
 {
-    partial class Studio
+    partial class MainStudio
     {
         public void UpdateRegDynamicIntelisense()
         {
@@ -78,7 +78,8 @@ namespace PortableAppStudio
             Model.OtherFileListStringConverter.OtherList.AddRange(otherFilesList.Distinct());
             Model.DllOcxFileListStringConverter.DllOcxList.AddRange(dllOcxList.Distinct());
 
-            PortableApp.Inst.App.Launch.Launch.UpdateWaitForExeN(Model.ExeFileNameListStringConverter.ExeFileNameList);
+            PortableApp.Inst.App.Launch.Launch.UpdateWaitForExeList(Model.ExeFileNameListStringConverter.ExeFileNameList);
+            PortableApp.Inst.App.Launch.Launch.UpdateKillProcList(Model.ExeFileNameListStringConverter.ExeFileNameList);
         }
 
         private void UpdateFileDynamicIntelisenseInternal(TreeNode appNode, List<string> appList, List<string> exeFileNameList, List<string> appPathList,

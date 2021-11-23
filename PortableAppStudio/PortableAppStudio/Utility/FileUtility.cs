@@ -141,15 +141,29 @@ namespace PortableAppStudio.Utility
             string[] directories = System.IO.Directory.GetDirectories(sourcePath, "*.*", SearchOption.AllDirectories);
             foreach (var srcDirPath in directories)
             {
-                string tempDestPath = Uri.UnescapeDataString(srcDirPath.Replace(sourcePath, destinationPath));
+                string tempDestPath = Uri.UnescapeDataString(srcDirPath.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
                 Directory.CreateDirectory(tempDestPath);
             }
             string[] files = System.IO.Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
             foreach(var srcFilePath in files)
             {
-                string tempDestPath = Uri.UnescapeDataString(srcFilePath.Replace(sourcePath, destinationPath));
+                string tempDestPath = Uri.UnescapeDataString(srcFilePath.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
                 File.Copy(srcFilePath, tempDestPath, true);
             }
+        }
+
+        public void CopyTopLevel(string sourcePath, string destinationPath, bool ovewrite = false)
+        {
+            string[] files = System.IO.Directory.GetFiles(sourcePath, "*.*", SearchOption.TopDirectoryOnly);
+
+            Parallel.ForEach(files, srcFilePath =>
+            {
+                var destFilePath = srcFilePath.Replace(sourcePath, destinationPath,StringComparison.OrdinalIgnoreCase);
+                if ((!File.Exists(destFilePath)) || ovewrite)
+                {
+                    File.Copy(srcFilePath, destFilePath, ovewrite);
+                }
+            });
         }
 
         public void CopyAll(string sourcePath, string destinationPath)
@@ -159,14 +173,14 @@ namespace PortableAppStudio.Utility
 
             Parallel.ForEach(directories, dirPath =>
             {
-                Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
             });
 
             string[] files = System.IO.Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
 
             Parallel.ForEach(files, newPath =>
             {
-                File.Copy(newPath, newPath.Replace(sourcePath, destinationPath),true);
+                File.Copy(newPath, newPath.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase),true);
             });
         }
 
@@ -217,6 +231,21 @@ namespace PortableAppStudio.Utility
             }
 
             return retVal;
+        }
+
+        public string GetSearchPath(string fileName)
+        {
+            if (File.Exists(fileName))
+                return Path.GetFullPath(fileName);
+
+            var values = Environment.GetEnvironmentVariable("PATH");
+            foreach (var path in values.Split(Path.PathSeparator))
+            {
+                var fullPath = Path.Combine(path, fileName);
+                if (File.Exists(fullPath))
+                    return fullPath;
+            }
+            return null;
         }
     }
 }

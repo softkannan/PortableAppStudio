@@ -10,18 +10,23 @@ namespace PortableAppStudio.Model
 {
     public class RegInfo
     {
-        public RegInfo(string key, string valueName, string regKind, string regValue)
+        public RegInfo(SortedDictionary<string, string> searchReplaceList, string parserType,string key, string valueName, string regKind, string regValue)
         {
             this.Value = regValue;
             this.Key = key;
             this.ValueName = valueName;
             this.Kind = regKind;
+            this.ParserType = parserType;
+            this.SearchReplaceList = searchReplaceList;
         }
 
         public string Key { get; private set; }
         public string Kind { get; private set; }
         public string ValueName { get; private set; }
         public string Value { get; private set; }
+        public string ParserType { get; private set; }
+
+        public SortedDictionary<string, string> SearchReplaceList { get; private set; }
 
         public string RegWriteValue
         {

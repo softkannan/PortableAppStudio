@@ -46,7 +46,8 @@ namespace PortableAppStudio.Model.LaunchINI
 
         [Browsable(true)]
         [Category("[LanguageFile]")]
-        public bool? CaseSensitive { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string CaseSensitive { get; set; }
 
 
         [Browsable(true)]

@@ -33,11 +33,22 @@ namespace PortableAppStudio.Model
 
         }
 
-        public void UpdateSearchReplaceList(string resourceName)
+        public void UpdateEnvironmentList()
+        {
+            string filename = PathManager.Init.GetResourcePath("EnvIntellisense.txt");
+            if (File.Exists(filename))
+            {
+                var tempVal = File.ReadLines(filename).ToArray();
+                SearchList.AddRange(tempVal);
+                ReplaceList.AddRange(tempVal);
+            }
+        }
+
+        public SortedDictionary<string, string> UpdateSearchReplaceList(string resourceName)
         {
             SearchList = new AutoCompleteStringCollection();
             ReplaceList = new AutoCompleteStringCollection();
-            SearchReplaceMap = new Dictionary<string, string>();
+            var retVal = new SortedDictionary<string, string>(new DescendingComparer<string>());
 
             string filename = PathManager.Init.GetResourcePath(resourceName);
             if (File.Exists(filename))
@@ -56,22 +67,17 @@ namespace PortableAppStudio.Model
                         if(keyValue.Length > 1)
                         {
                             ReplaceList.Add(keyValue[1].Trim());
-                            SearchReplaceMap[keyValue[0].Trim()] = keyValue[1].Trim();
+                            retVal[keyValue[0].Trim()] = keyValue[1].Trim();
                         }
                     }
                 }
             }
-
-            filename = PathManager.Init.GetResourcePath("EnvIntellisense.txt");
-            if (File.Exists(filename))
-            {
-                var tempVal = File.ReadLines(filename).ToArray();
-                SearchList.AddRange(tempVal);
-                ReplaceList.AddRange(tempVal);
-            }
+            
+            SearchReplaceMap = retVal;
+            return retVal;
         }
 
-        public Dictionary<string,string> SearchReplaceMap { get; private set; }
+        public SortedDictionary<string,string> SearchReplaceMap { get; private set; }
 
         public AutoCompleteStringCollection SearchList { get; private set; }
 

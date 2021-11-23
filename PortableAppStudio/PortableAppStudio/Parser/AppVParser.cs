@@ -49,8 +49,9 @@ namespace PortableAppStudio.Parser
 
         public override void Parse(string fileName)
         {
-            Model.InteliSense.Inst.UpdateSearchReplaceList("AppVIntellisense.txt");
-
+            this.ParserType = RegSourceType.AppV;
+            SearchReplaceList = Model.InteliSense.Inst.UpdateSearchReplaceList("AppVIntellisense.txt");
+            Model.InteliSense.Inst.UpdateEnvironmentList();
             ParseInternal(fileName);
         }
 

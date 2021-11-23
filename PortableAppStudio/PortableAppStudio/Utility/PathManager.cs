@@ -145,12 +145,12 @@ namespace PortableAppStudio.Utility
             Tuple<bool,string, Model.EnvironmentInfo> retVal = null;
             foreach (KeyValuePair<string, Model.EnvironmentInfo> item in SystemEnvironments)
             {
-                if (filePath.IndexOf(item.Value.ShortPath, StringComparison.InvariantCultureIgnoreCase) == 0)
+                if (filePath.IndexOf(item.Value.ShortPath, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     retVal = new Tuple<bool,string, Model.EnvironmentInfo>(true, item.Key, item.Value);
                     break;
                 }
-                else if (filePath.IndexOf(item.Value.LongPath, StringComparison.InvariantCultureIgnoreCase) == 0)
+                else if (filePath.IndexOf(item.Value.LongPath, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     retVal = new Tuple<bool,string, Model.EnvironmentInfo>(false, item.Key, item.Value);
                     break;
@@ -176,12 +176,12 @@ namespace PortableAppStudio.Utility
             }
             //foreach(KeyValuePair<string,Model.EnvironmentInfo> item in SystemEnvironments)
             //{
-            //    if(filePath.IndexOf(item.Value.ShortPath,StringComparison.InvariantCultureIgnoreCase) == 0)
+            //    if(filePath.IndexOf(item.Value.ShortPath,StringComparison.OrdinalIgnoreCase) == 0)
             //    {
             //        retVal = string.Format("{0}{1}", item.Key, filePath.Substring(item.Value.ShortPath.Length));
             //        break;
             //    }
-            //    else if (filePath.IndexOf(item.Value.LongPath, StringComparison.InvariantCultureIgnoreCase) == 0)
+            //    else if (filePath.IndexOf(item.Value.LongPath,StringComparison.OrdinalIgnoreCase) == 0)
             //    {
             //        retVal = string.Format("{0}{1}", item.Key, filePath.Substring(item.Value.LongPath.Length));
             //        break;
@@ -251,7 +251,10 @@ namespace PortableAppStudio.Utility
                     var envVariable = item.Substring(0, tipStartPos);
                     var envTips = item.Substring(tipStartPos);
 
-                    ToolTipMap.Add(envVariable, envTips);
+                    if (!ToolTipMap.ContainsKey(envVariable))
+                    {
+                        ToolTipMap.Add(envVariable, envTips);
+                    }
 
                     var filePath = new Model.EnvironmentInfo();
                     filePath.RelativePath = envVariable;

@@ -21,45 +21,46 @@ using System.Windows.Forms;
 
 namespace PortableAppStudio
 {
-    partial class Studio
+    partial class MainStudio
     {
-        private List<TreeNode> GetDropData(DragEventArgs e)
+        private void RunProcMon()
+        {
+            try
+            {
+                System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon;
+                launchProc.StartInfo.UseShellExecute = true;
+                launchProc.Start();
+            }
+            catch (Exception)
+            { }
+        }
+
+        private void GeneratePortableLauncher()
+        {
+            try
+            {
+                System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.LaunchGeneratorPath;
+                launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Utility.UserSettings.Inst.PortableAppPath);
+                launchProc.StartInfo.UseShellExecute = true;
+
+                launchProc.Start();
+            }
+            catch(Exception)
+            { }
+        }
+
+        private List<TreeNode> GetTreeNodeDropData(DragEventArgs e)
         {
             return (List<TreeNode>)e?.Data?.GetData(TreeNode_Drop_DataType);
         }
 
         private TreeViewEx GetDropSourceTree(DragEventArgs e)
         {
-            var tempDropData = GetDropData(e);
+            var tempDropData = GetTreeNodeDropData(e);
             return tempDropData?.FirstOrDefault()?.TreeView as TreeViewEx;
-        }
-
-        
-        private void ImportSourceFiles(ParserBase importParser, string fileOrFolderName)
-        {
-            ErrorLog.Inst.WriteStatus("Importing Source Files...");
-            var progressBar = ProgressDialog.Run(this, "Importing Source Files and Registry Entries ...",
-                    "Importing Source Files and Registry Entries From \"{0}\"", fileOrFolderName);
-            try
-            {
-                importParser.Parse(string.Format(@"\\?\{0}",fileOrFolderName));
-
-                this.SuspendLayout();
-
-                importParser.PopulateSourceTreeView(sourceFilesTree, sourceRegTree);
-
-                this.ResumeLayout();
-
-            }
-            catch (Exception ex)
-            {
-                ErrorLog.Inst.ShowError("Source Files Import Error : {0}", ex.Message);
-            }
-            finally
-            {
-                progressBar.ShutDown();
-            }
-            ErrorLog.Inst.WriteStatus("Source Files and Registry Entries Import Completed");
         }
 
         // Updates all child tree nodes recursively.
@@ -152,6 +153,7 @@ namespace PortableAppStudio
                 }
 
                 PortableApp.Inst.Reload();
+                UpdateFileDynamicIntelisense();
             }
             catch (Exception ex)
             {
@@ -198,6 +200,7 @@ namespace PortableAppStudio
             {
                 progressBar.ShutDown();
             }
+            Utility.UserSettings.Inst.PortableAppPath = portableAppFolder;
             ErrorLog.Inst.WriteStatus("Ready");
         }
 
@@ -231,6 +234,10 @@ namespace PortableAppStudio
                     return new EnvironmentForm();
                 case LaunchINI.DirectoriesLink_Tag:
                     return new DirectoriesLinkForm();
+                case LaunchINI.PrefixPATHEnv_Tag:
+                    return new PrefixPATHEnvForm();
+                case LaunchINI.FileWriteN_Tag:
+                    return new FileWriteNForm();
                 default:
                     return new FolderNameForm();
             }

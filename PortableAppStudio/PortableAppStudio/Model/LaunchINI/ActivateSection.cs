@@ -11,8 +11,15 @@ namespace PortableAppStudio.Model.LaunchINI
     {
         [Browsable(true)]
         [Category("[Activate]")]
+        [TypeConverter(typeof(GhostscriptStringConverter))]
+        [DefaultValue("none")]
+        public string Ghostscript { get; set; }
+
+        [Browsable(true)]
+        [Category("[Activate]")]
         [DefaultValue(false)]
-        public bool? Registry { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string Registry { get; set; }
 
         [Browsable(true)]
         [Category("[Activate]")]
@@ -23,6 +30,7 @@ namespace PortableAppStudio.Model.LaunchINI
         [Browsable(true)]
         [Category("[Activate]")]
         [DefaultValue(false)]
-        public bool? XML { get; set; }
+        [TypeConverter(typeof(BooleanStringConverter))]
+        public string XML { get; set; }
     }
 }

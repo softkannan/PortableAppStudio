@@ -16,75 +16,144 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PortableAppStudio
 {
-    public partial class Studio : Form
+    public partial class MainStudio : Form
     {
-        public Studio()
+        public MainStudio()
         {
             InitializeComponent();
 
+            var lastFileNode = sourceFilesTree.Nodes.Add("%APPDATA%\\", "%APPDATA%");
+            sourceFilesTree.KeyNodes.Add("%APPDATA%\\", lastFileNode);
+
+            var lastRegNode = sourceRegTree.Nodes.Add("HKCU\\", "HKCU");
+            sourceRegTree.KeyNodes.Add("HKCU\\", lastRegNode);
+
+            lastRegNode = sourceRegTree.Nodes.Add("HKLM\\", "HKLM");
+            sourceRegTree.KeyNodes.Add("HKLM\\", lastRegNode);
+
+            Utility.UserSettings.LoadSettings();
+
             UpdateTreeContextMenus();
 
-            ErrorLog.Inst.Initialize(this,statusLabelMain, statusLabelKeyPress);
+            ErrorLog.Inst.Initialize(this, statusLabelMain, statusLabelKeyPress);
 
-            labelFileConvert.DragDrop += LabelFileConvert_DragDrop;
-            labelFileConvert.DragEnter += LabelFileConvert_DragEnter;
+            fileConvertLabel.DragDrop += FileConvertLabel_DragDrop;
+            fileConvertLabel.DragEnter += FileConvertLabel_DragEnter;
 
-            appInfoTree.AfterSelect += appInfoTree_AfterSelect;
-            launchTree.AfterSelect += this.launchTree_AfterSelect;
+            #region Tree Items
 
-            sourceFilesTree.NodeMouseClick += SourceTree_NodeMouseClick;
+            appInfoTree.AfterSelect += AppInfoTree_AfterSelect;
+            launchTree.AfterSelect += LaunchTree_AfterSelect;
+            launchTree.NodeMouseClick += LaunchTree_NodeMouseClick;
+
+            sourceFilesTree.NodeMouseClick += SourceTreeFile_NodeMouseClick;
             sourceFilesTree.ItemDrag += SourceFilesTree_ItemDrag;
-
-            sourceRegTree.NodeMouseClick += SourceTree_NodeMouseClick;
-            sourceRegTree.ItemDrag += SourceRegTree_ItemDrag;
             sourceFilesTree.DragEnter += SourceFilesTree_DragEnter;
             sourceFilesTree.DragDrop += SourceFilesTree_DragDrop;
+
+            sourceRegTree.NodeMouseClick += SourceTreeReg_NodeMouseClick;
+            sourceRegTree.ItemDrag += SourceRegTree_ItemDrag;
 
             appFilesTree.NodeMouseClick += AppFilesTree_NodeMouseClick;
             appFilesTree.DragDrop += AppFilesTree_DragDrop;
             appFilesTree.DragEnter += AppFilesTree_DragEnter;
 
-            appRegTree.NodeMouseClick += appRegTree_NodeMouseClick;
+            appRegTree.NodeMouseClick += AppRegTree_NodeMouseClick;
             appRegTree.DragEnter += AppRegTree_DragEnter;
             appRegTree.DragDrop += AppRegTree_DragDrop;
 
-            createToolStripMenuItem.Click += createToolStripMenuItem_Click;
-            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
-            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
-            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            #endregion
 
-            importThinAppCaptureToolStripMenuItem.Click += importThinAppCaptureToolStripMenuItem_Click;
-            importRegshotCaptureToolStripMenuItem.Click += importRegshotCaptureToolStripMenuItem_Click;
-            importAppVCaptureToolStripMenuItem.Click += importAppVCaptureToolStripMenuItem_Click;
-            importXRegshotCaptureToolStripMenuItem.Click += importXRegshotCaptureToolStripMenuItem_Click;
-            importRegFileToolStripMenuItem.Click += importRegFileToolStripMenuItem_Click;
-            importFolderToolStripMenuItem.Click += importFolderToolStripMenuItem_Click;
+            #region Menu Bar Items
 
-            fixDirectoriesToolStripMenuItem.Click += fixDirectoriesToolStripMenuItem_Click;
-            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            createToolStripMenuItem.Click += CreateToolStripMenuItem_Click;
+            openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
+            saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
+            exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
 
+            importThinAppCaptureToolStripMenuItem.Click += ImportThinAppCaptureToolStripMenuItem_Click;
+            importRegshotCaptureToolStripMenuItem.Click += ImportRegshotCaptureToolStripMenuItem_Click;
+            importAppVCaptureToolStripMenuItem.Click += ImportAppVCaptureToolStripMenuItem_Click;
+            importXRegshotCaptureToolStripMenuItem.Click += ImportXRegshotCaptureToolStripMenuItem_Click;
+            importRegFileToolStripMenuItem.Click += ImportRegFileToolStripMenuItem_Click;
+            importFolderToolStripMenuItem.Click += ImportFolderToolStripMenuItem_Click;
+            importRegistryCliboardToolStripMenuItem.Click += ImportRegistryCliboardToolStripMenuItem_Click;
+            importFilesClipboardToolStripMenuItem.Click += ImportFilesClipboardToolStripMenuItem_Click;
 
-            toolStripButtonCreate.Click += createToolStripMenuItem_Click;
-            toolStripButtonOpen.Click += openToolStripMenuItem_Click;
-            toolStripButtonSave.Click += saveToolStripMenuItem_Click;
-            toolStripButtonClear.Click += toolStripButtonClear_Click;
-            toolStripButtonRefresh.Click += toolStripButtonReferesh_Click;
-            toolStripButtonImportAppv.Click += importAppVCaptureToolStripMenuItem_Click;
-            toolStripButtonImportThinApp.Click += importThinAppCaptureToolStripMenuItem_Click;
-            toolStripButtonImportX_RegShot.Click += importXRegshotCaptureToolStripMenuItem_Click;
-            toolStripButtonImportRegShot.Click += importRegshotCaptureToolStripMenuItem_Click;
-            toolStripButtonImportRegFile.Click += importRegFileToolStripMenuItem_Click;
-            toolStripButtonImportFolder.Click += importFolderToolStripMenuItem_Click;
             deleteFoldersToolStripMenuItem.Click += DeleteFoldersToolStripMenuItem_Click;
 
-            ignoreFilesToolStripMenuItem.Click += ignoreFilesToolStripMenuItem_Click;
-            ignoreFoldersToolStripMenuItem.Click += ignoreFoldersToolStripMenuItem_Click;
-            ignoreRegistryToolStripMenuItem.Click += ignoreRegistryToolStripMenuItem_Click;
+            ignoreFilesToolStripMenuItem.Click += IgnoreFilesToolStripMenuItem_Click;
+            ignoreFoldersToolStripMenuItem.Click += IgnoreFoldersToolStripMenuItem_Click;
+            ignoreRegistryToolStripMenuItem.Click += IgnoreRegistryToolStripMenuItem_Click;
+
+            #endregion
+
+            #region Toolbar Buttons
+
+            importThinAppToolStripButtonDropMenuItem.Click += ImportThinAppCaptureToolStripMenuItem_Click;
+            importXRegshotToolStripButtonDropMenuItem.Click += ImportXRegshotCaptureToolStripMenuItem_Click;
+            importRegshotToolStripButtonDropMenuItem.Click += ImportRegshotCaptureToolStripMenuItem_Click;
+            importRegFileToolStripButtonDropMenuItem.Click += ImportRegFileToolStripMenuItem_Click;
+            importAppVToolStripButton.Click += ImportAppVCaptureToolStripMenuItem_Click;
+            importFolderToolStripButton.Click += ImportFolderToolStripMenuItem_Click;
+            importRegClipboardToolStripMenuItem.Click += ImportRegistryCliboardToolStripMenuItem_Click;
+
+            fixDirectoriesToolStripMenuItem.Click += FixDirectoriesToolStripMenuItem_Click;
+            aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
+
+            createToolStripButton.Click += CreateToolStripMenuItem_Click;
+            openToolStripButton.Click += OpenToolStripMenuItem_Click;
+            saveToolStripButton.Click += SaveToolStripMenuItem_Click;
+
+            clearToolStripButton.Click += ClearToolStripButton_Click;
+            refreshToolStripButton.Click += RefreshToolStripButton_Click;
+
+            createLauncherToolStripButton.Click += CreateLauncherToolStripButton_Click;
+            runPortableToolStripButton.ButtonClick += RunPortableToolStripButton_Click;
+            runWithProcMonToolStripMenuItem.Click += RunWithProcMonToolStripMenuItem_Click;
+            runWithRegMonToolStripMenuItem.Click += RunWithRegMonToolStripMenuItem_Click;
+            runWithTracerToolStripMenuItem.Click += RunWithTracerToolStripMenuItem_Click;
+            mergeCustomNSIToolStripButton.Click += MergeCustomNSIToolStripButton_Click;
+            viewDebugLogToolStripButton.Click += ViewDebugLogToolStripButton_Click;
+            editToolStripButton.Click += EditToolStripButton_Click;
+
+            mergeListtoolStripComboBox.Items.Add("Custom.nsh");
+            mergeListtoolStripComboBox.Items.Add("Launch.ini");
+            mergeListtoolStripComboBox.Items.Add("AppInfo Folder");
+            mergeListtoolStripComboBox.SelectedIndex = 0;
+
+            regFromAppToolStripMenuItem.Click += RegFromAppToolStripMenuItem_Click;
+            registryChangesViewToolStripMenuItem.Click += RegistryChangesViewToolStripMenuItem_Click;
+            processExplorerToolStripMenuItem.Click += ProcessExplorerToolStripMenuItem_Click;
+            processMonitorToolStripMenuItem.Click += ProcessMonitorToolStripMenuItem_Click;
+            resourceHackerToolStripMenuItem.Click += ResourceHackerToolStripMenuItem_Click;
+            whatChangedToolStripMenuItem.Click += WhatChangedToolStripMenuItem_Click;
+            tcpviewToolStripMenuItem.Click += TcpviewToolStripMenuItem_Click;
+            fileActivityWatchToolStripMenuItem.Click += FileActivityWatchToolStripMenuItem_Click;
+            smartSniffToolStripMenuItem.Click += SmartSniffToolStripMenuItem_Click;
+            exeInfoToolStripMenuItem.Click += ExeInfoToolStripMenuItem_Click;
+            iconsExtractToolStripMenuItem.Click += IconsExtractToolStripMenuItem_Click;
+
+            aPPDATAToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            cOMMONPROGRAMFILESx86ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            commonProgramW6432ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            pROGRAMFILESX86ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            programW6432ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            tEMPToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            aPPDATALocalLowToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            lOCALAPPDATAToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            pROGRAMDATAToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            uSERPROFILEToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            systemRootToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            pUBLICToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+
+            #endregion
 
             statusLabelKeyPress.Text = "";
             statusLabelMain.Text = "";
@@ -96,135 +165,7 @@ namespace PortableAppStudio
             appInfoEditor.PropertyValueChanged += PortableApp.Inst.OnValueChanged;
             launchEditor.PropertyValueChanged += PortableApp.Inst.OnValueChanged;
         }
-        
-        private void DeleteFoldersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new FolderDelete();
 
-            form.ShowDialog(this);
-        }
-
-        private void importRegshotCaptureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openFileDlg.RestoreDirectory = true;
-            openFileDlg.InitialDirectory = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            openFileDlg.Filter = "RegShot Files|*.txt";
-            if (openFileDlg.ShowDialog(this) == DialogResult.OK)
-            {
-                Settings.Default.ImportLastPath = Path.GetDirectoryName(openFileDlg.FileName);
-                var regshotParser = new RegShotParser();
-                ImportSourceFiles(regshotParser, openFileDlg.FileName);
-            }
-        }
-        private void importXRegshotCaptureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
-            {
-                Settings.Default.ImportLastPath = folderBrowserDlg.SelectedPath;
-                var xRegShotParser = new X_RegshotParser();
-                ImportSourceFiles(xRegShotParser, folderBrowserDlg.SelectedPath);
-            }
-        }
-
-        private void importThinAppCaptureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
-            {
-                Settings.Default.ImportLastPath = folderBrowserDlg.SelectedPath;
-                var thinAppParser = new ThinAppParser();
-                ImportSourceFiles(thinAppParser, folderBrowserDlg.SelectedPath);
-            }
-        }
-
-        private void importAppVCaptureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
-            {
-                Settings.Default.ImportLastPath = folderBrowserDlg.SelectedPath;
-                var appvParser = new AppVParser();
-                ImportSourceFiles(appvParser, folderBrowserDlg.SelectedPath);
-            }
-        }
-
-        private void importRegFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openFileDlg.RestoreDirectory = true;
-            openFileDlg.InitialDirectory = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            openFileDlg.Filter = "RegShot Files|*.reg";
-            if (openFileDlg.ShowDialog(this) == DialogResult.OK)
-            {
-                Settings.Default.ImportLastPath = Path.GetDirectoryName(openFileDlg.FileName);
-                var regFileParser = new RegFileParser();
-                ImportSourceFiles(regFileParser, openFileDlg.FileName);
-            }
-        }
-
-        private void importFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
-            {
-                Settings.Default.ImportLastPath = folderBrowserDlg.SelectedPath;
-                var folderParser = new FolderParser();
-                ImportSourceFiles(folderParser, folderBrowserDlg.SelectedPath);
-            }
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.PortableAppLastPath);
-            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
-            {
-                Settings.Default.PortableAppLastPath = folderBrowserDlg.SelectedPath;
-                LoadPortableApp(folderBrowserDlg.SelectedPath,true);
-            }
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveInternal();
-        }
-
-        private void createToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new NewPortableAppForm();
-            form.SelectedPath = Path.GetDirectoryName(PathManager.Init.GetLastPath(Settings.Default.PortableAppLastPath));
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                Settings.Default.PortableAppLastPath = form.SelectedPath;
-                LoadPortableApp(form.SelectedPath,false);
-            }
-        }
-
-        private void ignoreFoldersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IgnoreListForm form = new IgnoreListForm();
-
-            form.InitalizeExcludeFolders();
-
-            form.ShowDialog(this);
-        }
-
-        private void ignoreFilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IgnoreListForm form = new IgnoreListForm();
-
-            form.InitalizeExcludeFiles();
-
-            form.ShowDialog(this);
-        }
-
-        private void ignoreRegistryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IgnoreListForm form = new IgnoreListForm();
-
-            form.InitalizeExcludeRegKeys();
-
-            form.ShowDialog(this);
-        }
         private void Studio_Load(object sender, EventArgs e)
         {
             //RegShotParser parser = new RegShotParser();
@@ -264,126 +205,295 @@ namespace PortableAppStudio
             Settings.Default.Save();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-        private void toolStripButtonClear_Click(object sender, EventArgs e)
-        {
-            sourceFilesTree.Reset();
-            sourceRegTree.Reset();
-        }
-
-        private void toolStripButtonReferesh_Click(object sender, EventArgs e)
-        {
-            PortableApp.Inst.RefreshAppTrees(true);
-        }
-
-        private void LabelFileConvert_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-
-        private void LabelFileConvert_DragDrop(object sender, DragEventArgs e)
-        {
-            var fileData = e.Data.GetData("FileDrop") as string[];
-            if (fileData != null)
+            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.PortableAppLastPath);
+            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
             {
-                var folderParser = new FolderParser();
-                foreach (var item in fileData)
+                var appFolder = string.Format("{0}\\App", folderBrowserDlg.SelectedPath);
+                if(!Directory.Exists(appFolder))
                 {
-                    if (Directory.Exists(item))
+                    ErrorLog.Inst.ShowError("Invalid Portable Application folder : {0}", folderBrowserDlg.SelectedPath);
+                    return;
+                }
+                Settings.Default.PortableAppLastPath = folderBrowserDlg.SelectedPath;
+                LoadPortableApp(folderBrowserDlg.SelectedPath, true);
+            }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!PortableApp.Inst.IsAlreadyOpen)
+            {
+                MessageBox.Show("Open Portable App before saving", "Info", MessageBoxButtons.OK);
+                return;
+            }
+            SaveInternal();
+        }
+
+        private void CreateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new NewPortableAppForm
+            {
+                SelectedPath = Path.GetDirectoryName(PathManager.Init.GetLastPath(Settings.Default.PortableAppLastPath)),
+                ImportFolderName = Settings.Default.ImportLastPath
+            };
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                Settings.Default.PortableAppLastPath = form.SelectedPath;
+                LoadPortableApp(form.SelectedPath, false);
+            }
+        }
+
+        private void CreateLauncherToolStripButton_Click(object sender, EventArgs e)
+        {
+            GeneratePortableLauncher();
+        }
+
+        private void RunPortableToolStripButton_Click(object sender, EventArgs e)
+        {
+            if(UserSettings.Inst.IsPortableAppRunning)
+            {
+                ErrorLog.Inst.ShowError("Portable App already running");
+                return;
+            }
+            Task.Factory.StartNew(() =>
+            { 
+                try
+                {
+                    UserSettings.Inst.IsPortableAppRunning = true;
+                    var foundFiles = Directory.GetFiles(Utility.UserSettings.Inst.PortableAppPath, "*.exe", SearchOption.TopDirectoryOnly);
+                    if (foundFiles != null && foundFiles.Length > 0)
                     {
-                        string selectedSrcFolder = item;
-                        string selectedDestFolder = item + "_Fixed";
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = foundFiles.FirstOrDefault();
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
+                        launchProc.WaitForExit();
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                finally
+                {
+                    UserSettings.Inst.IsPortableAppRunning = false;
+                }
+            });
+        }
 
-                        if (Directory.Exists(selectedDestFolder))
-                        {
-                            Directory.CreateDirectory(selectedDestFolder);
-                        }
-
-                        var progressBar = ProgressDialog.Run(this, "Fixing Directory and File Names ...", "Fixing Directory and File Names \"{0}\"", selectedDestFolder);
-
-                        try
-                        {
-
-                            FileUtility.Inst.CopyAllFix(string.Format(@"\\?\{0}", selectedSrcFolder.Trim()), string.Format(@"\\?\{0}", selectedDestFolder.Trim()));
-
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorLog.Inst.ShowError("Failed to fix directory names : {0}", ex.Message);
-                        }
-
-                        Settings.Default.ImportLastPath = selectedDestFolder;
-
-                        progressBar.ShutDown();
-
-                        ErrorLog.Inst.ShowInfo("File name conversion completed. \"{0}\"", selectedDestFolder);
+        private void RunWithTracerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UserSettings.Inst.IsPortableAppRunning)
+            {
+                ErrorLog.Inst.ShowError("Portable App already running");
+                return;
+            }
+            try
+            {
+                var foundFiles = Directory.GetFiles(Utility.UserSettings.Inst.PortableAppPath, "*.exe", SearchOption.TopDirectoryOnly);
+                if (foundFiles != null && foundFiles.Length > 0)
+                {
+                    {
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = string.Format("{0}\\x64\\RegistryChangesView.exe", PathManager.Init.GetResourcePath("3rdPartyApps"));
+                        launchProc.StartInfo.Verb = "runas";
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
+                    }
+                    {
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = string.Format("{0}\\x64\\FileActivityWatch.exe", PathManager.Init.GetResourcePath("3rdPartyApps"));
+                        launchProc.StartInfo.Verb = "runas";
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
+                    }
+                    {
+                        MessageBox.Show("Before Click Ok make sure file and registry monitor is running", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = foundFiles.FirstOrDefault();
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
                     }
                 }
             }
+            catch (Exception)
+            { }
         }
 
-        private void fixDirectoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RunWithRegMonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            folderBrowserDlg.SelectedPath = PathManager.Init.GetLastPath(Settings.Default.ImportLastPath);
-            if (folderBrowserDlg.ShowFolderBrowser(this) == DialogResult.OK)
+            if (UserSettings.Inst.IsPortableAppRunning)
             {
-                string selectedSrcFolder = folderBrowserDlg.SelectedPath;
-                string selectedDestFolder = folderBrowserDlg.SelectedPath + "_Fixed";
-
-                if(Directory.Exists(selectedDestFolder))
-                {
-                    Directory.CreateDirectory(selectedDestFolder);
-                }
-
-                var progressBar = ProgressDialog.Run(this, "Fixing Directory and File Names ...", "Fixing Directory and File Names \"{0}\"", selectedDestFolder);
-
-                try
-                {
-
-                    FileUtility.Inst.CopyAllFix(string.Format(@"\\?\{0}",selectedSrcFolder.Trim()), string.Format(@"\\?\{0}",selectedDestFolder.Trim()));
-
-                }
-                catch(Exception ex)
-                {
-                    ErrorLog.Inst.ShowError("Failed to fix directory names : {0}", ex.Message);
-                }
-
-                Settings.Default.ImportLastPath = selectedDestFolder;
-
-                progressBar.ShutDown();
-
-                this.BringToFront();
-
-                ErrorLog.Inst.ShowInfo("File name conversion completed. \"{0}\"", selectedDestFolder);
+                ErrorLog.Inst.ShowError("Portable App already running");
+                return;
             }
+            try
+            {
+                var foundFiles = Directory.GetFiles(Utility.UserSettings.Inst.PortableAppPath, "*.exe", SearchOption.TopDirectoryOnly);
+                if (foundFiles != null && foundFiles.Length > 0)
+                {
+                    System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                    launchProc.StartInfo.Arguments = string.Format("/StartImmediately 0 /RunProcess \"{0}\"", foundFiles.FirstOrDefault());
+                    launchProc.StartInfo.FileName = string.Format("{0}\\x86\\RegFromApp.exe", PathManager.Init.GetResourcePath("3rdPartyApps"));
+                    launchProc.StartInfo.Verb = "runas";
+                    launchProc.StartInfo.UseShellExecute = true;
+
+                    launchProc.Start();
+                }
+            }
+            catch (Exception)
+            { }
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RunWithProcMonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm form = new AboutForm();
-
-            form.ShowDialog(this);
+            if (UserSettings.Inst.IsPortableAppRunning)
+            {
+                ErrorLog.Inst.ShowError("Portable App already running");
+                return;
+            }
+            try
+            {
+                var foundFiles = Directory.GetFiles(Utility.UserSettings.Inst.PortableAppPath, "*.exe", SearchOption.TopDirectoryOnly);
+                if (foundFiles != null && foundFiles.Length > 0)
+                {
+                    string exeFileName = Path.GetFileName(foundFiles.FirstOrDefault());
+                    {
+                        Clipboard.SetText(exeFileName);
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon;
+                        launchProc.StartInfo.Arguments = string.Format("/LoadConfig \"{0}\\ProcMonConfig.pmc\"", PathManager.Init.GetResourcePath("Other"));
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
+                    }
+                    {
+                        MessageBox.Show("Before Click Ok make sure procmon is running", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = foundFiles.FirstOrDefault();
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
+                    }
+                }
+            }
+            catch (Exception)
+            { }
         }
 
-        private void appVToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewDebugLogToolStripButton_Click(object sender, EventArgs e)
         {
-            var form = new SearchReplaceHelperForm();
+            try
+            {
+                System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
 
-            form.Initialize("AppVIntellisense.txt");
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath;
+                launchProc.StartInfo.Arguments = string.Format("\"{0}\\Data\\debug.log\"", Utility.UserSettings.Inst.PortableAppPath);
+                launchProc.StartInfo.UseShellExecute = true;
 
-            form.ShowDialog(this);
+                launchProc.Start();
+            }
+            catch(Exception)
+            { }
         }
 
-        private void thinAppToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MergeCustomNSIToolStripButton_Click(object sender, EventArgs e)
         {
-            var form = new SearchReplaceHelperForm();
+            string compareItem1 = string.Empty;
+            string compareItem2 = string.Empty;
+            try
+            {
+                //Custom.nsh
+                //Launch.ini
+                //AppInfo Folder
+                if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "Custom.nsh", StringComparison.OrdinalIgnoreCase))
+                {
+                    var resourcePortableApp = PathManager.Init.GetResourcePath("PortableApp");
+                    compareItem1 = string.Format("{0}\\App\\AppInfo\\Launcher\\Custom.nsh", resourcePortableApp);
+                    compareItem2 = string.Format("{0}\\App\\AppInfo\\Launcher\\Custom.nsh", Utility.UserSettings.Inst.PortableAppPath);
+                }
+                else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "Launch.ini", StringComparison.OrdinalIgnoreCase))
+                {
+                    var launchIniPath = Directory.GetFiles(string.Format("{0}\\App\\AppInfo\\Launcher", Utility.UserSettings.Inst.PortableAppPath), "*.ini", SearchOption.TopDirectoryOnly);
+                    if (launchIniPath != null && launchIniPath.Length > 0)
+                    {
+                        compareItem1 = launchIniPath.FirstOrDefault();
 
-            form.Initialize("ThinAppIntellisense.txt");
+                        using (var opnDlg = new OpenFileDialog())
+                        {
+                            opnDlg.ValidateNames = false;
+                            opnDlg.CheckFileExists = true;
+                            opnDlg.CheckPathExists = true;
+                            opnDlg.Multiselect = false;
+                            opnDlg.Filter = "Launch INI (*.ini)|*.ini";
+                            if (opnDlg.ShowDialog() == DialogResult.OK)
+                            {
+                                compareItem2 = opnDlg.FileName;
+                            }
+                        }
+                    }
+                }
+                else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "AppInfo Folder", StringComparison.OrdinalIgnoreCase))
+                {
+                    compareItem1 = Utility.UserSettings.Inst.PortableAppPath;
+                    using (var fbd = new FolderBrowserDialog())
+                    {
+                        if (fbd.ShowDialog() == DialogResult.OK)
+                        {
+                            compareItem2 = fbd.SelectedPath;
+                        }
+                    }
+                }
 
-            form.ShowDialog(this);
+                if ((!string.IsNullOrWhiteSpace(compareItem1)) && (!string.IsNullOrWhiteSpace(compareItem2)))
+                {
+                    System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath;
+                    launchProc.StartInfo.Arguments = string.Format("\"{0}\" \"{1}\"", compareItem1, compareItem2);
+                    launchProc.StartInfo.UseShellExecute = true;
+                    launchProc.Start();
+                }
+            }
+            catch(Exception)
+            { }
+        }
+
+        private void EditToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "Custom.nsh", StringComparison.OrdinalIgnoreCase))
+                {
+                    var customNSHPath = string.Format("{0}\\App\\AppInfo\\Launcher\\Custom.nsh", Utility.UserSettings.Inst.PortableAppPath);
+                    System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NSISEditorPath;
+                    launchProc.StartInfo.Arguments = string.Format("\"{0}\"", customNSHPath);
+                    launchProc.StartInfo.UseShellExecute = true;
+                    launchProc.Start();
+                }
+                else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "Launch.ini", StringComparison.OrdinalIgnoreCase))
+                {
+                    var launchIniPath = Directory.GetFiles(string.Format("{0}\\App\\AppInfo\\Launcher", Utility.UserSettings.Inst.PortableAppPath), "*.ini", SearchOption.TopDirectoryOnly);
+                    if (launchIniPath != null && launchIniPath.Length > 0)
+                    {
+                        var customNSHPath = launchIniPath.FirstOrDefault();
+                        System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                        launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath;
+                        launchProc.StartInfo.Arguments = string.Format("\"{0}\"", customNSHPath);
+                        launchProc.StartInfo.UseShellExecute = true;
+                        launchProc.Start();
+                    }
+                }
+                else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "AppInfo Folder", StringComparison.OrdinalIgnoreCase))
+                {
+                    System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager;
+                    launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Utility.UserSettings.Inst.PortableAppPath);
+                    launchProc.StartInfo.UseShellExecute = true;
+                    launchProc.Start();
+                }
+            }
+            catch(Exception)
+            { }
         }
     }
 }

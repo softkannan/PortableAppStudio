@@ -114,7 +114,20 @@ namespace PortableAppStudio.INI
 
         public bool WriteValue(string section, string key, string value)
         {
-            bool result = WritePrivateProfileString(section, key, value, filePath);
+            var finalValue = value;
+            if(!string.IsNullOrWhiteSpace(finalValue))
+            {
+                // if first character is " (quote) then eascape the char with single quote
+                if(finalValue.Length > 0 && finalValue[0] == '"')
+                {
+                    finalValue = string.Format("'{0}'", finalValue);
+                }
+                else if(finalValue.Length > 0 && finalValue[0] == '\'')
+                {
+                    finalValue = string.Format("'{0}'", finalValue);
+                }
+            }
+            bool result = WritePrivateProfileString(section, key, finalValue, filePath);
             return result;
         }
 

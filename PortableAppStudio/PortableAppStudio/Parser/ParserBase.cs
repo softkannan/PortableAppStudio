@@ -32,10 +32,24 @@ namespace PortableAppStudio.Parser
         protected const string REGEDIT5 = "Windows Registry Editor Version 5.00";
         protected const string REGEDIT4 = "REGEDIT4";
 
+        public string ParserType { get; protected set; }
+        public SortedDictionary<string,string> SearchReplaceList { get; protected set; }
+
         protected StringExtensionMethods.CodingType codingType = StringExtensionMethods.CodingType.Unicode;
 
         public ParserBase()
         {
+            this.ParserType = RegSourceType.RegFile;
+
+            SearchReplaceList = new SortedDictionary<string, string>(new DescendingComparer<string>());
+
+            foreach (var item in PathManager.Init.SystemEnvironments)
+            {
+                if (!SearchReplaceList.ContainsKey(item.Value.ShortPath))
+                {
+                    SearchReplaceList.Add(item.Value.ShortPath, item.Value.RelativePath);
+                }
+            }
         }
 
         private List<Model.RegInfo> _regValues = new List<Model.RegInfo>();
@@ -124,7 +138,7 @@ namespace PortableAppStudio.Parser
             {
                 Debugger.Break();
             }
-            _regValues.Add(new Model.RegInfo(key, valueName, regKind, regValue));
+            _regValues.Add(new Model.RegInfo(SearchReplaceList,ParserType, key, valueName, regKind, regValue));
         }
         
         public virtual void Parse(string fileName)

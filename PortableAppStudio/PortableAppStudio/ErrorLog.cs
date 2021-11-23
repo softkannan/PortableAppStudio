@@ -20,12 +20,12 @@ namespace PortableAppStudio
 
         private ToolStripStatusLabel _mainStatusLabel;
         private ToolStripStatusLabel _rightStatusLabel;
-        private Studio _mainForm;
+        private MainStudio _mainForm;
         public delegate void SetLabelCallBack(ToolStripStatusLabel label, string str);
 
         private SetLabelCallBack _labelCallBack;
 
-        public void Initialize(Studio mainForm,ToolStripStatusLabel mainStatusLabel,ToolStripStatusLabel rightStatusLabel)
+        public void Initialize(MainStudio mainForm,ToolStripStatusLabel mainStatusLabel,ToolStripStatusLabel rightStatusLabel)
         {
             _mainForm = mainForm;
             _mainStatusLabel = mainStatusLabel;

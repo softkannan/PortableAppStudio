@@ -147,43 +147,43 @@ namespace PortableAppStudio.Model.AppInfoINI
                     {
                         case "Format":
                             {
-                                var topNode = Format.BuildTreeUI("Format", rootNode);
+                                var topNode = Format.BuildTreeUI("Format", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "Details":
                             {
-                                var topNode = Details.BuildTreeUI("Details", rootNode);
+                                var topNode = Details.BuildTreeUI("Details", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "License":
                             {
-                                var topNode = License.BuildTreeUI("License", rootNode);
+                                var topNode = License.BuildTreeUI("License", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "Version":
                             {
-                                var topNode = Version.BuildTreeUI("Version", rootNode);
+                                var topNode = Version.BuildTreeUI("Version", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "SpecialPaths":
                             {
-                                var topNode = SpecialPaths.BuildTreeUI("SpecialPaths", rootNode);
+                                var topNode = SpecialPaths.BuildTreeUI("SpecialPaths", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "Dependencies":
                             {
-                                var topNode = Dependencies.BuildTreeUI("Dependencies", rootNode);
+                                var topNode = Dependencies.BuildTreeUI("Dependencies", rootNode, item);
                                 topNode.Expand();
                             }
                             break;
                         case "Control":
                             {
-                                var topNode = Control.BuildTreeUI("Control", rootNode);
+                                var topNode = Control.BuildTreeUI("Control", rootNode, item);
                                 topNode.Expand();
                             }
                             break;

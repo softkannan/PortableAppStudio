@@ -50,13 +50,14 @@ namespace PortableAppStudio.Parser
                 RelativePathMap.Add("%Program Files Common%", "%COMMONPROGRAMFILES%");
                 RelativePathMap.Add("%ProgramFilesDir%", "%PROGRAMFILES%");
             }
-
         }
-
 
         public override void Parse(string fileName)
         {
-            Model.InteliSense.Inst.UpdateSearchReplaceList("ThinAppIntellisense.txt");
+            this.ParserType = RegSourceType.ThinApp;
+
+            this.SearchReplaceList = Model.InteliSense.Inst.UpdateSearchReplaceList("ThinAppIntellisense.txt");
+            Model.InteliSense.Inst.UpdateEnvironmentList();
 
             ParseInternal(fileName);
         }
@@ -84,15 +85,15 @@ namespace PortableAppStudio.Parser
                     continue;
                 }
 
-                if (lastKey.Length == 0 && tempVal.IndexOf(KEY_HEADER) == 0) // beginning of key
+                if (lastKey.Length == 0 && tempVal.IndexOf(KEY_HEADER, StringComparison.OrdinalIgnoreCase) == 0) // beginning of key
                 {
                     var keyStartPos = tempVal.IndexOf(' ');
                     var tempKey = tempVal.Substring(keyStartPos);
-                    if (tempKey.IndexOf(HKLM_LONG, StringComparison.InvariantCultureIgnoreCase) == 0)
+                    if (tempKey.IndexOf(HKLM_LONG, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         lastKey = string.Format("{0}{1}", HKLM_SHORT, tempKey.Substring(HKLM_LONG.Length));
                     }
-                    else if (tempKey.IndexOf(HKCU_LONG, StringComparison.InvariantCultureIgnoreCase) == 0)
+                    else if (tempKey.IndexOf(HKCU_LONG, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         lastKey = string.Format("{0}{1}", HKCU_SHORT, tempKey.Substring(HKCU_LONG.Length));
                     }
@@ -104,7 +105,7 @@ namespace PortableAppStudio.Parser
                 else
                 {
                     var localVal = tempVal.Trim();
-                    if (lastValueName == null && localVal.IndexOf(VALUE_HEADER) == 0)
+                    if (lastValueName == null && localVal.IndexOf(VALUE_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         lastValueName = "@";
                         if (localVal.Length > VALUE_HEADER.Length)
@@ -112,7 +113,7 @@ namespace PortableAppStudio.Parser
                             lastValueName = localVal.Substring(VALUE_HEADER.Length);
                         }
                     }
-                    else if (lastValueName == null && localVal.IndexOf(VALUE_HEADER_EX) == 0)
+                    else if (lastValueName == null && localVal.IndexOf(VALUE_HEADER_EX, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         lastValueName = "@";
                         if (localVal.Length > VALUE_HEADER_EX.Length)
@@ -124,7 +125,7 @@ namespace PortableAppStudio.Parser
                     {
                         var regValue = "";
                         var regType = nameof(REG_SZ);
-                        if (localVal.IndexOf(REG_SZ_HEADER) == 0)
+                        if (localVal.IndexOf(REG_SZ_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regType = nameof(REG_SZ);
                             if (localVal.Length > REG_SZ_HEADER.Length)
@@ -136,7 +137,7 @@ namespace PortableAppStudio.Parser
                                 }
                             }
                         }
-                        else if (localVal.IndexOf(REG_DWORD_HEADER) == 0)
+                        else if (localVal.IndexOf(REG_DWORD_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regType = nameof(REG_DWORD);
                             if (localVal.Length > REG_DWORD_HEADER.Length)
@@ -148,7 +149,7 @@ namespace PortableAppStudio.Parser
                                 }
                             }
                         }
-                        else if (localVal.IndexOf(REG_EXPAND_SZ_HEADER) == 0)
+                        else if (localVal.IndexOf(REG_EXPAND_SZ_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regType = nameof(REG_EXPAND_SZ);
                             if (localVal.Length > REG_EXPAND_SZ_HEADER.Length)
@@ -156,7 +157,7 @@ namespace PortableAppStudio.Parser
                                 regValue = localVal.Substring(REG_EXPAND_SZ_HEADER.Length);
                             }
                         }
-                        else if (localVal.IndexOf(REG_MULTI_SZ_HEADER) == 0)
+                        else if (localVal.IndexOf(REG_MULTI_SZ_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regType = nameof(REG_MULTI_SZ);
                             if (localVal.Length > REG_MULTI_SZ_HEADER.Length)
@@ -164,7 +165,7 @@ namespace PortableAppStudio.Parser
                                 regValue = localVal.Substring(REG_MULTI_SZ_HEADER.Length);
                             }
                         }
-                        else if (localVal.IndexOf(REG_QWORD_HEADER) == 0)
+                        else if (localVal.IndexOf(REG_QWORD_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regType = nameof(REG_QWORD);
                             if (localVal.Length > REG_QWORD_HEADER.Length)
@@ -176,7 +177,7 @@ namespace PortableAppStudio.Parser
                                 }
                             }
                         }
-                        else if (localVal.IndexOf(REG_BINARY_HEADER) == 0)
+                        else if (localVal.IndexOf(REG_BINARY_HEADER, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             regType = nameof(REG_BINARY);
                             if (localVal.Length > REG_BINARY_HEADER.Length)

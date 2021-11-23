@@ -20,7 +20,8 @@ namespace PortableAppStudio.Parser
 
         public override void Parse(string fileName)
         {
-           ParseInternal(fileName);
+            this.ParserType = RegSourceType.X_RegShot;
+            ParseInternal(fileName);
         }
 
         private void ParseFiles()

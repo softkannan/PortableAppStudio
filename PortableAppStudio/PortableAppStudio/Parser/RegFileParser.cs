@@ -71,12 +71,12 @@ namespace PortableAppStudio.Parser
             {
                 regValue.Append(tempRegVal.Substring(1));
             }
-            else if (tempRegVal.IndexOf(REG_DWORD) == 0)
+            else if (tempRegVal.IndexOf(REG_DWORD, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 regKind = nameof(REG_DWORD);
                 regValue.Append(tempRegVal.Substring(REG_DWORD.Length));
             }
-            else if (tempRegVal.IndexOf(REG_QWORD) == 0)
+            else if (tempRegVal.IndexOf(REG_QWORD, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 regKind = nameof(REG_QWORD);
                 if (tempRegVal.Length > REG_QWORD.Length)
@@ -84,7 +84,7 @@ namespace PortableAppStudio.Parser
                     regValue.Append(tempRegVal.Substring(REG_QWORD.Length));
                 }
             }
-            else if (tempRegVal.IndexOf(REG_MULTI_SZ) == 0)
+            else if (tempRegVal.IndexOf(REG_MULTI_SZ, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 regKind = nameof(REG_MULTI_SZ);
                 if (tempRegVal.Length > REG_MULTI_SZ.Length)
@@ -92,7 +92,7 @@ namespace PortableAppStudio.Parser
                     regValue.Append(tempRegVal.Substring(REG_MULTI_SZ.Length));
                 }
             }
-            else if (tempRegVal.IndexOf(REG_EXPAND_SZ) == 0)
+            else if (tempRegVal.IndexOf(REG_EXPAND_SZ, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 regKind = nameof(REG_EXPAND_SZ);
                 if (tempRegVal.Length > REG_EXPAND_SZ.Length)
@@ -100,7 +100,7 @@ namespace PortableAppStudio.Parser
                     regValue.Append(tempRegVal.Substring(REG_EXPAND_SZ.Length)); 
                 }
             }
-            else if (tempRegVal.IndexOf(REG_BINARY) == 0)
+            else if (tempRegVal.IndexOf(REG_BINARY, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 regKind = nameof(REG_BINARY);
                 if (tempRegVal.Length > REG_BINARY.Length)
@@ -108,7 +108,7 @@ namespace PortableAppStudio.Parser
                     regValue.Append(tempRegVal.Substring(REG_BINARY.Length));
                 }
             }
-            else if (tempRegVal.IndexOf(REG_CUSTOM) == 0)
+            else if (tempRegVal.IndexOf(REG_CUSTOM, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 match = customKindPattern.Match(tempRegVal);
                 if (match != null && match.Success)
@@ -180,6 +180,8 @@ namespace PortableAppStudio.Parser
 
         public override void Parse(string fileName)
         {
+            this.ParserType = RegSourceType.RegFile;
+
             ParseTextRegFile(fileName);
         }
         /// <summary>
@@ -257,11 +259,11 @@ namespace PortableAppStudio.Parser
                         {
                             continue;
                         }
-                        else if (tempKey.IndexOf(HKLM_LONG, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        else if (tempKey.IndexOf(HKLM_LONG, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             lastKey = string.Format("{0}{1}", HKLM_SHORT, tempKey.Substring(HKLM_LONG.Length));
                         }
-                        else if (tempKey.IndexOf(HKCU_LONG, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        else if (tempKey.IndexOf(HKCU_LONG, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             lastKey = string.Format("{0}{1}", HKCU_SHORT, tempKey.Substring(HKCU_LONG.Length));
                         }

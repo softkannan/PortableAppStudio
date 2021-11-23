@@ -142,6 +142,25 @@ namespace PortableAppStudio.Model.LaunchINI
             return new StandardValuesCollection(list);
         }
     }
+
+    public class GhostscriptStringConverter : StringConverter
+    {
+        public override Boolean GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override Boolean GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            List<String> list = new List<String>();
+            list.Add("");
+            list.Add("none");
+            list.Add("find");
+            list.Add("find32");
+            list.Add("find64");
+            list.Add("require");
+            list.Add("require32");
+            list.Add("require64");
+            return new StandardValuesCollection(list);
+        }
+    }
     //public class OSSelectionTypeConverter : TypeConverter
     //{
     //    //public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)

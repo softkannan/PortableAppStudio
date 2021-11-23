@@ -140,6 +140,13 @@ namespace PortableAppStudio.Model.FolderLayout
                 FileUtility.Inst.CopyAll(srcPath, _otherFolder);
             }
 
+            {
+                var srcPath = PathManager.Init.GetResourcePath("PortableApp");
+                FileUtility.Inst.CopyTopLevel(srcPath, folderName);
+            }
+
+
+
             App.LoadFolder(_appFolder, RootFolder);
 
             Data.LoadFolder(_dataFolder, RootFolder);
