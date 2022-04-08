@@ -58,6 +58,7 @@ namespace PortableAppStudio
         private ToolStripItem _pasteDestFileWriteNItem;
 
         ContextMenuStrip _destFileWriteNItemContextMenu = new ContextMenuStrip();
+        private ToolStripItem _openDestFileWriteNItem;
         private ToolStripItem _editDestFileWriteNItem;
         private ToolStripItem _removeDestFileWriteNItem;
         private ToolStripItem _duplicateDestFileWriteNItem;
@@ -125,6 +126,8 @@ namespace PortableAppStudio
             _pasteDestFileWriteNItem.Click += PasteDestFileWriteNItem_Click;
 
             _destFileWriteNItemContextMenu.Items.Clear();
+            _openDestFileWriteNItem = _destFileWriteNItemContextMenu.Items.Add("Open");
+            _openDestFileWriteNItem.Click += OpenDestFileWriteNItem_Click;
             _editDestFileWriteNItem = _destFileWriteNItemContextMenu.Items.Add("Edit");
             _editDestFileWriteNItem.Click += EditDestFileWriteNItem_Click;
             _duplicateDestFileWriteNItem = _destFileWriteNItemContextMenu.Items.Add("Duplicate");
@@ -167,6 +170,7 @@ namespace PortableAppStudio
             _addDestFileWriteNItem.Tag = null;
             _pasteDestFileWriteNItem.Tag = null;
 
+            _openDestFileWriteNItem.Tag = null;
             _editDestFileWriteNItem.Tag = null;
             _removeDestFileWriteNItem.Tag = null;
             _duplicateDestFileWriteNItem.Tag = null;
@@ -220,6 +224,7 @@ namespace PortableAppStudio
             _addDestFileWriteNItem.Tag = null;
             _pasteDestFileWriteNItem.Tag = null;
 
+            _openDestFileWriteNItem.Tag = null;
             _editDestFileWriteNItem.Tag = null;
             _removeDestFileWriteNItem.Tag = null;
             _duplicateDestFileWriteNItem.Tag = null;
@@ -262,6 +267,7 @@ namespace PortableAppStudio
             _addDestFileWriteNItem.Tag = null;
             _pasteDestFileWriteNItem.Tag = null;
 
+            _openDestFileWriteNItem.Tag = null;
             _editDestFileWriteNItem.Tag = null;
             _removeDestFileWriteNItem.Tag = null;
             _duplicateDestFileWriteNItem.Tag = null;
@@ -318,6 +324,7 @@ namespace PortableAppStudio
                         else if (firstNode.IsDescendantOf(LaunchINI.FileWriteN_Tag))
                         {
                             _editDestFileWriteNItem.Tag = firstNode;
+                            _openDestFileWriteNItem.Tag = firstNode;
 
                             _destFileWriteNItemContextMenu.Show(selectedTree, x, y);
                         }
@@ -403,7 +410,7 @@ namespace PortableAppStudio
                             var firstPart = firstNode.Text.Substring(0, equalIndex);
                             var regFileName = string.Format("\"{0}\\Data\\settings\\{1}.reg\"", Utility.UserSettings.Inst.PortableAppPath, firstPart);
                             System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                            launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath;
+                            launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath.Path;
                             launchProc.StartInfo.Arguments = regFileName;
                             launchProc.StartInfo.UseShellExecute = true;
                             launchProc.Start();
@@ -435,7 +442,7 @@ namespace PortableAppStudio
                                 var srcRegFile = string.Format("\"{0}\\Data\\settings\\{1}.reg\"", Utility.UserSettings.Inst.PortableAppPath, firstPart);
                                 var destRegFile = string.Format("\"{0}\\App\\DefaultData\\settings\\{1}.reg\"", Utility.UserSettings.Inst.PortableAppPath, firstPart);
                                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath;
+                                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath.Path;
                                 launchProc.StartInfo.Arguments = string.Format("{0} {1}", srcRegFile, destRegFile);
                                 launchProc.StartInfo.UseShellExecute = true;
                                 launchProc.Start();
@@ -457,7 +464,7 @@ namespace PortableAppStudio
                                 var regFile1 = string.Format("\"{0}\\Data\\settings\\{1}.reg\"", Utility.UserSettings.Inst.PortableAppPath, firstPart1);
                                 var regFile2 = string.Format("\"{0}\\Data\\settings\\{1}.reg\"", Utility.UserSettings.Inst.PortableAppPath, firstPart2);
                                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath;
+                                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath.Path;
                                 launchProc.StartInfo.Arguments = string.Format("{0} {1}", regFile1, regFile2);
                                 launchProc.StartInfo.UseShellExecute = true;
                                 launchProc.Start();
@@ -503,12 +510,12 @@ namespace PortableAppStudio
                             }
                             var exePath = UserSettings.Inst.RegJumpPath;
                             var args = string.Format("\"{0}\"", regKey);
-                            if (exePath.EndsWith("RegScanner.exe", StringComparison.OrdinalIgnoreCase))
+                            if (exePath.Path.EndsWith("RegScanner.exe", StringComparison.OrdinalIgnoreCase))
                             {
                                 args = string.Format("/regedit \"{0}\"", regKey);
                             }
                             System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                            launchProc.StartInfo.FileName = exePath;
+                            launchProc.StartInfo.FileName = exePath.Path;
                             launchProc.StartInfo.Verb = "runas";
                             launchProc.StartInfo.Arguments = args;
                             launchProc.StartInfo.UseShellExecute = true;
@@ -916,6 +923,28 @@ namespace PortableAppStudio
             }
         }
 
+        private void OpenDestFileWriteNItem_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tempItem = sender as ToolStripItem;
+            if (tempItem != null && tempItem.Tag is TreeNode selectedNode)
+            {
+                FileWriteNForm editForm = GetEditForm(selectedNode.Parent.Text) as FileWriteNForm;
+                var fileWriteSection = selectedNode.Tag as Model.LaunchINI.FileWriteNSection;
+
+                var selectionPath = Environment.ExpandEnvironmentVariables(fileWriteSection.File);
+                selectionPath = selectionPath.Replace("%PAL:AppDir%", string.Format("{0}\\App", UserSettings.Inst.PortableAppPath));
+                selectionPath = selectionPath.Replace("%PAL:DataDir%", string.Format("{0}\\Data", UserSettings.Inst.PortableAppPath));
+
+                if (File.Exists(selectionPath))
+                {
+                    EditInNotepad(selectionPath);
+                }
+                else if (Directory.Exists(selectionPath))
+                {
+                    OpenFolder(selectionPath);
+                }
+            }
+        }
         private void EditDestFileWriteNItem_Click(object sender, EventArgs e)
         {
             ToolStripItem tempItem = sender as ToolStripItem;

@@ -1,0 +1,4 @@
+﻿HKLM_Software=HKLM\Software
+HKCU_Software=HKCU\Software
+HKLM_Environment=HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+HKCU_Environment=HKCU\Environment

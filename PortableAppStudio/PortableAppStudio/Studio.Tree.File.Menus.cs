@@ -26,6 +26,7 @@ namespace PortableAppStudio
         private ToolStripItem _addDestFileINITopItem;
         private ToolStripItem _pastDestFileINITopItem;
         private ToolStripItem _expandAllDestFileINITopItem;
+        private ToolStripMenuItem _environRedirDestFileINITopItem;
 
         ContextMenuStrip _destFileINIContextMenu = new ContextMenuStrip();
         private ToolStripItem _duplicateDestFileINIItem;
@@ -39,6 +40,7 @@ namespace PortableAppStudio
         private ToolStripItem _addDestFileTopItem;
         private ToolStripItem _pasteDestFileTopItem;
         private ToolStripItem _expandAllDestFileTopItem;
+        private ToolStripMenuItem _environRedirDestFileTopItem;
 
 
         ContextMenuStrip _destFileContextMenu = new ContextMenuStrip();
@@ -66,6 +68,14 @@ namespace PortableAppStudio
             _pasteDestFileTopItem.Click += PasteDestFileTopItem_Click;
             _expandAllDestFileTopItem = _destFileTopContextMenu.Items.Add("ExpandAll");
             _expandAllDestFileTopItem.Click += ExpandNodes_Click;
+            _environRedirDestFileTopItem = new ToolStripMenuItem("EnvironmentRedir");
+            foreach (var item in PathManager.Init.PredefEnvironments)
+            {
+                var tempItem = _environRedirDestFileTopItem.DropDownItems.Add(item.Key);
+                tempItem.Tag = (item.Key, item.Value);
+                tempItem.Click += EnvironRedirDestFileTopItem_Click;
+            }
+            _destFileTopContextMenu.Items.Add(_environRedirDestFileTopItem);
 
             _destFileContextMenu.Items.Clear();
             _openDestFileItem = _destFileContextMenu.Items.Add("Open");
@@ -91,6 +101,14 @@ namespace PortableAppStudio
             _pastDestFileINITopItem.Click += PasteDestFileTopItem_Click;
             _expandAllDestFileINITopItem = _destFileINITopContextMenu.Items.Add("ExpandAll");
             _expandAllDestFileINITopItem.Click += ExpandNodes_Click;
+            _environRedirDestFileINITopItem = new ToolStripMenuItem("EnvironmentRedir");
+            foreach (var item in PathManager.Init.PredefEnvironments)
+            {
+                var tempItem = _environRedirDestFileINITopItem.DropDownItems.Add(item.Key);
+                tempItem.Tag = (item.Key, item.Value);
+                tempItem.Click += EnvironRedirFileINITopItem_Click;
+            }
+            _destFileINITopContextMenu.Items.Add(_environRedirDestFileINITopItem);
 
             _destFileINIContextMenu.Items.Clear();
             _openDestFileINIItem = _destFileINIContextMenu.Items.Add("Open");
@@ -124,6 +142,8 @@ namespace PortableAppStudio
             _addDestFileTopItem.Tag = null;
             _pasteDestFileTopItem.Tag = null;
             _expandAllDestFileTopItem.Tag = null;
+            _environRedirDestFileTopItem.Tag = null;
+            _environRedirDestFileTopItem.Visible = false;
 
             _removeDestFileItem.Tag = null;
             _expandAllDestFileItem.Tag = null;
@@ -136,6 +156,8 @@ namespace PortableAppStudio
             _addDestFileINITopItem.Tag = null;
             _pastDestFileINITopItem.Tag = null;
             _expandAllDestFileTopItem.Tag = null;
+            _environRedirDestFileINITopItem.Tag = null;
+            _environRedirDestFileINITopItem.Visible = false;
 
             _duplicateDestFileINIItem.Tag = null;
             _editDestFileINIItem.Tag = null;
@@ -162,6 +184,8 @@ namespace PortableAppStudio
                     {
                         _addDestFileTopItem.Tag = firstNode;
                         _pasteDestFileTopItem.Tag = firstNode;
+                        _environRedirDestFileTopItem.Tag = firstNode;
+                        _environRedirDestFileTopItem.Visible = firstNode.Text == "Data";
                         _destFileTopContextMenu.Show(selectedTree, x, y);
                     }
                     break;
@@ -173,8 +197,10 @@ namespace PortableAppStudio
                 case LaunchINI.Environment_Tag:
                 case LaunchINI.PrefixPATHEnv_Tag:
                     {
+                        _environRedirDestFileINITopItem.Visible = firstNode.Text == LaunchINI.Environment_Tag;
                         _addDestFileINITopItem.Tag = firstNode;
                         _pastDestFileINITopItem.Tag = firstNode;
+                        _environRedirDestFileINITopItem.Tag = firstNode;
                         _destFileINITopContextMenu.Show(selectedTree, x, y);
                     }
                     break;
@@ -293,6 +319,7 @@ namespace PortableAppStudio
                     var valuePair = firstNode.Tag as Model.IINIKeyValuePair;
                     var fileInfo = firstNode.Tag as Model.FileInfo;
                     var folderInfo = firstNode.Tag as Model.FolderInfo;
+                    TreeNode parentNode = firstNode.Parent;
                     if (valuePair != null)
                     {
                         string selectionPath = "";
@@ -302,7 +329,20 @@ namespace PortableAppStudio
                         }
                         else
                         {
-                            selectionPath = string.Format("{0}\\Data\\{1}", UserSettings.Inst.PortableAppPath, valuePair.IniKey);
+                            if (parentNode?.Text == LaunchINI.Environment_Tag)
+                            {
+                                selectionPath = Environment.ExpandEnvironmentVariables(valuePair.IniValue);
+                                selectionPath = selectionPath.Replace("%PAL:AppDir%", string.Format("{0}\\App", UserSettings.Inst.PortableAppPath));
+                                selectionPath = selectionPath.Replace("%PAL:DataDir%", string.Format("{0}\\Data", UserSettings.Inst.PortableAppPath));
+                            }
+                            else
+                            {
+                                selectionPath = string.Format("{0}\\Data\\{1}", UserSettings.Inst.PortableAppPath, valuePair.IniKey);
+                                if (!(File.Exists(selectionPath) || Directory.Exists(selectionPath)))
+                                {
+                                    selectionPath = string.Format("{0}\\App\\{1}", UserSettings.Inst.PortableAppPath, valuePair.IniKey);
+                                }
+                            }
                         }
                         if (File.Exists(selectionPath))
                         {
@@ -521,7 +561,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager.Path;
                 launchProc.StartInfo.Arguments = folderPath;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.Start();
@@ -535,8 +575,8 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath;
-                launchProc.StartInfo.Arguments = filePath;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath.Path;
+                launchProc.StartInfo.Arguments = string.Format("\"{0}\"",filePath);
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.Start();
             }
@@ -576,7 +616,6 @@ namespace PortableAppStudio
                     {
                         // Get the DataObject.
                         IDataObject data_object = Clipboard.GetDataObject();
-
                         if (data_object != null)
                         {
                             var fileDropData = data_object.GetData(DataFormats.FileDrop, true) as string[];
@@ -624,7 +663,8 @@ namespace PortableAppStudio
                                             if (Directory.Exists(clipListData[index]))
                                             {
                                                 string folderName = clipListData[index].ToDiskRelativePath();
-                                                firstNode.Nodes.Add(string.Format("-={0}", folderName));
+                                                var nodeIdx = firstNode.Nodes.Count + 1;
+                                                firstNode.Nodes.Add(string.Format("Path{0}={1}", nodeIdx, folderName));
                                             }
                                         }
                                     }
@@ -638,11 +678,40 @@ namespace PortableAppStudio
                                             }
                                             else if (clipListData[index].IndexOf('%') == 0)
                                             {
-                                                firstNode.Nodes.Add(string.Format("-={0}", clipListData[index]));
+                                                var nodeIdx = firstNode.Nodes.Count + 1;
+                                                firstNode.Nodes.Add(string.Format("Path{0}={1}", nodeIdx, clipListData[index]));
+                                            }
+                                            else if(clipListData[index].IndexOf("Environment") != -1)
+                                            {
+                                                var clipTag = (Action: "Copy", SelectedItems: new List<TreeNode>());
+                                                var isDataFromSourceTree = false;
+                                                if (ClipBoardExInfo.Inst.Tag != null && ClipBoardExInfo.Inst.Tag is ValueTuple<string, List<TreeNode>>)
+                                                {
+                                                    clipTag = ((string Action, List<TreeNode> SelectedItems))ClipBoardExInfo.Inst.Tag;
+                                                    ClipBoardExInfo.Inst.Tag = null;
+                                                    isDataFromSourceTree = true;
+                                                }
+
+                                                if (isDataFromSourceTree)
+                                                {
+                                                    if (clipTag.Action == "Copy")
+                                                    {
+                                                        for (int indexrv = 0; indexrv < clipTag.SelectedItems.Count; indexrv++)
+                                                        {
+                                                            var srcNode = clipTag.SelectedItems[indexrv];
+                                                            var regInfo = srcNode.Tag as Model.RegInfo;
+                                                            if (regInfo != null)
+                                                            {
+                                                                firstNode.AppendINI(regInfo.ValueName, regInfo.RegStrValue);
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                             else
                                             {
-                                                string dirPair = clipListData[index].ToDataDirectoryPair();
+                                                var nodeIdx = firstNode.Nodes.Count + 1;
+                                                string dirPair = clipListData[index].ToDataDirectoryPair(nodeIdx);
                                                 if (!string.IsNullOrWhiteSpace(dirPair))
                                                 {
                                                     firstNode.Nodes.Add(dirPair);
@@ -890,6 +959,48 @@ namespace PortableAppStudio
             if (!string.IsNullOrWhiteSpace(clipTxt))
             {
                 Clipboard.SetText(clipTxt);
+            }
+        }
+
+        private void EnvironRedirFileINITopItem_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tempItem = sender as ToolStripItem;
+            if (tempItem != null)
+            {
+                var parent = tempItem.OwnerItem;
+                var firstNode = parent != null ? parent.Tag as TreeNode : null;
+                if (firstNode == null)
+                {
+                    MessageBox.Show("Add not supported", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    var (iniKey, iniValue) = (ValueTuple<string, string>)tempItem.Tag;
+                    firstNode.AppendINI(iniKey, iniValue);
+                }
+            }
+        }
+
+        private void EnvironRedirDestFileTopItem_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tempItem = sender as ToolStripItem;
+            if (tempItem != null)
+            {
+                var parent = tempItem.OwnerItem;
+                var firstNode = parent != null ? parent.Tag as TreeNode : null;
+                if (firstNode == null)
+                {
+                    MessageBox.Show("Add not supported", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    var (iniKey, iniValue) = (ValueTuple<string, string>)tempItem.Tag;
+                    int startPos = iniValue.IndexOf('\\');
+                    if (startPos != -1)
+                    {
+                        firstNode.Nodes.Add(iniValue.Substring(startPos + 1));
+                    }
+                }
             }
         }
 

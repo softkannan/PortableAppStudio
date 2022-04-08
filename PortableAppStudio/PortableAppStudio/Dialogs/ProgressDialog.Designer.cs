@@ -37,17 +37,22 @@
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
-            this.infoLabel.Location = new System.Drawing.Point(12, 23);
+            this.infoLabel.Location = new System.Drawing.Point(16, 28);
+            this.infoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(101, 13);
+            this.infoLabel.Size = new System.Drawing.Size(122, 16);
             this.infoLabel.TabIndex = 0;
             this.infoLabel.Text = "Work In Progress ...";
             // 
             // mainProgressBar
             // 
-            this.mainProgressBar.Location = new System.Drawing.Point(12, 52);
+            this.mainProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainProgressBar.Location = new System.Drawing.Point(16, 64);
+            this.mainProgressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainProgressBar.Name = "mainProgressBar";
-            this.mainProgressBar.Size = new System.Drawing.Size(527, 30);
+            this.mainProgressBar.Size = new System.Drawing.Size(703, 37);
             this.mainProgressBar.Step = 5;
             this.mainProgressBar.TabIndex = 1;
             // 
@@ -57,13 +62,14 @@
             // 
             // ProgressDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 119);
+            this.ClientSize = new System.Drawing.Size(735, 146);
             this.ControlBox = false;
             this.Controls.Add(this.mainProgressBar);
             this.Controls.Add(this.infoLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ProgressDialog";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

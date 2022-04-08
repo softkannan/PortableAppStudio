@@ -28,7 +28,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.Start();
             }
@@ -42,7 +42,7 @@ namespace PortableAppStudio
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
 
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.LaunchGeneratorPath;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.LaunchGeneratorPath.Path;
                 launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Utility.UserSettings.Inst.PortableAppPath);
                 launchProc.StartInfo.UseShellExecute = true;
 

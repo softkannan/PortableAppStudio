@@ -36,25 +36,25 @@ namespace PortableAppStudio
         public bool ShowYesNo(string format, params object[] args)
         {
             string message = string.Format(format, args);
-            return MessageBox.Show(message, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+            return MessageBox.Show(new Form { TopMost = true },message, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
         }
 
         public void LogError(string format,params object[] args)
         {
             string message = string.Format(format, args);
-            MessageBox.Show(message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            MessageBox.Show(new Form { TopMost = true },message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
 
         public void ShowError(string format, params object[] args)
         {
             string message = string.Format(format, args);
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(new Form { TopMost = true },message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public void ShowInfo(string format, params object[] args)
         {
             string message = string.Format(format, args);
-            MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(new Form { TopMost = true },message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void WriteStatus(string format, params object[] args)

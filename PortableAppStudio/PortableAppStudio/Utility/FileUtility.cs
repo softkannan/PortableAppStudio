@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+using PortableAppStudio.Utility.FileUtil;
 
 namespace PortableAppStudio.Utility
 {
@@ -136,19 +137,38 @@ namespace PortableAppStudio.Utility
             }
         }
 
-        public void CopyAllFix(string sourcePath, string destinationPath)
+        public void CopyAllFix2(string sourcePath, string destinationPath)
         {
-            string[] directories = System.IO.Directory.GetDirectories(sourcePath, "*.*", SearchOption.AllDirectories);
+            var directories = Directory.GetDirectories(sourcePath, "*.*", SearchOption.AllDirectories);
             foreach (var srcDirPath in directories)
             {
                 string tempDestPath = Uri.UnescapeDataString(srcDirPath.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
                 Directory.CreateDirectory(tempDestPath);
             }
-            string[] files = System.IO.Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
-            foreach(var srcFilePath in files)
+            var files = Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
+            foreach (var srcFilePath in files)
             {
                 string tempDestPath = Uri.UnescapeDataString(srcFilePath.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
                 File.Copy(srcFilePath, tempDestPath, true);
+            }
+        }
+
+        public void CopyAllFix(string sourcePath, string destinationPath)
+        {
+            var directories = DirectoryInfoEx.GetDirectories(sourcePath, "*.*", SearchOption.AllDirectories);
+            foreach (var srcDirPath in directories)
+            {
+                string tempDestPath = Uri.UnescapeDataString(srcDirPath.FullName.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
+                if (DirectoryInfoEx.CreateDirectory(tempDestPath, out string errorMessage) != 0)
+                {
+                    ErrorLog.Inst.LogError(errorMessage);
+                }
+            }
+            var files = DirectoryInfoEx.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
+            foreach (var srcFilePath in files)
+            {
+                string tempDestPath = Uri.UnescapeDataString(srcFilePath.FullName.Replace(sourcePath, destinationPath, StringComparison.OrdinalIgnoreCase));
+                File.Copy(srcFilePath.FullName, tempDestPath, true);
             }
         }
 

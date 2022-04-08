@@ -110,6 +110,26 @@ namespace PortableAppStudio
             form.ShowDialog(this);
         }
 
+        private void RegLaunchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var menuItem = sender as ToolStripMenuItem;
+                if (sender != null)
+                {
+                    string cmdStr = menuItem.Tag as string;
+                    System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.RegJump.Path;
+                    launchProc.StartInfo.Verb = "runas";
+                    launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Environment.ExpandEnvironmentVariables(cmdStr));
+                    launchProc.StartInfo.UseShellExecute = true;
+                    launchProc.Start();
+                }
+            }
+            catch (Exception)
+            { }
+        }
+
         private void FolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -117,9 +137,10 @@ namespace PortableAppStudio
                 var menuItem = sender as ToolStripMenuItem;
                 if (sender != null)
                 {
+                    string cmdStr = menuItem.Tag as string;
                     System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager;
-                    launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Environment.ExpandEnvironmentVariables(menuItem.Text));
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager.Path;
+                    launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Environment.ExpandEnvironmentVariables(cmdStr));
                     launchProc.StartInfo.UseShellExecute = true;
                     launchProc.Start();
                 }
@@ -133,7 +154,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.WhatChanged;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.WhatChanged.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -147,7 +168,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ResourceHacker;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ResourceHacker.Path;
                 if (Directory.Exists(Utility.UserSettings.Inst.PortableAppPath))
                 {
                     var exeAppPath = string.Format("{0}\\App\\{1}", Utility.UserSettings.Inst.PortableAppPath, PortableApp.Inst.App.Launch.Launch.ProgramExecutable);
@@ -165,7 +186,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -179,7 +200,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcExp;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcExp.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -193,7 +214,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.RegistryChangesView;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.RegistryChangesView.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -207,7 +228,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.RegFromApp;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.RegFromApp.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -221,7 +242,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.IconsExtract;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.IconsExtract.Path;
                 if (Directory.Exists(Utility.UserSettings.Inst.PortableAppPath))
                 {
                     var exeAppPath = string.Format("{0}\\App\\*.*", Utility.UserSettings.Inst.PortableAppPath, PortableApp.Inst.App.Launch.Launch.ProgramExecutable);
@@ -240,7 +261,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ExeInfo;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ExeInfo.Path;
                 if (Directory.Exists(Utility.UserSettings.Inst.PortableAppPath))
                 {
                     var exeAppPath = string.Format("{0}\\App\\{1}", Utility.UserSettings.Inst.PortableAppPath, PortableApp.Inst.App.Launch.Launch.ProgramExecutable);
@@ -259,7 +280,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.SmartSniff;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.SmartSniff.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -273,7 +294,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileActivityWatch;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileActivityWatch.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();
@@ -287,7 +308,7 @@ namespace PortableAppStudio
             try
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.Tcpview;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.Tcpview.Path;
                 launchProc.StartInfo.UseShellExecute = true;
                 launchProc.StartInfo.Verb = "runas";
                 launchProc.Start();

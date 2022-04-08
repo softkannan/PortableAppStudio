@@ -119,7 +119,9 @@ namespace PortableAppStudio
             runWithProcMonToolStripMenuItem.Click += RunWithProcMonToolStripMenuItem_Click;
             runWithRegMonToolStripMenuItem.Click += RunWithRegMonToolStripMenuItem_Click;
             runWithTracerToolStripMenuItem.Click += RunWithTracerToolStripMenuItem_Click;
-            mergeCustomNSIToolStripButton.Click += MergeCustomNSIToolStripButton_Click;
+            mergeCustomNSIToolStripButton.ButtonClick += MergeCustomNSIToolStripButton_Click;
+            compareToolStripMenuItem.Click += MergeCustomNSIToolStripButton_Click;
+            forceMergeToolStripMenuItem.Click += ForceMergeToolStripMenuItem_Click;
             viewDebugLogToolStripButton.Click += ViewDebugLogToolStripButton_Click;
             editToolStripButton.Click += EditToolStripButton_Click;
 
@@ -140,18 +142,25 @@ namespace PortableAppStudio
             exeInfoToolStripMenuItem.Click += ExeInfoToolStripMenuItem_Click;
             iconsExtractToolStripMenuItem.Click += IconsExtractToolStripMenuItem_Click;
 
-            aPPDATAToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            cOMMONPROGRAMFILESx86ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            commonProgramW6432ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            pROGRAMFILESX86ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            programW6432ToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            tEMPToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            aPPDATALocalLowToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            lOCALAPPDATAToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            pROGRAMDATAToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            uSERPROFILEToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            systemRootToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
-            pUBLICToolStripMenuItem.Click += FolderToolStripMenuItem_Click;
+            foreach (var item in PathManager.Init.RegistryQuickLaunch)
+            {
+                var toolItem = quickLaunchRegToolStripDropDownButton.DropDownItems.Add(item.Key);
+                toolItem.Tag = item.Value;
+                toolItem.Click += RegLaunchToolStripMenuItem_Click;
+            }
+
+            foreach (var item in PathManager.Init.FileQuickLaunch)
+            {
+                var toolItem = foldersToolStripSplitButton.DropDownItems.Add(item.Key);
+                toolItem.Tag = item.Value;
+                toolItem.Click += FolderToolStripMenuItem_Click;
+            }
+
+            crossPlatformTemplateToolStripMenuItem.Click += CrossPlatformTemplateToolStripMenuItem_Click;
+            opensourceTemplateToolStripMenuItem.Click += OpensourceTemplateToolStripMenuItem_Click;
+            qTFrameworkTemplateToolStripMenuItem.Click += QTFrameworkTemplateToolStripMenuItem_Click;
+            pythonApplicationTemplateToolStripMenuItem.Click += PythonApplicationTemplateToolStripMenuItem_Click;
+            jAVAApplicationTemplateToolStripMenuItem.Click += JAVAApplicationTemplateToolStripMenuItem_Click;
 
             #endregion
 
@@ -165,6 +174,7 @@ namespace PortableAppStudio
             appInfoEditor.PropertyValueChanged += PortableApp.Inst.OnValueChanged;
             launchEditor.PropertyValueChanged += PortableApp.Inst.OnValueChanged;
         }
+
 
         private void Studio_Load(object sender, EventArgs e)
         {
@@ -362,7 +372,7 @@ namespace PortableAppStudio
                     {
                         Clipboard.SetText(exeFileName);
                         System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                        launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon;
+                        launchProc.StartInfo.FileName = Utility.UserSettings.Inst.ProcMon.Path;
                         launchProc.StartInfo.Arguments = string.Format("/LoadConfig \"{0}\\ProcMonConfig.pmc\"", PathManager.Init.GetResourcePath("Other"));
                         launchProc.StartInfo.UseShellExecute = true;
                         launchProc.Start();
@@ -386,7 +396,7 @@ namespace PortableAppStudio
             {
                 System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
 
-                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath;
+                launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath.Path;
                 launchProc.StartInfo.Arguments = string.Format("\"{0}\\Data\\debug.log\"", Utility.UserSettings.Inst.PortableAppPath);
                 launchProc.StartInfo.UseShellExecute = true;
 
@@ -396,7 +406,17 @@ namespace PortableAppStudio
             { }
         }
 
+        private void ForceMergeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MergeFile(mergeListtoolStripComboBox.SelectedItem as string, true);
+        }
+
         private void MergeCustomNSIToolStripButton_Click(object sender, EventArgs e)
+        {
+            MergeFile(mergeListtoolStripComboBox.SelectedItem as string, false);
+        }
+
+        private void MergeFile(string action, bool forceMerge)
         {
             string compareItem1 = string.Empty;
             string compareItem2 = string.Empty;
@@ -405,18 +425,24 @@ namespace PortableAppStudio
                 //Custom.nsh
                 //Launch.ini
                 //AppInfo Folder
-                if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "Custom.nsh", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(action, "Custom.nsh", StringComparison.OrdinalIgnoreCase))
                 {
                     var resourcePortableApp = PathManager.Init.GetResourcePath("PortableApp");
                     compareItem1 = string.Format("{0}\\App\\AppInfo\\Launcher\\Custom.nsh", resourcePortableApp);
                     compareItem2 = string.Format("{0}\\App\\AppInfo\\Launcher\\Custom.nsh", Utility.UserSettings.Inst.PortableAppPath);
+
+                    if(forceMerge && 
+                        MessageBox.Show(string.Format("Do you want to overwrite the \"{0}\" file.",compareItem2),"Warning",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        File.Copy(compareItem1, compareItem2, true);
+                    }
                 }
-                else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "Launch.ini", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(action, "Launch.ini", StringComparison.OrdinalIgnoreCase))
                 {
                     var launchIniPath = Directory.GetFiles(string.Format("{0}\\App\\AppInfo\\Launcher", Utility.UserSettings.Inst.PortableAppPath), "*.ini", SearchOption.TopDirectoryOnly);
                     if (launchIniPath != null && launchIniPath.Length > 0)
                     {
-                        compareItem1 = launchIniPath.FirstOrDefault();
+                        compareItem2 = launchIniPath.FirstOrDefault();
 
                         using (var opnDlg = new OpenFileDialog())
                         {
@@ -427,12 +453,18 @@ namespace PortableAppStudio
                             opnDlg.Filter = "Launch INI (*.ini)|*.ini";
                             if (opnDlg.ShowDialog() == DialogResult.OK)
                             {
-                                compareItem2 = opnDlg.FileName;
+                                compareItem1 = opnDlg.FileName;
                             }
+                        }
+
+                        if (forceMerge &&
+                        MessageBox.Show(string.Format("Do you want to overwrite the \"{0}\" file.", compareItem2), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            File.Copy(compareItem1, compareItem2, true);
                         }
                     }
                 }
-                else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "AppInfo Folder", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(action, "AppInfo Folder", StringComparison.OrdinalIgnoreCase))
                 {
                     compareItem1 = Utility.UserSettings.Inst.PortableAppPath;
                     using (var fbd = new FolderBrowserDialog())
@@ -447,13 +479,13 @@ namespace PortableAppStudio
                 if ((!string.IsNullOrWhiteSpace(compareItem1)) && (!string.IsNullOrWhiteSpace(compareItem2)))
                 {
                     System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath;
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.DiffToolPath.Path;
                     launchProc.StartInfo.Arguments = string.Format("\"{0}\" \"{1}\"", compareItem1, compareItem2);
                     launchProc.StartInfo.UseShellExecute = true;
                     launchProc.Start();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             { }
         }
 
@@ -465,7 +497,7 @@ namespace PortableAppStudio
                 {
                     var customNSHPath = string.Format("{0}\\App\\AppInfo\\Launcher\\Custom.nsh", Utility.UserSettings.Inst.PortableAppPath);
                     System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NSISEditorPath;
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NSISEditorPath.Path;
                     launchProc.StartInfo.Arguments = string.Format("\"{0}\"", customNSHPath);
                     launchProc.StartInfo.UseShellExecute = true;
                     launchProc.Start();
@@ -477,7 +509,7 @@ namespace PortableAppStudio
                     {
                         var customNSHPath = launchIniPath.FirstOrDefault();
                         System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                        launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath;
+                        launchProc.StartInfo.FileName = Utility.UserSettings.Inst.NotepadPath.Path;
                         launchProc.StartInfo.Arguments = string.Format("\"{0}\"", customNSHPath);
                         launchProc.StartInfo.UseShellExecute = true;
                         launchProc.Start();
@@ -486,7 +518,7 @@ namespace PortableAppStudio
                 else if (string.Equals(mergeListtoolStripComboBox.SelectedItem as string, "AppInfo Folder", StringComparison.OrdinalIgnoreCase))
                 {
                     System.Diagnostics.Process launchProc = new System.Diagnostics.Process();
-                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager;
+                    launchProc.StartInfo.FileName = Utility.UserSettings.Inst.FileManager.Path;
                     launchProc.StartInfo.Arguments = string.Format("\"{0}\"", Utility.UserSettings.Inst.PortableAppPath);
                     launchProc.StartInfo.UseShellExecute = true;
                     launchProc.Start();
@@ -495,5 +527,7 @@ namespace PortableAppStudio
             catch(Exception)
             { }
         }
+
+        
     }
 }

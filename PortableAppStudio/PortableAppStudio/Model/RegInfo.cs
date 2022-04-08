@@ -36,6 +36,14 @@ namespace PortableAppStudio.Model
             }
         }
 
+        public string RegStrValue
+        {
+            get
+            {
+                return GetStrValue();
+            }
+        }
+
         public void SearchAndReplace(string search,string replace)
         {
             if(Kind == "REG_SZ")
@@ -43,6 +51,34 @@ namespace PortableAppStudio.Model
                 string tempVal = Value;
                 Value = tempVal.Replace(search, replace,StringComparison.OrdinalIgnoreCase);
             }
+        }
+
+        private string GetStrValue()
+        {
+            string regValue = "";
+            switch (Kind)
+            {
+                case "REG_EXPAND_SZ":
+                    regValue = Value.HexToStr();
+                    break;
+                case "REG_SZ":
+                    regValue = Value;
+                    break;
+                case "REG_DWORD":
+                    uint dwordValue = 0;
+                    uint.TryParse(Value, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out dwordValue);
+                    regValue = string.Format("{0}", dwordValue);
+                    break;
+                case "REG_QWORD":
+                case "REG_BINARY":
+                    regValue = string.Format("{0}", Value.Replace(",", ""));
+                    break;
+                default:
+                    regValue = "";
+                    break;
+            }
+
+            return regValue;
         }
 
         private string GetValue()

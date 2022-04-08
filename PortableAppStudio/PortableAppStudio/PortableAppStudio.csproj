@@ -356,6 +356,7 @@
     <Compile Include="Studio.Tree.Files.DragDrop.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utility\ArrayExt.cs" />
     <Compile Include="Utility\ClipBoardExInfo.cs" />
     <Compile Include="Utility\ControlExtensions.cs" />
     <Compile Include="Utility\DescendingComparer.cs" />
@@ -363,6 +364,10 @@
     <Compile Include="Utility\FolderBrowserDialogExtensionMethods.cs" />
     <Compile Include="Utility\IconFactory.cs" />
     <Compile Include="Utility\IconHelper.cs" />
+    <Compile Include="Utility\FileUtil\DirectoryInfoEx.cs" />
+    <Compile Include="Utility\FileUtil\FileInfoEx.cs" />
+    <Compile Include="Utility\FileUtil\FileAttribEx.cs" />
+    <Compile Include="Utility\FileUtil\NativeMethods.cs" />
     <Compile Include="Utility\ProcessExtensions.cs" />
     <Compile Include="Utility\MiscExtensions.cs" />
     <Compile Include="Utility\PathManager.cs" />
@@ -382,6 +387,7 @@
     <Compile Include="TreeModel\Utility.cs" />
     <Compile Include="Utility\FileUtility.cs" />
     <Compile Include="Utility\TaskUtility.cs" />
+    <Compile Include="Utility\Tool.cs" />
     <Compile Include="Utility\TreeViewExtensionMethods.cs" />
     <Compile Include="Utility\TypeInfoExtensionMethods.cs" />
     <Compile Include="Utility\TypeLib.cs" />
@@ -595,6 +601,12 @@
     <None Include="Resource\PortableApp\App\AppInfo\Launcher\Custom.nsh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Resource\Config\FileActivityWatch.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Icons\compare-64.png" />
+    <Content Include="Resource\Icons\merge-50.png" />
+    <Content Include="Resource\Icons\registry-editor.png" />
     <Content Include="Resource\PortableApp\BlockAllExe.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -611,6 +623,15 @@
   <ItemGroup>
     <Content Include="appicon.ico" />
     <Content Include="Resource\AppEnvironments.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\PredefEnvironments.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\RegistryQuickLaunch.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\FileQuickLaunch.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resource\ThinAppIntellisense.txt">
@@ -736,6 +757,9 @@
     <Content Include="Resource\SystemEnvironments_x86.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Studio.Template.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <None Include="UserSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -744,7 +768,16 @@
     <Folder Include="Resource\3rdPartyApps\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)\Resource\3rdPartyApps\*" "$(TargetDir)\Resource\3rdPartyApps\" /E /Y</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="afterbuild" AfterTargets="Build">
+    <Exec Command="echo ********************afterbuild********************************" />
+    <Exec Command="echo Output written to $(TargetDir)" />
+  </Target>
+  <Target Name="afterrebuild" AfterTargets="ReBuild">
+    <Exec Command="echo ***********************************afterRebuild************************************************" />
+    <Exec Command="xcopy &quot;$(ProjectDir)\Resource\3rdPartyApps\*&quot; &quot;$(TargetDir)\Resource\3rdPartyApps\&quot; /E /Y" />
+  </Target>
+  <Target Name="afterclean" AfterTargets="Clean">
+    <Exec Command="echo ***********************************afterclean************************************************" />
+    <Exec Command="echo Output written to $(TargetDir)" />
+  </Target>
 </Project>

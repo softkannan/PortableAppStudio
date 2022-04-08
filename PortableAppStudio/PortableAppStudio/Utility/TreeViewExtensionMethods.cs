@@ -23,6 +23,48 @@ namespace PortableAppStudio.Utility
             return retVal;
         }
 
+        public static void MergeINI(this TreeNode pThis, string key, string value)
+        {
+            var findKey = key + "=";
+            var nodeNotFound = true;
+            foreach(TreeNode curNode in pThis.Nodes)
+            {
+                if(curNode.Text.IndexOf(findKey) == 0)
+                {
+                    nodeNotFound = false;
+                    var (keyStr, valueStr) = curNode.Text.Trim().Split('=');
+                    valueStr = value + ";" + valueStr;
+                    curNode.Text = keyStr + "=" + valueStr;
+                    break;
+                }
+            }
+            if(nodeNotFound)
+            {
+                pThis.Nodes.Add(string.Format("{0}={1}", key,value));
+            }
+        }
+
+        public static void AppendINI(this TreeNode pThis, string key, string value)
+        {
+            var findKey = key + "=";
+            var nodeNotFound = true;
+            foreach (TreeNode curNode in pThis.Nodes)
+            {
+                if (curNode.Text.IndexOf(findKey) == 0)
+                {
+                    nodeNotFound = false;
+                    var (keyStr, valueStr) = curNode.Text.Trim().Split('=');
+                    valueStr = value + ";" + valueStr;
+                    curNode.Text = keyStr + "=" + valueStr;
+                    break;
+                }
+            }
+            if (nodeNotFound)
+            {
+                pThis.Nodes.Add(string.Format("{0}={1}", key, value));
+            }
+        }
+
         public static void Merge(this TreeNode pThis, TreeNode srcNode)
         {
             MergeInternal(pThis, srcNode);
@@ -81,8 +123,9 @@ namespace PortableAppStudio.Utility
         public static TreeNode CreateFolderNodes(this TreeNode pThis, string folderName)
         {
             TreeNode retVal = null;
-            int backSlash = folderName.IndexOf('\\');
-            if (backSlash == -1)
+            var tempVal = folderName.Trim('\\');
+            int slashPos = tempVal.IndexOf('\\');
+            if (slashPos == -1)
             {
                 var newStartNode = pThis.Nodes.FindNode(folderName);
                 if (newStartNode == null)
@@ -93,8 +136,8 @@ namespace PortableAppStudio.Utility
             }
             else
             {
-                string topFoldername = folderName.Substring(0, backSlash);
-                string remainFolderName = folderName.Substring(backSlash + 1);
+                string topFoldername = tempVal.Substring(0, slashPos);
+                string remainFolderName = tempVal.Substring(slashPos + 1);
                 var newStartNode = pThis.Nodes.FindNode(topFoldername);
                 if (newStartNode == null)
                 {
@@ -250,7 +293,7 @@ namespace PortableAppStudio.Utility
         //}
 
 
-        public static string ToDataDirectoryPair(this string pThis)
+        public static string ToDataDirectoryPair(this string pThis, int nodeIdx = -1)
         {
             string retVal = "";
             var foundEnv = PathManager.Init.GetEnvironmentInfo(pThis);
@@ -271,7 +314,7 @@ namespace PortableAppStudio.Utility
             }
             else
             {
-                retVal = string.Format("-={0}", PathManager.Init.GetExpandablePath(pThis));
+                retVal = string.Format("{0}={1}", nodeIdx == -1 ? "-" : String.Format("Path{0}",nodeIdx) , PathManager.Init.GetExpandablePath(pThis));
             }
             return retVal;
         }

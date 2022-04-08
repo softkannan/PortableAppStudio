@@ -1,4 +1,5 @@
 ﻿using PortableAppStudio.Utility;
+using PortableAppStudio.Utility.FileUtil;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,7 @@ namespace PortableAppStudio.Model.FolderLayout
         public string PortableAppFolder { get; protected set; }
 
 
-        protected TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
+        protected TreeNode CreateDirectoryNode(DirectoryInfoEx directoryInfo)
         {
             var directoryNode = new TreeNode(directoryInfo.Name);
             foreach (var directory in directoryInfo.GetDirectories())
@@ -46,7 +47,7 @@ namespace PortableAppStudio.Model.FolderLayout
 
             if ((!string.IsNullOrWhiteSpace(this.RootFolder)) && Directory.Exists(this.RootFolder))
             {
-                var rootDirectoryInfo = new DirectoryInfo(this.RootFolder);
+                var rootDirectoryInfo = new DirectoryInfoEx(this.RootFolder);
                 this.RootNode.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
             }
 

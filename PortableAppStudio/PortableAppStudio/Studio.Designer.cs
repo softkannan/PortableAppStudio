@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("DEBUG_SEGMENT_[Launch]");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainStudio));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -105,7 +106,9 @@
             this.viewDebugLogToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.mergeListtoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.editToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.mergeCustomNSIToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.mergeCustomNSIToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forceMergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.importAppVToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.importFolderToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -128,22 +131,20 @@
             this.tcpviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartSniffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iconsExtractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSplitTemplateButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.crossPlatformTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opensourceTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qTFrameworkTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pythonApplicationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jAVAApplicationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.foldersToolStripSplitButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.aPPDATAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aPPDATALocalLowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lOCALAPPDATAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pROGRAMDATAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uSERPROFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pUBLICToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tEMPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOMMONPROGRAMFILESx86ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.commonProgramW6432ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pROGRAMFILESX86ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.programW6432ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickLaunchRegToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.mainStatus = new System.Windows.Forms.StatusStrip();
             this.statusLabelMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelKeyPress = new System.Windows.Forms.ToolStripStatusLabel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainTab.SuspendLayout();
             this.filesPage.SuspendLayout();
@@ -158,10 +159,12 @@
             this.debugGroupBox.SuspendLayout();
             this.mainToolStrip.SuspendLayout();
             this.mainStatus.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
             // 
+            this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.importStripMenuItem,
@@ -169,7 +172,7 @@
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1318, 24);
+            this.mainMenu.Size = new System.Drawing.Size(1757, 28);
             this.mainMenu.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -180,31 +183,31 @@
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // createToolStripMenuItem
             // 
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.createToolStripMenuItem.Text = "Create";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // importStripMenuItem
@@ -219,55 +222,55 @@
             this.importRegistryCliboardToolStripMenuItem,
             this.importFilesClipboardToolStripMenuItem});
             this.importStripMenuItem.Name = "importStripMenuItem";
-            this.importStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.importStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.importStripMenuItem.Text = "Import";
             // 
             // importThinAppCaptureToolStripMenuItem
             // 
             this.importThinAppCaptureToolStripMenuItem.Name = "importThinAppCaptureToolStripMenuItem";
-            this.importThinAppCaptureToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importThinAppCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importThinAppCaptureToolStripMenuItem.Text = "Import ThinApp Capture";
             // 
             // importRegshotCaptureToolStripMenuItem
             // 
             this.importRegshotCaptureToolStripMenuItem.Name = "importRegshotCaptureToolStripMenuItem";
-            this.importRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importRegshotCaptureToolStripMenuItem.Text = "Import Regshot Capture";
             // 
             // importAppVCaptureToolStripMenuItem
             // 
             this.importAppVCaptureToolStripMenuItem.Name = "importAppVCaptureToolStripMenuItem";
-            this.importAppVCaptureToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importAppVCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importAppVCaptureToolStripMenuItem.Text = "Import AppV Capture";
             // 
             // importXRegshotCaptureToolStripMenuItem
             // 
             this.importXRegshotCaptureToolStripMenuItem.Name = "importXRegshotCaptureToolStripMenuItem";
-            this.importXRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importXRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importXRegshotCaptureToolStripMenuItem.Text = "Import X-Regshot Capture";
             // 
             // importRegFileToolStripMenuItem
             // 
             this.importRegFileToolStripMenuItem.Name = "importRegFileToolStripMenuItem";
-            this.importRegFileToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importRegFileToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importRegFileToolStripMenuItem.Text = "Import RegFile";
             // 
             // importFolderToolStripMenuItem
             // 
             this.importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
-            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importFolderToolStripMenuItem.Text = "Import Folder";
             // 
             // importRegistryCliboardToolStripMenuItem
             // 
             this.importRegistryCliboardToolStripMenuItem.Name = "importRegistryCliboardToolStripMenuItem";
-            this.importRegistryCliboardToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importRegistryCliboardToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importRegistryCliboardToolStripMenuItem.Text = "Import Registry Clipboard";
             // 
             // importFilesClipboardToolStripMenuItem
             // 
             this.importFilesClipboardToolStripMenuItem.Name = "importFilesClipboardToolStripMenuItem";
-            this.importFilesClipboardToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.importFilesClipboardToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.importFilesClipboardToolStripMenuItem.Text = "Import Files Clipboard";
             // 
             // toolsToolStripMenuItem
@@ -278,19 +281,19 @@
             this.ignoreListToolStripMenuItem,
             this.searchReplaceInfoToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // fixDirectoriesToolStripMenuItem
             // 
             this.fixDirectoriesToolStripMenuItem.Name = "fixDirectoriesToolStripMenuItem";
-            this.fixDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.fixDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.fixDirectoriesToolStripMenuItem.Text = "Fix Directories";
             // 
             // deleteFoldersToolStripMenuItem
             // 
             this.deleteFoldersToolStripMenuItem.Name = "deleteFoldersToolStripMenuItem";
-            this.deleteFoldersToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.deleteFoldersToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.deleteFoldersToolStripMenuItem.Text = "Delete Folders";
             // 
             // ignoreListToolStripMenuItem
@@ -300,25 +303,25 @@
             this.ignoreFilesToolStripMenuItem,
             this.ignoreRegistryToolStripMenuItem});
             this.ignoreListToolStripMenuItem.Name = "ignoreListToolStripMenuItem";
-            this.ignoreListToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.ignoreListToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.ignoreListToolStripMenuItem.Text = "IgnoreList";
             // 
             // ignoreFoldersToolStripMenuItem
             // 
             this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
-            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.ignoreFoldersToolStripMenuItem.Text = "Folders";
             // 
             // ignoreFilesToolStripMenuItem
             // 
             this.ignoreFilesToolStripMenuItem.Name = "ignoreFilesToolStripMenuItem";
-            this.ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.ignoreFilesToolStripMenuItem.Text = "Files";
             // 
             // ignoreRegistryToolStripMenuItem
             // 
             this.ignoreRegistryToolStripMenuItem.Name = "ignoreRegistryToolStripMenuItem";
-            this.ignoreRegistryToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.ignoreRegistryToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.ignoreRegistryToolStripMenuItem.Text = "Registry";
             // 
             // searchReplaceInfoToolStripMenuItem
@@ -327,20 +330,20 @@
             this.appVToolStripMenuItem,
             this.thinAppToolStripMenuItem});
             this.searchReplaceInfoToolStripMenuItem.Name = "searchReplaceInfoToolStripMenuItem";
-            this.searchReplaceInfoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.searchReplaceInfoToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.searchReplaceInfoToolStripMenuItem.Text = "SearchReplaceInfo";
             // 
             // appVToolStripMenuItem
             // 
             this.appVToolStripMenuItem.Name = "appVToolStripMenuItem";
-            this.appVToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.appVToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.appVToolStripMenuItem.Text = "App-V";
             this.appVToolStripMenuItem.Click += new System.EventHandler(this.appVToolStripMenuItem_Click);
             // 
             // thinAppToolStripMenuItem
             // 
             this.thinAppToolStripMenuItem.Name = "thinAppToolStripMenuItem";
-            this.thinAppToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.thinAppToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.thinAppToolStripMenuItem.Text = "ThinApp";
             this.thinAppToolStripMenuItem.Click += new System.EventHandler(this.thinAppToolStripMenuItem_Click);
             // 
@@ -349,13 +352,13 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // mainTab
@@ -368,19 +371,21 @@
             this.mainTab.Controls.Add(this.appInfoPage);
             this.mainTab.Controls.Add(this.launchPage);
             this.mainTab.Controls.Add(this.optionsPage);
-            this.mainTab.Location = new System.Drawing.Point(12, 66);
+            this.mainTab.Location = new System.Drawing.Point(16, 81);
+            this.mainTab.Margin = new System.Windows.Forms.Padding(4);
             this.mainTab.Name = "mainTab";
             this.mainTab.SelectedIndex = 0;
-            this.mainTab.Size = new System.Drawing.Size(1294, 695);
+            this.mainTab.Size = new System.Drawing.Size(1725, 855);
             this.mainTab.TabIndex = 1;
             // 
             // filesPage
             // 
             this.filesPage.Controls.Add(this.filesTableLayoutPanel);
-            this.filesPage.Location = new System.Drawing.Point(4, 22);
+            this.filesPage.Location = new System.Drawing.Point(4, 25);
+            this.filesPage.Margin = new System.Windows.Forms.Padding(4);
             this.filesPage.Name = "filesPage";
-            this.filesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.filesPage.Size = new System.Drawing.Size(1286, 669);
+            this.filesPage.Padding = new System.Windows.Forms.Padding(4);
+            this.filesPage.Size = new System.Drawing.Size(1717, 826);
             this.filesPage.TabIndex = 0;
             this.filesPage.Text = "Files";
             this.filesPage.UseVisualStyleBackColor = true;
@@ -395,11 +400,12 @@
             this.filesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.filesTableLayoutPanel.Controls.Add(this.sourceFilesTree, 0, 0);
             this.filesTableLayoutPanel.Controls.Add(this.appFilesTree, 1, 0);
-            this.filesTableLayoutPanel.Location = new System.Drawing.Point(6, 6);
+            this.filesTableLayoutPanel.Location = new System.Drawing.Point(8, 7);
+            this.filesTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.filesTableLayoutPanel.Name = "filesTableLayoutPanel";
             this.filesTableLayoutPanel.RowCount = 1;
             this.filesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.filesTableLayoutPanel.Size = new System.Drawing.Size(1274, 657);
+            this.filesTableLayoutPanel.Size = new System.Drawing.Size(1699, 809);
             this.filesTableLayoutPanel.TabIndex = 7;
             // 
             // sourceFilesTree
@@ -408,9 +414,10 @@
             this.sourceFilesTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sourceFilesTree.Location = new System.Drawing.Point(3, 3);
+            this.sourceFilesTree.Location = new System.Drawing.Point(4, 4);
+            this.sourceFilesTree.Margin = new System.Windows.Forms.Padding(4);
             this.sourceFilesTree.Name = "sourceFilesTree";
-            this.sourceFilesTree.Size = new System.Drawing.Size(631, 651);
+            this.sourceFilesTree.Size = new System.Drawing.Size(841, 801);
             this.sourceFilesTree.TabIndex = 5;
             // 
             // appFilesTree
@@ -419,18 +426,20 @@
             this.appFilesTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.appFilesTree.Location = new System.Drawing.Point(640, 3);
+            this.appFilesTree.Location = new System.Drawing.Point(853, 4);
+            this.appFilesTree.Margin = new System.Windows.Forms.Padding(4);
             this.appFilesTree.Name = "appFilesTree";
-            this.appFilesTree.Size = new System.Drawing.Size(631, 651);
+            this.appFilesTree.Size = new System.Drawing.Size(842, 801);
             this.appFilesTree.TabIndex = 6;
             // 
             // registryTab
             // 
             this.registryTab.Controls.Add(this.registryTableLayoutPanel);
-            this.registryTab.Location = new System.Drawing.Point(4, 22);
+            this.registryTab.Location = new System.Drawing.Point(4, 25);
+            this.registryTab.Margin = new System.Windows.Forms.Padding(4);
             this.registryTab.Name = "registryTab";
-            this.registryTab.Padding = new System.Windows.Forms.Padding(3);
-            this.registryTab.Size = new System.Drawing.Size(1286, 669);
+            this.registryTab.Padding = new System.Windows.Forms.Padding(4);
+            this.registryTab.Size = new System.Drawing.Size(1717, 826);
             this.registryTab.TabIndex = 2;
             this.registryTab.Text = "Registry";
             this.registryTab.UseVisualStyleBackColor = true;
@@ -445,11 +454,12 @@
             this.registryTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.registryTableLayoutPanel.Controls.Add(this.appRegTree, 1, 0);
             this.registryTableLayoutPanel.Controls.Add(this.sourceRegTree, 0, 0);
-            this.registryTableLayoutPanel.Location = new System.Drawing.Point(6, 6);
+            this.registryTableLayoutPanel.Location = new System.Drawing.Point(8, 7);
+            this.registryTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.registryTableLayoutPanel.Name = "registryTableLayoutPanel";
             this.registryTableLayoutPanel.RowCount = 1;
             this.registryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.registryTableLayoutPanel.Size = new System.Drawing.Size(1186, 594);
+            this.registryTableLayoutPanel.Size = new System.Drawing.Size(1701, 811);
             this.registryTableLayoutPanel.TabIndex = 8;
             // 
             // appRegTree
@@ -458,10 +468,11 @@
             this.appRegTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.appRegTree.Location = new System.Drawing.Point(596, 3);
+            this.appRegTree.Location = new System.Drawing.Point(854, 4);
+            this.appRegTree.Margin = new System.Windows.Forms.Padding(4);
             this.appRegTree.Name = "appRegTree";
             this.appRegTree.ShowNodeToolTips = true;
-            this.appRegTree.Size = new System.Drawing.Size(587, 588);
+            this.appRegTree.Size = new System.Drawing.Size(843, 803);
             this.appRegTree.TabIndex = 7;
             // 
             // sourceRegTree
@@ -469,19 +480,21 @@
             this.sourceRegTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sourceRegTree.Location = new System.Drawing.Point(3, 3);
+            this.sourceRegTree.Location = new System.Drawing.Point(4, 4);
+            this.sourceRegTree.Margin = new System.Windows.Forms.Padding(4);
             this.sourceRegTree.Name = "sourceRegTree";
-            this.sourceRegTree.Size = new System.Drawing.Size(587, 588);
+            this.sourceRegTree.Size = new System.Drawing.Size(842, 803);
             this.sourceRegTree.TabIndex = 6;
             // 
             // appInfoPage
             // 
             this.appInfoPage.Controls.Add(this.appInfoEditor);
             this.appInfoPage.Controls.Add(this.appInfoTree);
-            this.appInfoPage.Location = new System.Drawing.Point(4, 22);
+            this.appInfoPage.Location = new System.Drawing.Point(4, 25);
+            this.appInfoPage.Margin = new System.Windows.Forms.Padding(4);
             this.appInfoPage.Name = "appInfoPage";
-            this.appInfoPage.Padding = new System.Windows.Forms.Padding(3);
-            this.appInfoPage.Size = new System.Drawing.Size(1286, 669);
+            this.appInfoPage.Padding = new System.Windows.Forms.Padding(4);
+            this.appInfoPage.Size = new System.Drawing.Size(1717, 826);
             this.appInfoPage.TabIndex = 4;
             this.appInfoPage.Text = "AppInfo";
             this.appInfoPage.UseVisualStyleBackColor = true;
@@ -491,9 +504,10 @@
             this.appInfoEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.appInfoEditor.Location = new System.Drawing.Point(459, 1);
+            this.appInfoEditor.Location = new System.Drawing.Point(612, 1);
+            this.appInfoEditor.Margin = new System.Windows.Forms.Padding(5);
             this.appInfoEditor.Name = "appInfoEditor";
-            this.appInfoEditor.Size = new System.Drawing.Size(733, 599);
+            this.appInfoEditor.Size = new System.Drawing.Size(1096, 816);
             this.appInfoEditor.TabIndex = 9;
             // 
             // appInfoTree
@@ -501,19 +515,21 @@
             this.appInfoTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.appInfoTree.LabelEdit = true;
-            this.appInfoTree.Location = new System.Drawing.Point(6, 12);
+            this.appInfoTree.Location = new System.Drawing.Point(8, 15);
+            this.appInfoTree.Margin = new System.Windows.Forms.Padding(4);
             this.appInfoTree.Name = "appInfoTree";
-            this.appInfoTree.Size = new System.Drawing.Size(447, 588);
+            this.appInfoTree.Size = new System.Drawing.Size(595, 803);
             this.appInfoTree.TabIndex = 8;
             // 
             // launchPage
             // 
             this.launchPage.Controls.Add(this.launchEditor);
             this.launchPage.Controls.Add(this.launchTree);
-            this.launchPage.Location = new System.Drawing.Point(4, 22);
+            this.launchPage.Location = new System.Drawing.Point(4, 25);
+            this.launchPage.Margin = new System.Windows.Forms.Padding(4);
             this.launchPage.Name = "launchPage";
-            this.launchPage.Padding = new System.Windows.Forms.Padding(3);
-            this.launchPage.Size = new System.Drawing.Size(1286, 669);
+            this.launchPage.Padding = new System.Windows.Forms.Padding(4);
+            this.launchPage.Size = new System.Drawing.Size(1717, 826);
             this.launchPage.TabIndex = 1;
             this.launchPage.Text = "Launch";
             this.launchPage.UseVisualStyleBackColor = true;
@@ -523,18 +539,20 @@
             this.launchEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.launchEditor.Location = new System.Drawing.Point(591, 0);
+            this.launchEditor.Location = new System.Drawing.Point(788, 0);
+            this.launchEditor.Margin = new System.Windows.Forms.Padding(5);
             this.launchEditor.Name = "launchEditor";
-            this.launchEditor.Size = new System.Drawing.Size(601, 600);
+            this.launchEditor.Size = new System.Drawing.Size(924, 817);
             this.launchEditor.TabIndex = 8;
             // 
             // launchTree
             // 
             this.launchTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.launchTree.Location = new System.Drawing.Point(6, 12);
+            this.launchTree.Location = new System.Drawing.Point(8, 15);
+            this.launchTree.Margin = new System.Windows.Forms.Padding(4);
             this.launchTree.Name = "launchTree";
-            this.launchTree.Size = new System.Drawing.Size(579, 588);
+            this.launchTree.Size = new System.Drawing.Size(771, 803);
             this.launchTree.TabIndex = 7;
             // 
             // optionsPage
@@ -543,20 +561,26 @@
             this.optionsPage.Controls.Add(this.groupBoxFileConvert);
             this.optionsPage.Controls.Add(this.registryGroupBox);
             this.optionsPage.Controls.Add(this.debugGroupBox);
-            this.optionsPage.Location = new System.Drawing.Point(4, 22);
+            this.optionsPage.Location = new System.Drawing.Point(4, 25);
+            this.optionsPage.Margin = new System.Windows.Forms.Padding(4);
             this.optionsPage.Name = "optionsPage";
-            this.optionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.optionsPage.Size = new System.Drawing.Size(1286, 669);
+            this.optionsPage.Padding = new System.Windows.Forms.Padding(4);
+            this.optionsPage.Size = new System.Drawing.Size(1717, 826);
             this.optionsPage.TabIndex = 5;
             this.optionsPage.Text = "Options / Tools";
             this.optionsPage.UseVisualStyleBackColor = true;
             // 
             // groupBoxFileConvert
             // 
+            this.groupBoxFileConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxFileConvert.Controls.Add(this.fileConvertLabel);
-            this.groupBoxFileConvert.Location = new System.Drawing.Point(390, 119);
+            this.groupBoxFileConvert.Location = new System.Drawing.Point(520, 146);
+            this.groupBoxFileConvert.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxFileConvert.Name = "groupBoxFileConvert";
-            this.groupBoxFileConvert.Size = new System.Drawing.Size(378, 213);
+            this.groupBoxFileConvert.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxFileConvert.Size = new System.Drawing.Size(1189, 672);
             this.groupBoxFileConvert.TabIndex = 2;
             this.groupBoxFileConvert.TabStop = false;
             this.groupBoxFileConvert.Text = "Folder / File Convert";
@@ -564,20 +588,29 @@
             // fileConvertLabel
             // 
             this.fileConvertLabel.AllowDrop = true;
-            this.fileConvertLabel.Location = new System.Drawing.Point(6, 16);
+            this.fileConvertLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileConvertLabel.Location = new System.Drawing.Point(8, 20);
+            this.fileConvertLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.fileConvertLabel.Name = "fileConvertLabel";
-            this.fileConvertLabel.Size = new System.Drawing.Size(366, 194);
+            this.fileConvertLabel.Size = new System.Drawing.Size(1173, 648);
             this.fileConvertLabel.TabIndex = 0;
             this.fileConvertLabel.Text = "Folder / File Convert";
             this.fileConvertLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // registryGroupBox
             // 
+            this.registryGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.registryGroupBox.Controls.Add(this.generateManifestChk);
             this.registryGroupBox.Controls.Add(this.generateRegFilesCheck);
-            this.registryGroupBox.Location = new System.Drawing.Point(390, 16);
+            this.registryGroupBox.Location = new System.Drawing.Point(520, 20);
+            this.registryGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.registryGroupBox.Name = "registryGroupBox";
-            this.registryGroupBox.Size = new System.Drawing.Size(378, 97);
+            this.registryGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.registryGroupBox.Size = new System.Drawing.Size(1189, 119);
             this.registryGroupBox.TabIndex = 1;
             this.registryGroupBox.TabStop = false;
             this.registryGroupBox.Text = "Registry";
@@ -585,9 +618,10 @@
             // generateManifestChk
             // 
             this.generateManifestChk.AutoSize = true;
-            this.generateManifestChk.Location = new System.Drawing.Point(23, 59);
+            this.generateManifestChk.Location = new System.Drawing.Point(31, 73);
+            this.generateManifestChk.Margin = new System.Windows.Forms.Padding(4);
             this.generateManifestChk.Name = "generateManifestChk";
-            this.generateManifestChk.Size = new System.Drawing.Size(113, 17);
+            this.generateManifestChk.Size = new System.Drawing.Size(138, 20);
             this.generateManifestChk.TabIndex = 1;
             this.generateManifestChk.Text = "Generate Manifest";
             this.generateManifestChk.UseVisualStyleBackColor = true;
@@ -597,9 +631,10 @@
             this.generateRegFilesCheck.AutoSize = true;
             this.generateRegFilesCheck.Checked = true;
             this.generateRegFilesCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.generateRegFilesCheck.Location = new System.Drawing.Point(23, 34);
+            this.generateRegFilesCheck.Location = new System.Drawing.Point(31, 42);
+            this.generateRegFilesCheck.Margin = new System.Windows.Forms.Padding(4);
             this.generateRegFilesCheck.Name = "generateRegFilesCheck";
-            this.generateRegFilesCheck.Size = new System.Drawing.Size(117, 17);
+            this.generateRegFilesCheck.Size = new System.Drawing.Size(146, 20);
             this.generateRegFilesCheck.TabIndex = 0;
             this.generateRegFilesCheck.Text = "Generate Reg Files";
             this.generateRegFilesCheck.UseVisualStyleBackColor = true;
@@ -615,9 +650,11 @@
             this.debugGroupBox.Controls.Add(this.DEBUG_OUTPUT_Combo);
             this.debugGroupBox.Controls.Add(this.DEBUG_SEGWRAP_Check);
             this.debugGroupBox.Controls.Add(this.DEBUG_ALL_Check);
-            this.debugGroupBox.Location = new System.Drawing.Point(6, 16);
+            this.debugGroupBox.Location = new System.Drawing.Point(8, 20);
+            this.debugGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.debugGroupBox.Name = "debugGroupBox";
-            this.debugGroupBox.Size = new System.Drawing.Size(378, 557);
+            this.debugGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.debugGroupBox.Size = new System.Drawing.Size(504, 798);
             this.debugGroupBox.TabIndex = 0;
             this.debugGroupBox.TabStop = false;
             this.debugGroupBox.Text = "Debug";
@@ -632,9 +669,10 @@
             listViewItem1.StateImageIndex = 0;
             this.DEBUG_SEGMENT_List.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.DEBUG_SEGMENT_List.Location = new System.Drawing.Point(15, 116);
+            this.DEBUG_SEGMENT_List.Location = new System.Drawing.Point(20, 143);
+            this.DEBUG_SEGMENT_List.Margin = new System.Windows.Forms.Padding(4);
             this.DEBUG_SEGMENT_List.Name = "DEBUG_SEGMENT_List";
-            this.DEBUG_SEGMENT_List.Size = new System.Drawing.Size(346, 423);
+            this.DEBUG_SEGMENT_List.Size = new System.Drawing.Size(460, 632);
             this.DEBUG_SEGMENT_List.TabIndex = 7;
             this.DEBUG_SEGMENT_List.UseCompatibleStateImageBehavior = false;
             this.DEBUG_SEGMENT_List.View = System.Windows.Forms.View.List;
@@ -642,27 +680,30 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 100);
+            this.label2.Location = new System.Drawing.Point(16, 123);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.Size = new System.Drawing.Size(108, 16);
             this.label2.TabIndex = 6;
             this.label2.Text = "Debug Segment:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(160, 34);
+            this.label1.Location = new System.Drawing.Point(213, 42);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(95, 16);
             this.label1.TabIndex = 5;
             this.label1.Text = "Debug Output :";
             // 
             // DEBUG_GLOBAL_Check
             // 
             this.DEBUG_GLOBAL_Check.AutoSize = true;
-            this.DEBUG_GLOBAL_Check.Location = new System.Drawing.Point(10, 80);
+            this.DEBUG_GLOBAL_Check.Location = new System.Drawing.Point(13, 98);
+            this.DEBUG_GLOBAL_Check.Margin = new System.Windows.Forms.Padding(4);
             this.DEBUG_GLOBAL_Check.Name = "DEBUG_GLOBAL_Check";
-            this.DEBUG_GLOBAL_Check.Size = new System.Drawing.Size(112, 17);
+            this.DEBUG_GLOBAL_Check.Size = new System.Drawing.Size(136, 20);
             this.DEBUG_GLOBAL_Check.TabIndex = 3;
             this.DEBUG_GLOBAL_Check.Text = "DEBUG_GLOBAL";
             this.DEBUG_GLOBAL_Check.UseVisualStyleBackColor = true;
@@ -674,17 +715,19 @@
             "nothing",
             "file",
             "messagebox"});
-            this.DEBUG_OUTPUT_Combo.Location = new System.Drawing.Point(163, 55);
+            this.DEBUG_OUTPUT_Combo.Location = new System.Drawing.Point(217, 68);
+            this.DEBUG_OUTPUT_Combo.Margin = new System.Windows.Forms.Padding(4);
             this.DEBUG_OUTPUT_Combo.Name = "DEBUG_OUTPUT_Combo";
-            this.DEBUG_OUTPUT_Combo.Size = new System.Drawing.Size(186, 21);
+            this.DEBUG_OUTPUT_Combo.Size = new System.Drawing.Size(247, 24);
             this.DEBUG_OUTPUT_Combo.TabIndex = 2;
             // 
             // DEBUG_SEGWRAP_Check
             // 
             this.DEBUG_SEGWRAP_Check.AutoSize = true;
-            this.DEBUG_SEGWRAP_Check.Location = new System.Drawing.Point(10, 57);
+            this.DEBUG_SEGWRAP_Check.Location = new System.Drawing.Point(13, 70);
+            this.DEBUG_SEGWRAP_Check.Margin = new System.Windows.Forms.Padding(4);
             this.DEBUG_SEGWRAP_Check.Name = "DEBUG_SEGWRAP_Check";
-            this.DEBUG_SEGWRAP_Check.Size = new System.Drawing.Size(125, 17);
+            this.DEBUG_SEGWRAP_Check.Size = new System.Drawing.Size(153, 20);
             this.DEBUG_SEGWRAP_Check.TabIndex = 1;
             this.DEBUG_SEGWRAP_Check.Text = "DEBUG_SEGWRAP";
             this.DEBUG_SEGWRAP_Check.UseVisualStyleBackColor = true;
@@ -694,9 +737,10 @@
             this.DEBUG_ALL_Check.AutoSize = true;
             this.DEBUG_ALL_Check.Checked = true;
             this.DEBUG_ALL_Check.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.DEBUG_ALL_Check.Location = new System.Drawing.Point(10, 34);
+            this.DEBUG_ALL_Check.Location = new System.Drawing.Point(13, 42);
+            this.DEBUG_ALL_Check.Margin = new System.Windows.Forms.Padding(4);
             this.DEBUG_ALL_Check.Name = "DEBUG_ALL_Check";
-            this.DEBUG_ALL_Check.Size = new System.Drawing.Size(89, 17);
+            this.DEBUG_ALL_Check.Size = new System.Drawing.Size(107, 20);
             this.DEBUG_ALL_Check.TabIndex = 0;
             this.DEBUG_ALL_Check.Text = "DEBUG_ALL";
             this.DEBUG_ALL_Check.UseVisualStyleBackColor = true;
@@ -724,10 +768,12 @@
             this.importMiscToolStripButton,
             this.toolStripSeparator4,
             this.toolsToolStripSplitButton,
-            this.foldersToolStripSplitButton});
-            this.mainToolStrip.Location = new System.Drawing.Point(0, 24);
+            this.toolStripSplitTemplateButton,
+            this.foldersToolStripSplitButton,
+            this.quickLaunchRegToolStripDropDownButton});
+            this.mainToolStrip.Location = new System.Drawing.Point(0, 28);
             this.mainToolStrip.Name = "mainToolStrip";
-            this.mainToolStrip.Size = new System.Drawing.Size(1318, 39);
+            this.mainToolStrip.Size = new System.Drawing.Size(1757, 39);
             this.mainToolStrip.TabIndex = 2;
             this.mainToolStrip.Text = "Main Tools";
             // 
@@ -805,21 +851,21 @@
             this.runPortableToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("runPortableToolStripButton.Image")));
             this.runPortableToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.runPortableToolStripButton.Name = "runPortableToolStripButton";
-            this.runPortableToolStripButton.Size = new System.Drawing.Size(48, 36);
+            this.runPortableToolStripButton.Size = new System.Drawing.Size(51, 36);
             this.runPortableToolStripButton.Text = "Run Portable";
             // 
             // runWithProcMonToolStripMenuItem
             // 
             this.runWithProcMonToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runWithProcMonToolStripMenuItem.Image")));
             this.runWithProcMonToolStripMenuItem.Name = "runWithProcMonToolStripMenuItem";
-            this.runWithProcMonToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runWithProcMonToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.runWithProcMonToolStripMenuItem.Text = "Run With ProcMon";
             // 
             // runWithRegMonToolStripMenuItem
             // 
             this.runWithRegMonToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runWithRegMonToolStripMenuItem.Image")));
             this.runWithRegMonToolStripMenuItem.Name = "runWithRegMonToolStripMenuItem";
-            this.runWithRegMonToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runWithRegMonToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.runWithRegMonToolStripMenuItem.Text = "Run With RegMon";
             this.runWithRegMonToolStripMenuItem.Visible = false;
             // 
@@ -827,7 +873,7 @@
             // 
             this.runWithTracerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runWithTracerToolStripMenuItem.Image")));
             this.runWithTracerToolStripMenuItem.Name = "runWithTracerToolStripMenuItem";
-            this.runWithTracerToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.runWithTracerToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.runWithTracerToolStripMenuItem.Text = "Run With Tracer";
             // 
             // viewDebugLogToolStripButton
@@ -843,7 +889,7 @@
             // 
             this.mergeListtoolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mergeListtoolStripComboBox.Name = "mergeListtoolStripComboBox";
-            this.mergeListtoolStripComboBox.Size = new System.Drawing.Size(200, 39);
+            this.mergeListtoolStripComboBox.Size = new System.Drawing.Size(265, 39);
             this.mergeListtoolStripComboBox.ToolTipText = "Importan files that can be editable";
             // 
             // editToolStripButton
@@ -858,11 +904,28 @@
             // mergeCustomNSIToolStripButton
             // 
             this.mergeCustomNSIToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mergeCustomNSIToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.compareToolStripMenuItem,
+            this.forceMergeToolStripMenuItem});
             this.mergeCustomNSIToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("mergeCustomNSIToolStripButton.Image")));
             this.mergeCustomNSIToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mergeCustomNSIToolStripButton.Name = "mergeCustomNSIToolStripButton";
-            this.mergeCustomNSIToolStripButton.Size = new System.Drawing.Size(36, 36);
+            this.mergeCustomNSIToolStripButton.Size = new System.Drawing.Size(51, 36);
             this.mergeCustomNSIToolStripButton.Text = "Merge Custom.nsi";
+            // 
+            // compareToolStripMenuItem
+            // 
+            this.compareToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("compareToolStripMenuItem.Image")));
+            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
+            this.compareToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.compareToolStripMenuItem.Text = "Compare";
+            // 
+            // forceMergeToolStripMenuItem
+            // 
+            this.forceMergeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("forceMergeToolStripMenuItem.Image")));
+            this.forceMergeToolStripMenuItem.Name = "forceMergeToolStripMenuItem";
+            this.forceMergeToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.forceMergeToolStripMenuItem.Text = "Force Merge";
             // 
             // toolStripSeparator3
             // 
@@ -899,42 +962,42 @@
             this.importMiscToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("importMiscToolStripButton.Image")));
             this.importMiscToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importMiscToolStripButton.Name = "importMiscToolStripButton";
-            this.importMiscToolStripButton.Size = new System.Drawing.Size(45, 36);
+            this.importMiscToolStripButton.Size = new System.Drawing.Size(46, 36);
             this.importMiscToolStripButton.Text = "Import Captures";
             // 
             // importXRegshotToolStripButtonDropMenuItem
             // 
             this.importXRegshotToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importXRegshotToolStripButtonDropMenuItem.Image")));
             this.importXRegshotToolStripButtonDropMenuItem.Name = "importXRegshotToolStripButtonDropMenuItem";
-            this.importXRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.importXRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
             this.importXRegshotToolStripButtonDropMenuItem.Text = "Import X-Regshot";
             // 
             // importThinAppToolStripButtonDropMenuItem
             // 
             this.importThinAppToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importThinAppToolStripButtonDropMenuItem.Image")));
             this.importThinAppToolStripButtonDropMenuItem.Name = "importThinAppToolStripButtonDropMenuItem";
-            this.importThinAppToolStripButtonDropMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.importThinAppToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
             this.importThinAppToolStripButtonDropMenuItem.Text = "Import ThinApp";
             // 
             // importRegFileToolStripButtonDropMenuItem
             // 
             this.importRegFileToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importRegFileToolStripButtonDropMenuItem.Image")));
             this.importRegFileToolStripButtonDropMenuItem.Name = "importRegFileToolStripButtonDropMenuItem";
-            this.importRegFileToolStripButtonDropMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.importRegFileToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
             this.importRegFileToolStripButtonDropMenuItem.Text = "Import RegFile";
             // 
             // importRegshotToolStripButtonDropMenuItem
             // 
             this.importRegshotToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importRegshotToolStripButtonDropMenuItem.Image")));
             this.importRegshotToolStripButtonDropMenuItem.Name = "importRegshotToolStripButtonDropMenuItem";
-            this.importRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.importRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
             this.importRegshotToolStripButtonDropMenuItem.Text = "Import Regshot";
             // 
             // importRegClipboardToolStripMenuItem
             // 
             this.importRegClipboardToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importRegClipboardToolStripMenuItem.Image")));
             this.importRegClipboardToolStripMenuItem.Name = "importRegClipboardToolStripMenuItem";
-            this.importRegClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.importRegClipboardToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.importRegClipboardToolStripMenuItem.Text = "Import Reg Clipboard";
             // 
             // toolStripSeparator4
@@ -960,194 +1023,171 @@
             this.toolsToolStripSplitButton.Image = ((System.Drawing.Image)(resources.GetObject("toolsToolStripSplitButton.Image")));
             this.toolsToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolsToolStripSplitButton.Name = "toolsToolStripSplitButton";
-            this.toolsToolStripSplitButton.Size = new System.Drawing.Size(45, 36);
+            this.toolsToolStripSplitButton.Size = new System.Drawing.Size(46, 36);
             this.toolsToolStripSplitButton.Text = "Tools";
             // 
             // whatChangedToolStripMenuItem
             // 
             this.whatChangedToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("whatChangedToolStripMenuItem.Image")));
             this.whatChangedToolStripMenuItem.Name = "whatChangedToolStripMenuItem";
-            this.whatChangedToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.whatChangedToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.whatChangedToolStripMenuItem.Text = "What Changed";
             // 
             // regFromAppToolStripMenuItem
             // 
             this.regFromAppToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("regFromAppToolStripMenuItem.Image")));
             this.regFromAppToolStripMenuItem.Name = "regFromAppToolStripMenuItem";
-            this.regFromAppToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.regFromAppToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.regFromAppToolStripMenuItem.Text = "RegFromApp";
             // 
             // registryChangesViewToolStripMenuItem
             // 
             this.registryChangesViewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("registryChangesViewToolStripMenuItem.Image")));
             this.registryChangesViewToolStripMenuItem.Name = "registryChangesViewToolStripMenuItem";
-            this.registryChangesViewToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.registryChangesViewToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.registryChangesViewToolStripMenuItem.Text = "RegistryChangesView";
             // 
             // fileActivityWatchToolStripMenuItem
             // 
             this.fileActivityWatchToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fileActivityWatchToolStripMenuItem.Image")));
             this.fileActivityWatchToolStripMenuItem.Name = "fileActivityWatchToolStripMenuItem";
-            this.fileActivityWatchToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.fileActivityWatchToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.fileActivityWatchToolStripMenuItem.Text = "FileActivityWatch";
             // 
             // exeInfoToolStripMenuItem
             // 
             this.exeInfoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exeInfoToolStripMenuItem.Image")));
             this.exeInfoToolStripMenuItem.Name = "exeInfoToolStripMenuItem";
-            this.exeInfoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.exeInfoToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.exeInfoToolStripMenuItem.Text = "ExeInfo";
             // 
             // processExplorerToolStripMenuItem
             // 
             this.processExplorerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("processExplorerToolStripMenuItem.Image")));
             this.processExplorerToolStripMenuItem.Name = "processExplorerToolStripMenuItem";
-            this.processExplorerToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.processExplorerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.processExplorerToolStripMenuItem.Text = "Process Explorer";
             // 
             // processMonitorToolStripMenuItem
             // 
             this.processMonitorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("processMonitorToolStripMenuItem.Image")));
             this.processMonitorToolStripMenuItem.Name = "processMonitorToolStripMenuItem";
-            this.processMonitorToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.processMonitorToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.processMonitorToolStripMenuItem.Text = "Process Monitor";
             // 
             // resourceHackerToolStripMenuItem
             // 
             this.resourceHackerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resourceHackerToolStripMenuItem.Image")));
             this.resourceHackerToolStripMenuItem.Name = "resourceHackerToolStripMenuItem";
-            this.resourceHackerToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.resourceHackerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.resourceHackerToolStripMenuItem.Text = "Resource Hacker";
             // 
             // tcpviewToolStripMenuItem
             // 
             this.tcpviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("tcpviewToolStripMenuItem.Image")));
             this.tcpviewToolStripMenuItem.Name = "tcpviewToolStripMenuItem";
-            this.tcpviewToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.tcpviewToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.tcpviewToolStripMenuItem.Text = "Tcpview";
             // 
             // smartSniffToolStripMenuItem
             // 
             this.smartSniffToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("smartSniffToolStripMenuItem.Image")));
             this.smartSniffToolStripMenuItem.Name = "smartSniffToolStripMenuItem";
-            this.smartSniffToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.smartSniffToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.smartSniffToolStripMenuItem.Text = "SmartSniff";
             // 
             // iconsExtractToolStripMenuItem
             // 
             this.iconsExtractToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("iconsExtractToolStripMenuItem.Image")));
             this.iconsExtractToolStripMenuItem.Name = "iconsExtractToolStripMenuItem";
-            this.iconsExtractToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.iconsExtractToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.iconsExtractToolStripMenuItem.Text = "IconsExtract";
+            // 
+            // toolStripSplitTemplateButton
+            // 
+            this.toolStripSplitTemplateButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitTemplateButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crossPlatformTemplateToolStripMenuItem,
+            this.opensourceTemplateToolStripMenuItem,
+            this.qTFrameworkTemplateToolStripMenuItem,
+            this.pythonApplicationTemplateToolStripMenuItem,
+            this.jAVAApplicationTemplateToolStripMenuItem});
+            this.toolStripSplitTemplateButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitTemplateButton.Image")));
+            this.toolStripSplitTemplateButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitTemplateButton.Name = "toolStripSplitTemplateButton";
+            this.toolStripSplitTemplateButton.Size = new System.Drawing.Size(46, 36);
+            this.toolStripSplitTemplateButton.Text = "Template";
+            // 
+            // crossPlatformTemplateToolStripMenuItem
+            // 
+            this.crossPlatformTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("crossPlatformTemplateToolStripMenuItem.Image")));
+            this.crossPlatformTemplateToolStripMenuItem.Name = "crossPlatformTemplateToolStripMenuItem";
+            this.crossPlatformTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.crossPlatformTemplateToolStripMenuItem.Text = "CrossPlatform";
+            // 
+            // opensourceTemplateToolStripMenuItem
+            // 
+            this.opensourceTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("opensourceTemplateToolStripMenuItem.Image")));
+            this.opensourceTemplateToolStripMenuItem.Name = "opensourceTemplateToolStripMenuItem";
+            this.opensourceTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.opensourceTemplateToolStripMenuItem.Text = "Opensource";
+            // 
+            // qTFrameworkTemplateToolStripMenuItem
+            // 
+            this.qTFrameworkTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("qTFrameworkTemplateToolStripMenuItem.Image")));
+            this.qTFrameworkTemplateToolStripMenuItem.Name = "qTFrameworkTemplateToolStripMenuItem";
+            this.qTFrameworkTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.qTFrameworkTemplateToolStripMenuItem.Text = "QTFramework";
+            // 
+            // pythonApplicationTemplateToolStripMenuItem
+            // 
+            this.pythonApplicationTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pythonApplicationTemplateToolStripMenuItem.Image")));
+            this.pythonApplicationTemplateToolStripMenuItem.Name = "pythonApplicationTemplateToolStripMenuItem";
+            this.pythonApplicationTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.pythonApplicationTemplateToolStripMenuItem.Text = "PythonApplication";
+            // 
+            // jAVAApplicationTemplateToolStripMenuItem
+            // 
+            this.jAVAApplicationTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("jAVAApplicationTemplateToolStripMenuItem.Image")));
+            this.jAVAApplicationTemplateToolStripMenuItem.Name = "jAVAApplicationTemplateToolStripMenuItem";
+            this.jAVAApplicationTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.jAVAApplicationTemplateToolStripMenuItem.Text = "JAVAApplication";
             // 
             // foldersToolStripSplitButton
             // 
             this.foldersToolStripSplitButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.foldersToolStripSplitButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aPPDATAToolStripMenuItem,
-            this.aPPDATALocalLowToolStripMenuItem,
-            this.lOCALAPPDATAToolStripMenuItem,
-            this.pROGRAMDATAToolStripMenuItem,
-            this.uSERPROFILEToolStripMenuItem,
-            this.pUBLICToolStripMenuItem,
-            this.tEMPToolStripMenuItem,
-            this.systemRootToolStripMenuItem,
-            this.cOMMONPROGRAMFILESx86ToolStripMenuItem,
-            this.commonProgramW6432ToolStripMenuItem,
-            this.pROGRAMFILESX86ToolStripMenuItem,
-            this.programW6432ToolStripMenuItem});
             this.foldersToolStripSplitButton.Image = ((System.Drawing.Image)(resources.GetObject("foldersToolStripSplitButton.Image")));
             this.foldersToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.foldersToolStripSplitButton.Name = "foldersToolStripSplitButton";
-            this.foldersToolStripSplitButton.Size = new System.Drawing.Size(45, 36);
+            this.foldersToolStripSplitButton.Size = new System.Drawing.Size(46, 36);
             this.foldersToolStripSplitButton.Text = "Common Folders";
             // 
-            // aPPDATAToolStripMenuItem
+            // quickLaunchRegToolStripDropDownButton
             // 
-            this.aPPDATAToolStripMenuItem.Name = "aPPDATAToolStripMenuItem";
-            this.aPPDATAToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.aPPDATAToolStripMenuItem.Text = "%APPDATA%";
-            // 
-            // aPPDATALocalLowToolStripMenuItem
-            // 
-            this.aPPDATALocalLowToolStripMenuItem.Name = "aPPDATALocalLowToolStripMenuItem";
-            this.aPPDATALocalLowToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.aPPDATALocalLowToolStripMenuItem.Text = "%APPDATA%\\..\\LocalLow";
-            // 
-            // lOCALAPPDATAToolStripMenuItem
-            // 
-            this.lOCALAPPDATAToolStripMenuItem.Name = "lOCALAPPDATAToolStripMenuItem";
-            this.lOCALAPPDATAToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.lOCALAPPDATAToolStripMenuItem.Text = "%LOCALAPPDATA%";
-            // 
-            // pROGRAMDATAToolStripMenuItem
-            // 
-            this.pROGRAMDATAToolStripMenuItem.Name = "pROGRAMDATAToolStripMenuItem";
-            this.pROGRAMDATAToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.pROGRAMDATAToolStripMenuItem.Text = "%PROGRAMDATA%";
-            // 
-            // uSERPROFILEToolStripMenuItem
-            // 
-            this.uSERPROFILEToolStripMenuItem.Name = "uSERPROFILEToolStripMenuItem";
-            this.uSERPROFILEToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.uSERPROFILEToolStripMenuItem.Text = "%USERPROFILE%";
-            // 
-            // pUBLICToolStripMenuItem
-            // 
-            this.pUBLICToolStripMenuItem.Name = "pUBLICToolStripMenuItem";
-            this.pUBLICToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.pUBLICToolStripMenuItem.Text = "%PUBLIC%";
-            // 
-            // tEMPToolStripMenuItem
-            // 
-            this.tEMPToolStripMenuItem.Name = "tEMPToolStripMenuItem";
-            this.tEMPToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.tEMPToolStripMenuItem.Text = "%TEMP%";
-            // 
-            // systemRootToolStripMenuItem
-            // 
-            this.systemRootToolStripMenuItem.Name = "systemRootToolStripMenuItem";
-            this.systemRootToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.systemRootToolStripMenuItem.Text = "%SystemRoot%";
-            // 
-            // cOMMONPROGRAMFILESx86ToolStripMenuItem
-            // 
-            this.cOMMONPROGRAMFILESx86ToolStripMenuItem.Name = "cOMMONPROGRAMFILESx86ToolStripMenuItem";
-            this.cOMMONPROGRAMFILESx86ToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.cOMMONPROGRAMFILESx86ToolStripMenuItem.Text = "%COMMONPROGRAMFILES(x86)%";
-            // 
-            // commonProgramW6432ToolStripMenuItem
-            // 
-            this.commonProgramW6432ToolStripMenuItem.Name = "commonProgramW6432ToolStripMenuItem";
-            this.commonProgramW6432ToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.commonProgramW6432ToolStripMenuItem.Text = "%CommonProgramW6432%";
-            // 
-            // pROGRAMFILESX86ToolStripMenuItem
-            // 
-            this.pROGRAMFILESX86ToolStripMenuItem.Name = "pROGRAMFILESX86ToolStripMenuItem";
-            this.pROGRAMFILESX86ToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.pROGRAMFILESX86ToolStripMenuItem.Text = "%PROGRAMFILES(X86)%";
-            // 
-            // programW6432ToolStripMenuItem
-            // 
-            this.programW6432ToolStripMenuItem.Name = "programW6432ToolStripMenuItem";
-            this.programW6432ToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.programW6432ToolStripMenuItem.Text = "%ProgramW6432%";
+            this.quickLaunchRegToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.quickLaunchRegToolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("quickLaunchRegToolStripDropDownButton.Image")));
+            this.quickLaunchRegToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.quickLaunchRegToolStripDropDownButton.Name = "quickLaunchRegToolStripDropDownButton";
+            this.quickLaunchRegToolStripDropDownButton.Size = new System.Drawing.Size(46, 36);
+            this.quickLaunchRegToolStripDropDownButton.Text = "Quick Launch Registry";
+            this.quickLaunchRegToolStripDropDownButton.ToolTipText = "Quick Launch Registry";
             // 
             // mainStatus
             // 
+            this.mainStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelMain,
             this.statusLabelKeyPress});
-            this.mainStatus.Location = new System.Drawing.Point(0, 764);
+            this.mainStatus.Location = new System.Drawing.Point(0, 941);
             this.mainStatus.Name = "mainStatus";
-            this.mainStatus.Size = new System.Drawing.Size(1318, 22);
+            this.mainStatus.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.mainStatus.Size = new System.Drawing.Size(1757, 26);
             this.mainStatus.TabIndex = 3;
             // 
             // statusLabelMain
             // 
             this.statusLabelMain.Name = "statusLabelMain";
-            this.statusLabelMain.Size = new System.Drawing.Size(1145, 17);
+            this.statusLabelMain.Size = new System.Drawing.Size(1537, 20);
             this.statusLabelMain.Spring = true;
             this.statusLabelMain.Text = "statusLabelMain";
             this.statusLabelMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1156,21 +1196,44 @@
             // 
             this.statusLabelKeyPress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusLabelKeyPress.Name = "statusLabelKeyPress";
-            this.statusLabelKeyPress.Size = new System.Drawing.Size(158, 17);
+            this.statusLabelKeyPress.Size = new System.Drawing.Size(200, 20);
             this.statusLabelKeyPress.Text = "toolStripStatusLabelKeyPress";
             this.statusLabelKeyPress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(105, 28);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.test2ToolStripMenuItem});
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            this.testToolStripMenuItem.Text = "Test";
+            // 
+            // test2ToolStripMenuItem
+            // 
+            this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
+            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
+            this.test2ToolStripMenuItem.Text = "Test2";
+            // 
             // MainStudio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 786);
+            this.ClientSize = new System.Drawing.Size(1757, 967);
             this.Controls.Add(this.mainStatus);
             this.Controls.Add(this.mainToolStrip);
             this.Controls.Add(this.mainTab);
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainStudio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Portable App Studio";
@@ -1195,6 +1258,7 @@
             this.mainToolStrip.PerformLayout();
             this.mainStatus.ResumeLayout(false);
             this.mainStatus.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1271,7 +1335,6 @@
         private System.Windows.Forms.ToolStripMenuItem appVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thinAppToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton createLauncherToolStripButton;
-        private System.Windows.Forms.ToolStripButton mergeCustomNSIToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -1296,18 +1359,6 @@
         private System.Windows.Forms.ToolStripMenuItem smartSniffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iconsExtractToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton foldersToolStripSplitButton;
-        private System.Windows.Forms.ToolStripMenuItem aPPDATAToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aPPDATALocalLowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lOCALAPPDATAToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pROGRAMDATAToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uSERPROFILEToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pUBLICToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tEMPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem systemRootToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cOMMONPROGRAMFILESx86ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem commonProgramW6432ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pROGRAMFILESX86ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem programW6432ToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton importMiscToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem importXRegshotToolStripButtonDropMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importThinAppToolStripButtonDropMenuItem;
@@ -1316,6 +1367,19 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem runWithTracerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importRegClipboardToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSplitButton mergeCustomNSIToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forceMergeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripSplitTemplateButton;
+        private System.Windows.Forms.ToolStripMenuItem crossPlatformTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem opensourceTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem qTFrameworkTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pythonApplicationTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem jAVAApplicationTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton quickLaunchRegToolStripDropDownButton;
     }
 }
 

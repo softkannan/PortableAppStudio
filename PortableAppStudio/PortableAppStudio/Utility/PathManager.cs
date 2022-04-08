@@ -61,6 +61,11 @@ namespace PortableAppStudio.Utility
         
         public Dictionary<string, string> EnvironmentVarToDirNameMap { get; private set; }
 
+        public Dictionary<string, string> RegistryQuickLaunch { get; private set; }
+        public Dictionary<string, string> PredefEnvironments { get; private set; }
+        public Dictionary<string, string> FileQuickLaunch { get; private set; }
+        
+
         public List<Model.FilePathEx> IgnoreFiles { get; private set; }
         public List<Model.FilePath> IgnoreFolders { get; private set; }
         public List<string> IgnoreRegKeys { get; private set; }
@@ -73,6 +78,9 @@ namespace PortableAppStudio.Utility
             AppEnvironments = new Dictionary<string, Model.EnvironmentInfo>(StringComparer.InvariantCultureIgnoreCase);
             ToolTipMap = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             EnvironmentVarToDirNameMap = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            PredefEnvironments = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            RegistryQuickLaunch = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            FileQuickLaunch = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
             IgnoreFiles = new List<Model.FilePathEx>();
             IgnoreFolders = new List<Model.FilePath>();
@@ -133,6 +141,9 @@ namespace PortableAppStudio.Utility
         public const string APPCOMPACTOR_FILE = "appcompactor.ini";
         public const string REGHIVE_FILE = "RegHive.dat";
         public const string ENVIRONMENTVARTODIRNAMEMAP_FILE = "EnvironmentVarToDirNameMap.txt";
+        public const string PREDEFENVIRONMENTS = "PredefEnvironments.txt";
+        public const string REGISTRYQUICKLAUNCH = "RegistryQuickLaunch.txt";
+        public const string FILEQUICKLAUNCH = "FileQuickLaunch.txt";
 
 
         public string GetResourcePath(string resourceFilename)
@@ -297,6 +308,63 @@ namespace PortableAppStudio.Utility
                         RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
                     IgnoreFiles.Add(filePath);
+                }
+            }
+
+            {
+                var rawLines = FileUtility.Inst.GetFileLines(GetResourcePath(PREDEFENVIRONMENTS));
+
+                foreach (var item in rawLines)
+                {
+                    int tipStartPos = item.IndexOf('=');
+                    if (tipStartPos != -1)
+                    {
+                        var envVarPart = item.Substring(0, tipStartPos).Trim();
+                        var envMapPart = item.Substring(tipStartPos + 1).Trim();
+
+                        if (!PredefEnvironments.ContainsKey(envVarPart))
+                        {
+                            PredefEnvironments.Add(envVarPart, envMapPart);
+                        }
+                    }
+                }
+            }
+
+            {
+                var rawLines = FileUtility.Inst.GetFileLines(GetResourcePath(REGISTRYQUICKLAUNCH));
+
+                foreach (var item in rawLines)
+                {
+                    int tipStartPos = item.IndexOf('=');
+                    if (tipStartPos != -1)
+                    {
+                        var frientlyName = item.Substring(0, tipStartPos).Trim();
+                        var regPath = item.Substring(tipStartPos + 1).Trim();
+
+                        if (!RegistryQuickLaunch.ContainsKey(frientlyName))
+                        {
+                            RegistryQuickLaunch.Add(frientlyName, regPath);
+                        }
+                    }
+                }
+            }
+
+            {
+                var rawLines = FileUtility.Inst.GetFileLines(GetResourcePath(FILEQUICKLAUNCH));
+
+                foreach (var item in rawLines)
+                {
+                    int tipStartPos = item.IndexOf('=');
+                    if (tipStartPos != -1)
+                    {
+                        var frientlyName = item.Substring(0, tipStartPos).Trim();
+                        var filePath = item.Substring(tipStartPos + 1).Trim();
+
+                        if (!FileQuickLaunch.ContainsKey(frientlyName))
+                        {
+                            FileQuickLaunch.Add(frientlyName, filePath);
+                        }
+                    }
                 }
             }
 

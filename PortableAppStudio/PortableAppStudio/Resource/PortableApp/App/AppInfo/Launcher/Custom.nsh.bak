@@ -13,9 +13,6 @@ Var GSMode
 Var GSDirectory
 Var GSRegExists
 Var GSExecutable
-Var GSProbePath1
-Var GSProbePath2
-Var GSProbePath3
 
 Var JavaModeCustom
 Var JavaDirectoryCustom
@@ -215,8 +212,6 @@ ${SegmentPre}
 	${DebugMsg} "Custom Segment Pre Probe Ghostscript"
 	StrCpy $GSExecutable ""
 	${ReadLauncherConfig} $GSMode Activate Ghostscript
-	
-	${DebugMsg} "Probe Ghostscript config found: $GSMode"
 			
 	${If} $GSMode == find
 	${OrIf} $GSMode == require
@@ -226,23 +221,16 @@ ${SegmentPre}
 	${OrIf} $GSMode == require64
 		; ..\CommonFiles\Ghostscript / ..\Ghostscript
 		
-		
-		StrCpy $GSProbePath1 '%PAL:AppDir%\Ghostscript'
-		StrCpy $GSProbePath2 '%PAL:DataDir%\Ghostscript'
-		StrCpy $GSProbePath3 '%PAL:DataDir%\..\..\CommonFiles\Ghostscript'
-		${ParseLocations} $GSProbePath1
-		${ParseLocations} $GSProbePath2
-		${ParseLocations} $GSProbePath3
-		
-		StrCpy $0 ''
-		
-		${If} ${FileExists} $GSProbePath1
-			StrCpy $0 $GSProbePath1
-		${ElseIf} ${FileExists} $GSProbePath2
-			StrCpy $0 $GSProbePath2
-		${ElseIf} ${FileExists} $GSProbePath3
-			StrCpy $0 $GSProbePath3
+		StrCpy $0 ""
+		${If} ${FileExists} "%PAL:AppDir%\Ghostscript"
+			StrCpy $0 '%PAL:AppDir%\Ghostscript'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\Ghostscript"
+			StrCpy $0 '%PAL:DataDir%\..\..\Ghostscript'
+		${ElseIf} ${FileExists} "%PAL:DataDir%\..\..\CommonFiles\Ghostscript"
+			StrCpy $0 '%PAL:DataDir%\..\..\CommonFiles\Ghostscript'
 		${Else}
+			; C:\Program Files\gs
+			
 			${If} $GSMode == find
 			${OrIf} $GSMode == find64
 			${OrIf} $GSMode == require64
@@ -256,6 +244,7 @@ ${SegmentPre}
 				${EndIf}
 				
 			${EndIf}
+			
 		${EndIf}
 		
 		${ParseLocations} $0
@@ -570,15 +559,14 @@ ${OverrideExecute}
 					ClearErrors
 					${ReadLauncherConfig} $2 Launch KillProc$0
 					${IfThen} ${Errors} ${|} ${ExitDo} ${|}
-					${If} ${ProcessExists} $2
-						${Do}
-							; Kill still running process forcefully
-							${DebugMsg} "KillProcess $2"
-							${TerminateProcess} $2 $3
-							${IfThen} $3 = 0 ${|} ${ExitDo} ${|}
-							${DebugMsg} "KillProcess Completed $2 Exit Code $3"
-						${Loop}
-					${EndIf}
+					
+					${Do}
+						; Kill still running process forcefully
+						${DebugMsg} "KillProcess $2"
+						${TerminateProcess} $2 $3
+						${IfThen} $3 = 0 ${|} ${ExitDo} ${|}
+						${DebugMsg} "KillProcess Completed $2 Exit Code $3"
+					${Loop}
 					
 					IntOp $0 $0 + 1
 				${Loop}
@@ -589,12 +577,10 @@ ${OverrideExecute}
 					${ReadLauncherConfig} $2 Launch WaitForEXE$0
 					${IfThen} ${Errors} ${|} ${ExitDo} ${|}
 					; Process wait for close
-					${If} ${ProcessExists} $2
-						${DebugMsg} "ProcessWaitClose $2"
-						${ProcessWaitClose} $2 -1 $R9
-						${DebugMsg} "ProcessWaitClose Completed $2 ExitCode $R9"
-						${IfThen} $R9 > 0 ${|} ${ExitDo} ${|}
-					${EndIf}
+					${DebugMsg} "ProcessWaitClose $2"
+					${ProcessWaitClose} $2 -1 $R9
+					${DebugMsg} "ProcessWaitClose Completed $2 ExitCode $R9"
+					${IfThen} $R9 > 0 ${|} ${ExitDo} ${|}
 					IntOp $0 $0 + 1
 				${Loop}
 			${LoopWhile} $R9 > 0
