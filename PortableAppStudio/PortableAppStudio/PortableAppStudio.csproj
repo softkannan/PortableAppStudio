@@ -774,7 +774,7 @@
   </Target>
   <Target Name="afterrebuild" AfterTargets="ReBuild">
     <Exec Command="echo ***********************************afterRebuild************************************************" />
-    <Exec Command="xcopy &quot;$(ProjectDir)\Resource\3rdPartyApps\*&quot; &quot;$(TargetDir)\Resource\3rdPartyApps\&quot; /E /Y" />
+    <Exec Command="xcopy &quot;$(ProjectDir)Resource\3rdPartyApps\*&quot; &quot;$(TargetDir)\Resource\3rdPartyApps\&quot; /E /Y" />
   </Target>
   <Target Name="afterclean" AfterTargets="Clean">
     <Exec Command="echo ***********************************afterclean************************************************" />
