@@ -10,7 +10,7 @@ namespace PortableAppStudio.Model.Manifest
     [Serializable]
     [XmlType(AnonymousType = true, Namespace = "urn:schemas-microsoft-com:asm.v1")]
     [XmlRoot(Namespace = "urn:schemas-microsoft-com:asm.v1", IsNullable = false)]
-    public partial class assembly
+    public partial class Assembly
     {
 
         private List<assemblyFile> fileField;

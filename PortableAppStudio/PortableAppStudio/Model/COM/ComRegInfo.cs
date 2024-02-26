@@ -35,7 +35,7 @@ namespace PortableAppStudio.Model.COM
 
         private Dictionary<string, ComFileInfo> _allFileComFiles;
 
-        private bool _overwriteManifestFiles = false;
+        //private bool _overwriteManifestFiles = false;
 
         public List<string> ListOfComDLL { get; private set; }
 

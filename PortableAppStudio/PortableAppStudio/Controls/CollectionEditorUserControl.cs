@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
-using System.Design;
 using System.Drawing.Design;
 using System.Globalization;
 using System.Reflection;

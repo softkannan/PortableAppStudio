@@ -41,9 +41,9 @@ namespace PortableAppStudio.Utility
             string toolsBase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            if (toolsBase.EndsWith("Release") || toolsBase.EndsWith("Debug"))
+            if (toolsBase.EndsWith("net8.0-windows") || toolsBase.EndsWith("Debug"))
             {
-                var tempPath = string.Format(@"{0}\..\..\", toolsBase);
+                var tempPath = string.Format(@"{0}\..\..\..\", toolsBase);
                 toolsBase = tempPath.ResolveFullPath().Trim('\\');
             }
             Environment.SetEnvironmentVariable("TOOLSBASE_DIR", toolsBase);

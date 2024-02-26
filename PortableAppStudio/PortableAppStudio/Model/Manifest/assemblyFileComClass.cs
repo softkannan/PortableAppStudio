@@ -21,7 +21,6 @@ namespace PortableAppStudio.Model.Manifest
 
         private string threadingModelField;
 
-        private string progid1Field;
 
         /// <remarks/>
         public string progid

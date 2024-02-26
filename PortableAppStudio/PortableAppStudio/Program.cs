@@ -14,6 +14,7 @@ namespace PortableAppStudio
         [STAThread]
         static void Main()
         {
+            Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainStudio());
