@@ -28,1240 +28,1127 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("DEBUG_SEGMENT_[Launch]");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainStudio));
-            this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importThinAppCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importRegshotCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importAppVCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importXRegshotCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importRegFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importRegistryCliboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importFilesClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fixDirectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchReplaceInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.appVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.thinAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainTab = new System.Windows.Forms.TabControl();
-            this.filesPage = new System.Windows.Forms.TabPage();
-            this.filesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.sourceFilesTree = new PortableAppStudio.Controls.TreeViewEx();
-            this.appFilesTree = new PortableAppStudio.Controls.TreeViewEx();
-            this.registryTab = new System.Windows.Forms.TabPage();
-            this.registryTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.appRegTree = new PortableAppStudio.Controls.TreeViewEx();
-            this.sourceRegTree = new PortableAppStudio.Controls.TreeViewEx();
-            this.appInfoPage = new System.Windows.Forms.TabPage();
-            this.appInfoEditor = new PortableAppStudio.Controls.PropertyEditorUserControl();
-            this.appInfoTree = new PortableAppStudio.Controls.TreeViewEx();
-            this.launchPage = new System.Windows.Forms.TabPage();
-            this.launchEditor = new PortableAppStudio.Controls.PropertyEditorUserControl();
-            this.launchTree = new PortableAppStudio.Controls.TreeViewEx();
-            this.optionsPage = new System.Windows.Forms.TabPage();
-            this.groupBoxFileConvert = new System.Windows.Forms.GroupBox();
-            this.fileConvertLabel = new System.Windows.Forms.Label();
-            this.registryGroupBox = new System.Windows.Forms.GroupBox();
-            this.generateManifestChk = new System.Windows.Forms.CheckBox();
-            this.generateRegFilesCheck = new System.Windows.Forms.CheckBox();
-            this.debugGroupBox = new System.Windows.Forms.GroupBox();
-            this.DEBUG_SEGMENT_List = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.DEBUG_GLOBAL_Check = new System.Windows.Forms.CheckBox();
-            this.DEBUG_OUTPUT_Combo = new System.Windows.Forms.ComboBox();
-            this.DEBUG_SEGWRAP_Check = new System.Windows.Forms.CheckBox();
-            this.DEBUG_ALL_Check = new System.Windows.Forms.CheckBox();
-            this.openFileDlg = new System.Windows.Forms.OpenFileDialog();
-            this.folderBrowserDlg = new System.Windows.Forms.FolderBrowserDialog();
-            this.saveFileDlg = new System.Windows.Forms.SaveFileDialog();
-            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.createToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.clearToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.createLauncherToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.runPortableToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.runWithProcMonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runWithRegMonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runWithTracerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewDebugLogToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.mergeListtoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.editToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.mergeCustomNSIToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.forceMergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.importAppVToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.importFolderToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.importMiscToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.importXRegshotToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importThinAppToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importRegFileToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importRegshotToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importRegClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolsToolStripSplitButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.whatChangedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.regFromAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registryChangesViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileActivityWatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exeInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.processExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.processMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resourceHackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tcpviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.smartSniffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iconsExtractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitTemplateButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.crossPlatformTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.opensourceTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.qTFrameworkTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pythonApplicationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.jAVAApplicationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.foldersToolStripSplitButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.quickLaunchRegToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.mainStatus = new System.Windows.Forms.StatusStrip();
-            this.statusLabelMain = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelKeyPress = new System.Windows.Forms.ToolStripStatusLabel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainMenu.SuspendLayout();
-            this.mainTab.SuspendLayout();
-            this.filesPage.SuspendLayout();
-            this.filesTableLayoutPanel.SuspendLayout();
-            this.registryTab.SuspendLayout();
-            this.registryTableLayoutPanel.SuspendLayout();
-            this.appInfoPage.SuspendLayout();
-            this.launchPage.SuspendLayout();
-            this.optionsPage.SuspendLayout();
-            this.groupBoxFileConvert.SuspendLayout();
-            this.registryGroupBox.SuspendLayout();
-            this.debugGroupBox.SuspendLayout();
-            this.mainToolStrip.SuspendLayout();
-            this.mainStatus.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
-            this.SuspendLayout();
+            mainMenu = new System.Windows.Forms.MenuStrip();
+            fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importThinAppCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importRegshotCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importAppVCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importXRegshotCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importRegFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importRegistryCliboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importFilesClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            fixDirectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            deleteFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ignoreListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ignoreFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ignoreRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            searchReplaceInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            appVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            thinAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mainTab = new System.Windows.Forms.TabControl();
+            filesPage = new System.Windows.Forms.TabPage();
+            filesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            sourceFilesTree = new Controls.TreeViewEx();
+            appFilesTree = new Controls.TreeViewEx();
+            registryTab = new System.Windows.Forms.TabPage();
+            registryTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            appRegTree = new Controls.TreeViewEx();
+            sourceRegTree = new Controls.TreeViewEx();
+            appInfoPage = new System.Windows.Forms.TabPage();
+            appInfoEditor = new Controls.PropertyEditorUserControl();
+            appInfoTree = new Controls.TreeViewEx();
+            launchPage = new System.Windows.Forms.TabPage();
+            launchEditor = new Controls.PropertyEditorUserControl();
+            launchTree = new Controls.TreeViewEx();
+            optionsPage = new System.Windows.Forms.TabPage();
+            groupBoxFileConvert = new System.Windows.Forms.GroupBox();
+            fileConvertLabel = new System.Windows.Forms.Label();
+            registryGroupBox = new System.Windows.Forms.GroupBox();
+            generateManifestChk = new System.Windows.Forms.CheckBox();
+            generateRegFilesCheck = new System.Windows.Forms.CheckBox();
+            debugGroupBox = new System.Windows.Forms.GroupBox();
+            DEBUG_SEGMENT_List = new System.Windows.Forms.ListView();
+            label2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            DEBUG_GLOBAL_Check = new System.Windows.Forms.CheckBox();
+            DEBUG_OUTPUT_Combo = new System.Windows.Forms.ComboBox();
+            DEBUG_SEGWRAP_Check = new System.Windows.Forms.CheckBox();
+            DEBUG_ALL_Check = new System.Windows.Forms.CheckBox();
+            openFileDlg = new System.Windows.Forms.OpenFileDialog();
+            folderBrowserDlg = new System.Windows.Forms.FolderBrowserDialog();
+            saveFileDlg = new System.Windows.Forms.SaveFileDialog();
+            mainToolStrip = new System.Windows.Forms.ToolStrip();
+            createToolStripButton = new System.Windows.Forms.ToolStripButton();
+            openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            clearToolStripButton = new System.Windows.Forms.ToolStripButton();
+            refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            createLauncherToolStripButton = new System.Windows.Forms.ToolStripButton();
+            runPortableToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
+            runWithProcMonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            runWithRegMonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            runWithTracerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            viewDebugLogToolStripButton = new System.Windows.Forms.ToolStripButton();
+            mergeListtoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            editToolStripButton = new System.Windows.Forms.ToolStripButton();
+            mergeCustomNSIToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
+            compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            forceMergeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            importAppVToolStripButton = new System.Windows.Forms.ToolStripButton();
+            importFolderToolStripButton = new System.Windows.Forms.ToolStripButton();
+            importMiscToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
+            importXRegshotToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importThinAppToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importRegFileToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importRegshotToolStripButtonDropMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importRegClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            toolsToolStripSplitButton = new System.Windows.Forms.ToolStripDropDownButton();
+            whatChangedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            regFromAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            registryChangesViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            fileActivityWatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            exeInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            processExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            processMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            resourceHackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            tcpviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            smartSniffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            iconsExtractToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSplitTemplateButton = new System.Windows.Forms.ToolStripDropDownButton();
+            crossPlatformTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            opensourceTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            qTFrameworkTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pythonApplicationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            jAVAApplicationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            foldersToolStripSplitButton = new System.Windows.Forms.ToolStripDropDownButton();
+            quickLaunchRegToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            mainStatus = new System.Windows.Forms.StatusStrip();
+            statusLabelMain = new System.Windows.Forms.ToolStripStatusLabel();
+            statusLabelKeyPress = new System.Windows.Forms.ToolStripStatusLabel();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mainMenu.SuspendLayout();
+            mainTab.SuspendLayout();
+            filesPage.SuspendLayout();
+            filesTableLayoutPanel.SuspendLayout();
+            registryTab.SuspendLayout();
+            registryTableLayoutPanel.SuspendLayout();
+            appInfoPage.SuspendLayout();
+            launchPage.SuspendLayout();
+            optionsPage.SuspendLayout();
+            groupBoxFileConvert.SuspendLayout();
+            registryGroupBox.SuspendLayout();
+            debugGroupBox.SuspendLayout();
+            mainToolStrip.SuspendLayout();
+            mainStatus.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // mainMenu
             // 
-            this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.importStripMenuItem,
-            this.toolsToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.mainMenu.Location = new System.Drawing.Point(0, 0);
-            this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1757, 28);
-            this.mainMenu.TabIndex = 0;
+            mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, importStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
+            mainMenu.Location = new System.Drawing.Point(0, 0);
+            mainMenu.Name = "mainMenu";
+            mainMenu.Size = new System.Drawing.Size(1757, 28);
+            mainMenu.TabIndex = 0;
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createToolStripMenuItem,
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { createToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            fileToolStripMenuItem.Text = "File";
             // 
             // createToolStripMenuItem
             // 
-            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
-            this.createToolStripMenuItem.Text = "Create";
+            createToolStripMenuItem.Name = "createToolStripMenuItem";
+            createToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            createToolStripMenuItem.Text = "Create";
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
-            this.openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
-            this.saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            saveToolStripMenuItem.Text = "Save";
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            exitToolStripMenuItem.Text = "Exit";
             // 
             // importStripMenuItem
             // 
-            this.importStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importThinAppCaptureToolStripMenuItem,
-            this.importRegshotCaptureToolStripMenuItem,
-            this.importAppVCaptureToolStripMenuItem,
-            this.importXRegshotCaptureToolStripMenuItem,
-            this.importRegFileToolStripMenuItem,
-            this.importFolderToolStripMenuItem,
-            this.importRegistryCliboardToolStripMenuItem,
-            this.importFilesClipboardToolStripMenuItem});
-            this.importStripMenuItem.Name = "importStripMenuItem";
-            this.importStripMenuItem.Size = new System.Drawing.Size(68, 24);
-            this.importStripMenuItem.Text = "Import";
+            importStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { importThinAppCaptureToolStripMenuItem, importRegshotCaptureToolStripMenuItem, importAppVCaptureToolStripMenuItem, importXRegshotCaptureToolStripMenuItem, importRegFileToolStripMenuItem, importFolderToolStripMenuItem, importRegistryCliboardToolStripMenuItem, importFilesClipboardToolStripMenuItem });
+            importStripMenuItem.Name = "importStripMenuItem";
+            importStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            importStripMenuItem.Text = "Import";
             // 
             // importThinAppCaptureToolStripMenuItem
             // 
-            this.importThinAppCaptureToolStripMenuItem.Name = "importThinAppCaptureToolStripMenuItem";
-            this.importThinAppCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importThinAppCaptureToolStripMenuItem.Text = "Import ThinApp Capture";
+            importThinAppCaptureToolStripMenuItem.Name = "importThinAppCaptureToolStripMenuItem";
+            importThinAppCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importThinAppCaptureToolStripMenuItem.Text = "Import ThinApp Capture";
             // 
             // importRegshotCaptureToolStripMenuItem
             // 
-            this.importRegshotCaptureToolStripMenuItem.Name = "importRegshotCaptureToolStripMenuItem";
-            this.importRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importRegshotCaptureToolStripMenuItem.Text = "Import Regshot Capture";
+            importRegshotCaptureToolStripMenuItem.Name = "importRegshotCaptureToolStripMenuItem";
+            importRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importRegshotCaptureToolStripMenuItem.Text = "Import Regshot Capture";
             // 
             // importAppVCaptureToolStripMenuItem
             // 
-            this.importAppVCaptureToolStripMenuItem.Name = "importAppVCaptureToolStripMenuItem";
-            this.importAppVCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importAppVCaptureToolStripMenuItem.Text = "Import AppV Capture";
+            importAppVCaptureToolStripMenuItem.Name = "importAppVCaptureToolStripMenuItem";
+            importAppVCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importAppVCaptureToolStripMenuItem.Text = "Import AppV Capture";
             // 
             // importXRegshotCaptureToolStripMenuItem
             // 
-            this.importXRegshotCaptureToolStripMenuItem.Name = "importXRegshotCaptureToolStripMenuItem";
-            this.importXRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importXRegshotCaptureToolStripMenuItem.Text = "Import X-Regshot Capture";
+            importXRegshotCaptureToolStripMenuItem.Name = "importXRegshotCaptureToolStripMenuItem";
+            importXRegshotCaptureToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importXRegshotCaptureToolStripMenuItem.Text = "Import X-Regshot Capture";
             // 
             // importRegFileToolStripMenuItem
             // 
-            this.importRegFileToolStripMenuItem.Name = "importRegFileToolStripMenuItem";
-            this.importRegFileToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importRegFileToolStripMenuItem.Text = "Import RegFile";
+            importRegFileToolStripMenuItem.Name = "importRegFileToolStripMenuItem";
+            importRegFileToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importRegFileToolStripMenuItem.Text = "Import RegFile";
             // 
             // importFolderToolStripMenuItem
             // 
-            this.importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
-            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importFolderToolStripMenuItem.Text = "Import Folder";
+            importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
+            importFolderToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importFolderToolStripMenuItem.Text = "Import Folder";
             // 
             // importRegistryCliboardToolStripMenuItem
             // 
-            this.importRegistryCliboardToolStripMenuItem.Name = "importRegistryCliboardToolStripMenuItem";
-            this.importRegistryCliboardToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importRegistryCliboardToolStripMenuItem.Text = "Import Registry Clipboard";
+            importRegistryCliboardToolStripMenuItem.Name = "importRegistryCliboardToolStripMenuItem";
+            importRegistryCliboardToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importRegistryCliboardToolStripMenuItem.Text = "Import Registry Clipboard";
             // 
             // importFilesClipboardToolStripMenuItem
             // 
-            this.importFilesClipboardToolStripMenuItem.Name = "importFilesClipboardToolStripMenuItem";
-            this.importFilesClipboardToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.importFilesClipboardToolStripMenuItem.Text = "Import Files Clipboard";
+            importFilesClipboardToolStripMenuItem.Name = "importFilesClipboardToolStripMenuItem";
+            importFilesClipboardToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            importFilesClipboardToolStripMenuItem.Text = "Import Files Clipboard";
             // 
             // toolsToolStripMenuItem
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fixDirectoriesToolStripMenuItem,
-            this.deleteFoldersToolStripMenuItem,
-            this.ignoreListToolStripMenuItem,
-            this.searchReplaceInfoToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
-            this.toolsToolStripMenuItem.Text = "Tools";
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { fixDirectoriesToolStripMenuItem, deleteFoldersToolStripMenuItem, ignoreListToolStripMenuItem, searchReplaceInfoToolStripMenuItem });
+            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            toolsToolStripMenuItem.Text = "Tools";
             // 
             // fixDirectoriesToolStripMenuItem
             // 
-            this.fixDirectoriesToolStripMenuItem.Name = "fixDirectoriesToolStripMenuItem";
-            this.fixDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.fixDirectoriesToolStripMenuItem.Text = "Fix Directories";
+            fixDirectoriesToolStripMenuItem.Name = "fixDirectoriesToolStripMenuItem";
+            fixDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            fixDirectoriesToolStripMenuItem.Text = "Fix Directories";
             // 
             // deleteFoldersToolStripMenuItem
             // 
-            this.deleteFoldersToolStripMenuItem.Name = "deleteFoldersToolStripMenuItem";
-            this.deleteFoldersToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.deleteFoldersToolStripMenuItem.Text = "Delete Folders";
+            deleteFoldersToolStripMenuItem.Name = "deleteFoldersToolStripMenuItem";
+            deleteFoldersToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            deleteFoldersToolStripMenuItem.Text = "Delete Folders";
             // 
             // ignoreListToolStripMenuItem
             // 
-            this.ignoreListToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ignoreFoldersToolStripMenuItem,
-            this.ignoreFilesToolStripMenuItem,
-            this.ignoreRegistryToolStripMenuItem});
-            this.ignoreListToolStripMenuItem.Name = "ignoreListToolStripMenuItem";
-            this.ignoreListToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.ignoreListToolStripMenuItem.Text = "IgnoreList";
+            ignoreListToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ignoreFoldersToolStripMenuItem, ignoreFilesToolStripMenuItem, ignoreRegistryToolStripMenuItem });
+            ignoreListToolStripMenuItem.Name = "ignoreListToolStripMenuItem";
+            ignoreListToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            ignoreListToolStripMenuItem.Text = "IgnoreList";
             // 
             // ignoreFoldersToolStripMenuItem
             // 
-            this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
-            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
-            this.ignoreFoldersToolStripMenuItem.Text = "Folders";
+            ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
+            ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            ignoreFoldersToolStripMenuItem.Text = "Folders";
             // 
             // ignoreFilesToolStripMenuItem
             // 
-            this.ignoreFilesToolStripMenuItem.Name = "ignoreFilesToolStripMenuItem";
-            this.ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
-            this.ignoreFilesToolStripMenuItem.Text = "Files";
+            ignoreFilesToolStripMenuItem.Name = "ignoreFilesToolStripMenuItem";
+            ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            ignoreFilesToolStripMenuItem.Text = "Files";
             // 
             // ignoreRegistryToolStripMenuItem
             // 
-            this.ignoreRegistryToolStripMenuItem.Name = "ignoreRegistryToolStripMenuItem";
-            this.ignoreRegistryToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
-            this.ignoreRegistryToolStripMenuItem.Text = "Registry";
+            ignoreRegistryToolStripMenuItem.Name = "ignoreRegistryToolStripMenuItem";
+            ignoreRegistryToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            ignoreRegistryToolStripMenuItem.Text = "Registry";
             // 
             // searchReplaceInfoToolStripMenuItem
             // 
-            this.searchReplaceInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.appVToolStripMenuItem,
-            this.thinAppToolStripMenuItem});
-            this.searchReplaceInfoToolStripMenuItem.Name = "searchReplaceInfoToolStripMenuItem";
-            this.searchReplaceInfoToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.searchReplaceInfoToolStripMenuItem.Text = "SearchReplaceInfo";
+            searchReplaceInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { appVToolStripMenuItem, thinAppToolStripMenuItem });
+            searchReplaceInfoToolStripMenuItem.Name = "searchReplaceInfoToolStripMenuItem";
+            searchReplaceInfoToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            searchReplaceInfoToolStripMenuItem.Text = "SearchReplaceInfo";
             // 
             // appVToolStripMenuItem
             // 
-            this.appVToolStripMenuItem.Name = "appVToolStripMenuItem";
-            this.appVToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
-            this.appVToolStripMenuItem.Text = "App-V";
-            this.appVToolStripMenuItem.Click += new System.EventHandler(this.appVToolStripMenuItem_Click);
+            appVToolStripMenuItem.Name = "appVToolStripMenuItem";
+            appVToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            appVToolStripMenuItem.Text = "App-V";
+            appVToolStripMenuItem.Click += appVToolStripMenuItem_Click;
             // 
             // thinAppToolStripMenuItem
             // 
-            this.thinAppToolStripMenuItem.Name = "thinAppToolStripMenuItem";
-            this.thinAppToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
-            this.thinAppToolStripMenuItem.Text = "ThinApp";
-            this.thinAppToolStripMenuItem.Click += new System.EventHandler(this.thinAppToolStripMenuItem_Click);
+            thinAppToolStripMenuItem.Name = "thinAppToolStripMenuItem";
+            thinAppToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            thinAppToolStripMenuItem.Text = "ThinApp";
+            thinAppToolStripMenuItem.Click += thinAppToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
-            this.helpToolStripMenuItem.Text = "Help";
+            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            aboutToolStripMenuItem.Text = "About";
             // 
             // mainTab
             // 
-            this.mainTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainTab.Controls.Add(this.filesPage);
-            this.mainTab.Controls.Add(this.registryTab);
-            this.mainTab.Controls.Add(this.appInfoPage);
-            this.mainTab.Controls.Add(this.launchPage);
-            this.mainTab.Controls.Add(this.optionsPage);
-            this.mainTab.Location = new System.Drawing.Point(16, 81);
-            this.mainTab.Margin = new System.Windows.Forms.Padding(4);
-            this.mainTab.Name = "mainTab";
-            this.mainTab.SelectedIndex = 0;
-            this.mainTab.Size = new System.Drawing.Size(1725, 855);
-            this.mainTab.TabIndex = 1;
+            mainTab.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            mainTab.Controls.Add(filesPage);
+            mainTab.Controls.Add(registryTab);
+            mainTab.Controls.Add(appInfoPage);
+            mainTab.Controls.Add(launchPage);
+            mainTab.Controls.Add(optionsPage);
+            mainTab.Location = new System.Drawing.Point(16, 101);
+            mainTab.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            mainTab.Name = "mainTab";
+            mainTab.SelectedIndex = 0;
+            mainTab.Size = new System.Drawing.Size(1725, 1069);
+            mainTab.TabIndex = 1;
             // 
             // filesPage
             // 
-            this.filesPage.Controls.Add(this.filesTableLayoutPanel);
-            this.filesPage.Location = new System.Drawing.Point(4, 25);
-            this.filesPage.Margin = new System.Windows.Forms.Padding(4);
-            this.filesPage.Name = "filesPage";
-            this.filesPage.Padding = new System.Windows.Forms.Padding(4);
-            this.filesPage.Size = new System.Drawing.Size(1717, 826);
-            this.filesPage.TabIndex = 0;
-            this.filesPage.Text = "Files";
-            this.filesPage.UseVisualStyleBackColor = true;
+            filesPage.Controls.Add(filesTableLayoutPanel);
+            filesPage.Location = new System.Drawing.Point(4, 29);
+            filesPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            filesPage.Name = "filesPage";
+            filesPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            filesPage.Size = new System.Drawing.Size(1717, 1036);
+            filesPage.TabIndex = 0;
+            filesPage.Text = "Files";
+            filesPage.UseVisualStyleBackColor = true;
             // 
             // filesTableLayoutPanel
             // 
-            this.filesTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.filesTableLayoutPanel.ColumnCount = 2;
-            this.filesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.filesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.filesTableLayoutPanel.Controls.Add(this.sourceFilesTree, 0, 0);
-            this.filesTableLayoutPanel.Controls.Add(this.appFilesTree, 1, 0);
-            this.filesTableLayoutPanel.Location = new System.Drawing.Point(8, 7);
-            this.filesTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.filesTableLayoutPanel.Name = "filesTableLayoutPanel";
-            this.filesTableLayoutPanel.RowCount = 1;
-            this.filesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.filesTableLayoutPanel.Size = new System.Drawing.Size(1699, 809);
-            this.filesTableLayoutPanel.TabIndex = 7;
+            filesTableLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            filesTableLayoutPanel.ColumnCount = 2;
+            filesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            filesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            filesTableLayoutPanel.Controls.Add(sourceFilesTree, 0, 0);
+            filesTableLayoutPanel.Controls.Add(appFilesTree, 1, 0);
+            filesTableLayoutPanel.Location = new System.Drawing.Point(8, 9);
+            filesTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            filesTableLayoutPanel.Name = "filesTableLayoutPanel";
+            filesTableLayoutPanel.RowCount = 1;
+            filesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            filesTableLayoutPanel.Size = new System.Drawing.Size(1699, 1011);
+            filesTableLayoutPanel.TabIndex = 7;
             // 
             // sourceFilesTree
             // 
-            this.sourceFilesTree.AllowDrop = true;
-            this.sourceFilesTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sourceFilesTree.Location = new System.Drawing.Point(4, 4);
-            this.sourceFilesTree.Margin = new System.Windows.Forms.Padding(4);
-            this.sourceFilesTree.Name = "sourceFilesTree";
-            this.sourceFilesTree.Size = new System.Drawing.Size(841, 801);
-            this.sourceFilesTree.TabIndex = 5;
+            sourceFilesTree.AllowDrop = true;
+            sourceFilesTree.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            sourceFilesTree.Location = new System.Drawing.Point(4, 5);
+            sourceFilesTree.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            sourceFilesTree.Name = "sourceFilesTree";
+            sourceFilesTree.Size = new System.Drawing.Size(841, 1001);
+            sourceFilesTree.TabIndex = 5;
             // 
             // appFilesTree
             // 
-            this.appFilesTree.AllowDrop = true;
-            this.appFilesTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.appFilesTree.Location = new System.Drawing.Point(853, 4);
-            this.appFilesTree.Margin = new System.Windows.Forms.Padding(4);
-            this.appFilesTree.Name = "appFilesTree";
-            this.appFilesTree.Size = new System.Drawing.Size(842, 801);
-            this.appFilesTree.TabIndex = 6;
+            appFilesTree.AllowDrop = true;
+            appFilesTree.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            appFilesTree.Location = new System.Drawing.Point(853, 5);
+            appFilesTree.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            appFilesTree.Name = "appFilesTree";
+            appFilesTree.Size = new System.Drawing.Size(842, 1001);
+            appFilesTree.TabIndex = 6;
             // 
             // registryTab
             // 
-            this.registryTab.Controls.Add(this.registryTableLayoutPanel);
-            this.registryTab.Location = new System.Drawing.Point(4, 25);
-            this.registryTab.Margin = new System.Windows.Forms.Padding(4);
-            this.registryTab.Name = "registryTab";
-            this.registryTab.Padding = new System.Windows.Forms.Padding(4);
-            this.registryTab.Size = new System.Drawing.Size(1717, 826);
-            this.registryTab.TabIndex = 2;
-            this.registryTab.Text = "Registry";
-            this.registryTab.UseVisualStyleBackColor = true;
+            registryTab.Controls.Add(registryTableLayoutPanel);
+            registryTab.Location = new System.Drawing.Point(4, 29);
+            registryTab.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            registryTab.Name = "registryTab";
+            registryTab.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            registryTab.Size = new System.Drawing.Size(1717, 1036);
+            registryTab.TabIndex = 2;
+            registryTab.Text = "Registry";
+            registryTab.UseVisualStyleBackColor = true;
             // 
             // registryTableLayoutPanel
             // 
-            this.registryTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.registryTableLayoutPanel.ColumnCount = 2;
-            this.registryTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.registryTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.registryTableLayoutPanel.Controls.Add(this.appRegTree, 1, 0);
-            this.registryTableLayoutPanel.Controls.Add(this.sourceRegTree, 0, 0);
-            this.registryTableLayoutPanel.Location = new System.Drawing.Point(8, 7);
-            this.registryTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.registryTableLayoutPanel.Name = "registryTableLayoutPanel";
-            this.registryTableLayoutPanel.RowCount = 1;
-            this.registryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.registryTableLayoutPanel.Size = new System.Drawing.Size(1701, 811);
-            this.registryTableLayoutPanel.TabIndex = 8;
+            registryTableLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            registryTableLayoutPanel.ColumnCount = 2;
+            registryTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            registryTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            registryTableLayoutPanel.Controls.Add(appRegTree, 1, 0);
+            registryTableLayoutPanel.Controls.Add(sourceRegTree, 0, 0);
+            registryTableLayoutPanel.Location = new System.Drawing.Point(8, 9);
+            registryTableLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            registryTableLayoutPanel.Name = "registryTableLayoutPanel";
+            registryTableLayoutPanel.RowCount = 1;
+            registryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            registryTableLayoutPanel.Size = new System.Drawing.Size(1701, 1014);
+            registryTableLayoutPanel.TabIndex = 8;
             // 
             // appRegTree
             // 
-            this.appRegTree.AllowDrop = true;
-            this.appRegTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.appRegTree.Location = new System.Drawing.Point(854, 4);
-            this.appRegTree.Margin = new System.Windows.Forms.Padding(4);
-            this.appRegTree.Name = "appRegTree";
-            this.appRegTree.ShowNodeToolTips = true;
-            this.appRegTree.Size = new System.Drawing.Size(843, 803);
-            this.appRegTree.TabIndex = 7;
+            appRegTree.AllowDrop = true;
+            appRegTree.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            appRegTree.Location = new System.Drawing.Point(854, 5);
+            appRegTree.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            appRegTree.Name = "appRegTree";
+            appRegTree.ShowNodeToolTips = true;
+            appRegTree.Size = new System.Drawing.Size(843, 1004);
+            appRegTree.TabIndex = 7;
             // 
             // sourceRegTree
             // 
-            this.sourceRegTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sourceRegTree.Location = new System.Drawing.Point(4, 4);
-            this.sourceRegTree.Margin = new System.Windows.Forms.Padding(4);
-            this.sourceRegTree.Name = "sourceRegTree";
-            this.sourceRegTree.Size = new System.Drawing.Size(842, 803);
-            this.sourceRegTree.TabIndex = 6;
+            sourceRegTree.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            sourceRegTree.Location = new System.Drawing.Point(4, 5);
+            sourceRegTree.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            sourceRegTree.Name = "sourceRegTree";
+            sourceRegTree.Size = new System.Drawing.Size(842, 1004);
+            sourceRegTree.TabIndex = 6;
             // 
             // appInfoPage
             // 
-            this.appInfoPage.Controls.Add(this.appInfoEditor);
-            this.appInfoPage.Controls.Add(this.appInfoTree);
-            this.appInfoPage.Location = new System.Drawing.Point(4, 25);
-            this.appInfoPage.Margin = new System.Windows.Forms.Padding(4);
-            this.appInfoPage.Name = "appInfoPage";
-            this.appInfoPage.Padding = new System.Windows.Forms.Padding(4);
-            this.appInfoPage.Size = new System.Drawing.Size(1717, 826);
-            this.appInfoPage.TabIndex = 4;
-            this.appInfoPage.Text = "AppInfo";
-            this.appInfoPage.UseVisualStyleBackColor = true;
+            appInfoPage.Controls.Add(appInfoEditor);
+            appInfoPage.Controls.Add(appInfoTree);
+            appInfoPage.Location = new System.Drawing.Point(4, 29);
+            appInfoPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            appInfoPage.Name = "appInfoPage";
+            appInfoPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            appInfoPage.Size = new System.Drawing.Size(1717, 1036);
+            appInfoPage.TabIndex = 4;
+            appInfoPage.Text = "AppInfo";
+            appInfoPage.UseVisualStyleBackColor = true;
             // 
             // appInfoEditor
             // 
-            this.appInfoEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.appInfoEditor.Location = new System.Drawing.Point(612, 1);
-            this.appInfoEditor.Margin = new System.Windows.Forms.Padding(5);
-            this.appInfoEditor.Name = "appInfoEditor";
-            this.appInfoEditor.Size = new System.Drawing.Size(1096, 816);
-            this.appInfoEditor.TabIndex = 9;
+            appInfoEditor.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            appInfoEditor.Location = new System.Drawing.Point(612, 1);
+            appInfoEditor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            appInfoEditor.Name = "appInfoEditor";
+            appInfoEditor.Size = new System.Drawing.Size(1096, 1020);
+            appInfoEditor.TabIndex = 9;
             // 
             // appInfoTree
             // 
-            this.appInfoTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.appInfoTree.LabelEdit = true;
-            this.appInfoTree.Location = new System.Drawing.Point(8, 15);
-            this.appInfoTree.Margin = new System.Windows.Forms.Padding(4);
-            this.appInfoTree.Name = "appInfoTree";
-            this.appInfoTree.Size = new System.Drawing.Size(595, 803);
-            this.appInfoTree.TabIndex = 8;
+            appInfoTree.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            appInfoTree.LabelEdit = true;
+            appInfoTree.Location = new System.Drawing.Point(8, 19);
+            appInfoTree.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            appInfoTree.Name = "appInfoTree";
+            appInfoTree.Size = new System.Drawing.Size(595, 1003);
+            appInfoTree.TabIndex = 8;
             // 
             // launchPage
             // 
-            this.launchPage.Controls.Add(this.launchEditor);
-            this.launchPage.Controls.Add(this.launchTree);
-            this.launchPage.Location = new System.Drawing.Point(4, 25);
-            this.launchPage.Margin = new System.Windows.Forms.Padding(4);
-            this.launchPage.Name = "launchPage";
-            this.launchPage.Padding = new System.Windows.Forms.Padding(4);
-            this.launchPage.Size = new System.Drawing.Size(1717, 826);
-            this.launchPage.TabIndex = 1;
-            this.launchPage.Text = "Launch";
-            this.launchPage.UseVisualStyleBackColor = true;
+            launchPage.Controls.Add(launchEditor);
+            launchPage.Controls.Add(launchTree);
+            launchPage.Location = new System.Drawing.Point(4, 29);
+            launchPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            launchPage.Name = "launchPage";
+            launchPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            launchPage.Size = new System.Drawing.Size(1717, 1036);
+            launchPage.TabIndex = 1;
+            launchPage.Text = "Launch";
+            launchPage.UseVisualStyleBackColor = true;
             // 
             // launchEditor
             // 
-            this.launchEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.launchEditor.Location = new System.Drawing.Point(788, 0);
-            this.launchEditor.Margin = new System.Windows.Forms.Padding(5);
-            this.launchEditor.Name = "launchEditor";
-            this.launchEditor.Size = new System.Drawing.Size(924, 817);
-            this.launchEditor.TabIndex = 8;
+            launchEditor.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            launchEditor.Location = new System.Drawing.Point(788, 0);
+            launchEditor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            launchEditor.Name = "launchEditor";
+            launchEditor.Size = new System.Drawing.Size(924, 1022);
+            launchEditor.TabIndex = 8;
             // 
             // launchTree
             // 
-            this.launchTree.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.launchTree.Location = new System.Drawing.Point(8, 15);
-            this.launchTree.Margin = new System.Windows.Forms.Padding(4);
-            this.launchTree.Name = "launchTree";
-            this.launchTree.Size = new System.Drawing.Size(771, 803);
-            this.launchTree.TabIndex = 7;
+            launchTree.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            launchTree.Location = new System.Drawing.Point(8, 19);
+            launchTree.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            launchTree.Name = "launchTree";
+            launchTree.Size = new System.Drawing.Size(771, 1003);
+            launchTree.TabIndex = 7;
             // 
             // optionsPage
             // 
-            this.optionsPage.AllowDrop = true;
-            this.optionsPage.Controls.Add(this.groupBoxFileConvert);
-            this.optionsPage.Controls.Add(this.registryGroupBox);
-            this.optionsPage.Controls.Add(this.debugGroupBox);
-            this.optionsPage.Location = new System.Drawing.Point(4, 25);
-            this.optionsPage.Margin = new System.Windows.Forms.Padding(4);
-            this.optionsPage.Name = "optionsPage";
-            this.optionsPage.Padding = new System.Windows.Forms.Padding(4);
-            this.optionsPage.Size = new System.Drawing.Size(1717, 826);
-            this.optionsPage.TabIndex = 5;
-            this.optionsPage.Text = "Options / Tools";
-            this.optionsPage.UseVisualStyleBackColor = true;
+            optionsPage.AllowDrop = true;
+            optionsPage.Controls.Add(groupBoxFileConvert);
+            optionsPage.Controls.Add(registryGroupBox);
+            optionsPage.Controls.Add(debugGroupBox);
+            optionsPage.Location = new System.Drawing.Point(4, 29);
+            optionsPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            optionsPage.Name = "optionsPage";
+            optionsPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            optionsPage.Size = new System.Drawing.Size(1717, 1036);
+            optionsPage.TabIndex = 5;
+            optionsPage.Text = "Options / Tools";
+            optionsPage.UseVisualStyleBackColor = true;
             // 
             // groupBoxFileConvert
             // 
-            this.groupBoxFileConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxFileConvert.Controls.Add(this.fileConvertLabel);
-            this.groupBoxFileConvert.Location = new System.Drawing.Point(520, 146);
-            this.groupBoxFileConvert.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBoxFileConvert.Name = "groupBoxFileConvert";
-            this.groupBoxFileConvert.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxFileConvert.Size = new System.Drawing.Size(1189, 672);
-            this.groupBoxFileConvert.TabIndex = 2;
-            this.groupBoxFileConvert.TabStop = false;
-            this.groupBoxFileConvert.Text = "Folder / File Convert";
+            groupBoxFileConvert.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBoxFileConvert.Controls.Add(fileConvertLabel);
+            groupBoxFileConvert.Location = new System.Drawing.Point(520, 182);
+            groupBoxFileConvert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            groupBoxFileConvert.Name = "groupBoxFileConvert";
+            groupBoxFileConvert.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            groupBoxFileConvert.Size = new System.Drawing.Size(1189, 840);
+            groupBoxFileConvert.TabIndex = 2;
+            groupBoxFileConvert.TabStop = false;
+            groupBoxFileConvert.Text = "Folder / File Convert";
             // 
             // fileConvertLabel
             // 
-            this.fileConvertLabel.AllowDrop = true;
-            this.fileConvertLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fileConvertLabel.Location = new System.Drawing.Point(8, 20);
-            this.fileConvertLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.fileConvertLabel.Name = "fileConvertLabel";
-            this.fileConvertLabel.Size = new System.Drawing.Size(1173, 648);
-            this.fileConvertLabel.TabIndex = 0;
-            this.fileConvertLabel.Text = "Folder / File Convert";
-            this.fileConvertLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            fileConvertLabel.AllowDrop = true;
+            fileConvertLabel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            fileConvertLabel.Location = new System.Drawing.Point(8, 25);
+            fileConvertLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            fileConvertLabel.Name = "fileConvertLabel";
+            fileConvertLabel.Size = new System.Drawing.Size(1173, 810);
+            fileConvertLabel.TabIndex = 0;
+            fileConvertLabel.Text = "Folder / File Convert";
+            fileConvertLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // registryGroupBox
             // 
-            this.registryGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.registryGroupBox.Controls.Add(this.generateManifestChk);
-            this.registryGroupBox.Controls.Add(this.generateRegFilesCheck);
-            this.registryGroupBox.Location = new System.Drawing.Point(520, 20);
-            this.registryGroupBox.Margin = new System.Windows.Forms.Padding(4);
-            this.registryGroupBox.Name = "registryGroupBox";
-            this.registryGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.registryGroupBox.Size = new System.Drawing.Size(1189, 119);
-            this.registryGroupBox.TabIndex = 1;
-            this.registryGroupBox.TabStop = false;
-            this.registryGroupBox.Text = "Registry";
+            registryGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            registryGroupBox.Controls.Add(generateManifestChk);
+            registryGroupBox.Controls.Add(generateRegFilesCheck);
+            registryGroupBox.Location = new System.Drawing.Point(520, 25);
+            registryGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            registryGroupBox.Name = "registryGroupBox";
+            registryGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            registryGroupBox.Size = new System.Drawing.Size(1189, 149);
+            registryGroupBox.TabIndex = 1;
+            registryGroupBox.TabStop = false;
+            registryGroupBox.Text = "Registry";
             // 
             // generateManifestChk
             // 
-            this.generateManifestChk.AutoSize = true;
-            this.generateManifestChk.Location = new System.Drawing.Point(31, 73);
-            this.generateManifestChk.Margin = new System.Windows.Forms.Padding(4);
-            this.generateManifestChk.Name = "generateManifestChk";
-            this.generateManifestChk.Size = new System.Drawing.Size(138, 20);
-            this.generateManifestChk.TabIndex = 1;
-            this.generateManifestChk.Text = "Generate Manifest";
-            this.generateManifestChk.UseVisualStyleBackColor = true;
+            generateManifestChk.AutoSize = true;
+            generateManifestChk.Location = new System.Drawing.Point(31, 91);
+            generateManifestChk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            generateManifestChk.Name = "generateManifestChk";
+            generateManifestChk.Size = new System.Drawing.Size(152, 24);
+            generateManifestChk.TabIndex = 1;
+            generateManifestChk.Text = "Generate Manifest";
+            generateManifestChk.UseVisualStyleBackColor = true;
             // 
             // generateRegFilesCheck
             // 
-            this.generateRegFilesCheck.AutoSize = true;
-            this.generateRegFilesCheck.Checked = true;
-            this.generateRegFilesCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.generateRegFilesCheck.Location = new System.Drawing.Point(31, 42);
-            this.generateRegFilesCheck.Margin = new System.Windows.Forms.Padding(4);
-            this.generateRegFilesCheck.Name = "generateRegFilesCheck";
-            this.generateRegFilesCheck.Size = new System.Drawing.Size(146, 20);
-            this.generateRegFilesCheck.TabIndex = 0;
-            this.generateRegFilesCheck.Text = "Generate Reg Files";
-            this.generateRegFilesCheck.UseVisualStyleBackColor = true;
+            generateRegFilesCheck.AutoSize = true;
+            generateRegFilesCheck.Checked = true;
+            generateRegFilesCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            generateRegFilesCheck.Location = new System.Drawing.Point(31, 52);
+            generateRegFilesCheck.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            generateRegFilesCheck.Name = "generateRegFilesCheck";
+            generateRegFilesCheck.Size = new System.Drawing.Size(154, 24);
+            generateRegFilesCheck.TabIndex = 0;
+            generateRegFilesCheck.Text = "Generate Reg Files";
+            generateRegFilesCheck.UseVisualStyleBackColor = true;
             // 
             // debugGroupBox
             // 
-            this.debugGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.debugGroupBox.Controls.Add(this.DEBUG_SEGMENT_List);
-            this.debugGroupBox.Controls.Add(this.label2);
-            this.debugGroupBox.Controls.Add(this.label1);
-            this.debugGroupBox.Controls.Add(this.DEBUG_GLOBAL_Check);
-            this.debugGroupBox.Controls.Add(this.DEBUG_OUTPUT_Combo);
-            this.debugGroupBox.Controls.Add(this.DEBUG_SEGWRAP_Check);
-            this.debugGroupBox.Controls.Add(this.DEBUG_ALL_Check);
-            this.debugGroupBox.Location = new System.Drawing.Point(8, 20);
-            this.debugGroupBox.Margin = new System.Windows.Forms.Padding(4);
-            this.debugGroupBox.Name = "debugGroupBox";
-            this.debugGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.debugGroupBox.Size = new System.Drawing.Size(504, 798);
-            this.debugGroupBox.TabIndex = 0;
-            this.debugGroupBox.TabStop = false;
-            this.debugGroupBox.Text = "Debug";
+            debugGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            debugGroupBox.Controls.Add(DEBUG_SEGMENT_List);
+            debugGroupBox.Controls.Add(label2);
+            debugGroupBox.Controls.Add(label1);
+            debugGroupBox.Controls.Add(DEBUG_GLOBAL_Check);
+            debugGroupBox.Controls.Add(DEBUG_OUTPUT_Combo);
+            debugGroupBox.Controls.Add(DEBUG_SEGWRAP_Check);
+            debugGroupBox.Controls.Add(DEBUG_ALL_Check);
+            debugGroupBox.Location = new System.Drawing.Point(8, 25);
+            debugGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            debugGroupBox.Name = "debugGroupBox";
+            debugGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            debugGroupBox.Size = new System.Drawing.Size(504, 998);
+            debugGroupBox.TabIndex = 0;
+            debugGroupBox.TabStop = false;
+            debugGroupBox.Text = "Debug";
             // 
             // DEBUG_SEGMENT_List
             // 
-            this.DEBUG_SEGMENT_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DEBUG_SEGMENT_List.CheckBoxes = true;
-            this.DEBUG_SEGMENT_List.HideSelection = false;
+            DEBUG_SEGMENT_List.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            DEBUG_SEGMENT_List.CheckBoxes = true;
             listViewItem1.StateImageIndex = 0;
-            this.DEBUG_SEGMENT_List.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.DEBUG_SEGMENT_List.Location = new System.Drawing.Point(20, 143);
-            this.DEBUG_SEGMENT_List.Margin = new System.Windows.Forms.Padding(4);
-            this.DEBUG_SEGMENT_List.Name = "DEBUG_SEGMENT_List";
-            this.DEBUG_SEGMENT_List.Size = new System.Drawing.Size(460, 632);
-            this.DEBUG_SEGMENT_List.TabIndex = 7;
-            this.DEBUG_SEGMENT_List.UseCompatibleStateImageBehavior = false;
-            this.DEBUG_SEGMENT_List.View = System.Windows.Forms.View.List;
+            DEBUG_SEGMENT_List.Items.AddRange(new System.Windows.Forms.ListViewItem[] { listViewItem1 });
+            DEBUG_SEGMENT_List.Location = new System.Drawing.Point(20, 179);
+            DEBUG_SEGMENT_List.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            DEBUG_SEGMENT_List.Name = "DEBUG_SEGMENT_List";
+            DEBUG_SEGMENT_List.Size = new System.Drawing.Size(460, 789);
+            DEBUG_SEGMENT_List.TabIndex = 7;
+            DEBUG_SEGMENT_List.UseCompatibleStateImageBehavior = false;
+            DEBUG_SEGMENT_List.View = System.Windows.Forms.View.List;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 123);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 16);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Debug Segment:";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(16, 154);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(120, 20);
+            label2.TabIndex = 6;
+            label2.Text = "Debug Segment:";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(213, 42);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Debug Output :";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(213, 52);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(111, 20);
+            label1.TabIndex = 5;
+            label1.Text = "Debug Output :";
             // 
             // DEBUG_GLOBAL_Check
             // 
-            this.DEBUG_GLOBAL_Check.AutoSize = true;
-            this.DEBUG_GLOBAL_Check.Location = new System.Drawing.Point(13, 98);
-            this.DEBUG_GLOBAL_Check.Margin = new System.Windows.Forms.Padding(4);
-            this.DEBUG_GLOBAL_Check.Name = "DEBUG_GLOBAL_Check";
-            this.DEBUG_GLOBAL_Check.Size = new System.Drawing.Size(136, 20);
-            this.DEBUG_GLOBAL_Check.TabIndex = 3;
-            this.DEBUG_GLOBAL_Check.Text = "DEBUG_GLOBAL";
-            this.DEBUG_GLOBAL_Check.UseVisualStyleBackColor = true;
+            DEBUG_GLOBAL_Check.AutoSize = true;
+            DEBUG_GLOBAL_Check.Location = new System.Drawing.Point(13, 122);
+            DEBUG_GLOBAL_Check.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            DEBUG_GLOBAL_Check.Name = "DEBUG_GLOBAL_Check";
+            DEBUG_GLOBAL_Check.Size = new System.Drawing.Size(138, 24);
+            DEBUG_GLOBAL_Check.TabIndex = 3;
+            DEBUG_GLOBAL_Check.Text = "DEBUG_GLOBAL";
+            DEBUG_GLOBAL_Check.UseVisualStyleBackColor = true;
             // 
             // DEBUG_OUTPUT_Combo
             // 
-            this.DEBUG_OUTPUT_Combo.FormattingEnabled = true;
-            this.DEBUG_OUTPUT_Combo.Items.AddRange(new object[] {
-            "nothing",
-            "file",
-            "messagebox"});
-            this.DEBUG_OUTPUT_Combo.Location = new System.Drawing.Point(217, 68);
-            this.DEBUG_OUTPUT_Combo.Margin = new System.Windows.Forms.Padding(4);
-            this.DEBUG_OUTPUT_Combo.Name = "DEBUG_OUTPUT_Combo";
-            this.DEBUG_OUTPUT_Combo.Size = new System.Drawing.Size(247, 24);
-            this.DEBUG_OUTPUT_Combo.TabIndex = 2;
+            DEBUG_OUTPUT_Combo.FormattingEnabled = true;
+            DEBUG_OUTPUT_Combo.Items.AddRange(new object[] { "nothing", "file", "messagebox" });
+            DEBUG_OUTPUT_Combo.Location = new System.Drawing.Point(217, 85);
+            DEBUG_OUTPUT_Combo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            DEBUG_OUTPUT_Combo.Name = "DEBUG_OUTPUT_Combo";
+            DEBUG_OUTPUT_Combo.Size = new System.Drawing.Size(247, 28);
+            DEBUG_OUTPUT_Combo.TabIndex = 2;
             // 
             // DEBUG_SEGWRAP_Check
             // 
-            this.DEBUG_SEGWRAP_Check.AutoSize = true;
-            this.DEBUG_SEGWRAP_Check.Location = new System.Drawing.Point(13, 70);
-            this.DEBUG_SEGWRAP_Check.Margin = new System.Windows.Forms.Padding(4);
-            this.DEBUG_SEGWRAP_Check.Name = "DEBUG_SEGWRAP_Check";
-            this.DEBUG_SEGWRAP_Check.Size = new System.Drawing.Size(153, 20);
-            this.DEBUG_SEGWRAP_Check.TabIndex = 1;
-            this.DEBUG_SEGWRAP_Check.Text = "DEBUG_SEGWRAP";
-            this.DEBUG_SEGWRAP_Check.UseVisualStyleBackColor = true;
+            DEBUG_SEGWRAP_Check.AutoSize = true;
+            DEBUG_SEGWRAP_Check.Location = new System.Drawing.Point(13, 88);
+            DEBUG_SEGWRAP_Check.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            DEBUG_SEGWRAP_Check.Name = "DEBUG_SEGWRAP_Check";
+            DEBUG_SEGWRAP_Check.Size = new System.Drawing.Size(152, 24);
+            DEBUG_SEGWRAP_Check.TabIndex = 1;
+            DEBUG_SEGWRAP_Check.Text = "DEBUG_SEGWRAP";
+            DEBUG_SEGWRAP_Check.UseVisualStyleBackColor = true;
             // 
             // DEBUG_ALL_Check
             // 
-            this.DEBUG_ALL_Check.AutoSize = true;
-            this.DEBUG_ALL_Check.Checked = true;
-            this.DEBUG_ALL_Check.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.DEBUG_ALL_Check.Location = new System.Drawing.Point(13, 42);
-            this.DEBUG_ALL_Check.Margin = new System.Windows.Forms.Padding(4);
-            this.DEBUG_ALL_Check.Name = "DEBUG_ALL_Check";
-            this.DEBUG_ALL_Check.Size = new System.Drawing.Size(107, 20);
-            this.DEBUG_ALL_Check.TabIndex = 0;
-            this.DEBUG_ALL_Check.Text = "DEBUG_ALL";
-            this.DEBUG_ALL_Check.UseVisualStyleBackColor = true;
+            DEBUG_ALL_Check.AutoSize = true;
+            DEBUG_ALL_Check.Checked = true;
+            DEBUG_ALL_Check.CheckState = System.Windows.Forms.CheckState.Checked;
+            DEBUG_ALL_Check.Location = new System.Drawing.Point(13, 52);
+            DEBUG_ALL_Check.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            DEBUG_ALL_Check.Name = "DEBUG_ALL_Check";
+            DEBUG_ALL_Check.Size = new System.Drawing.Size(109, 24);
+            DEBUG_ALL_Check.TabIndex = 0;
+            DEBUG_ALL_Check.Text = "DEBUG_ALL";
+            DEBUG_ALL_Check.UseVisualStyleBackColor = true;
             // 
             // mainToolStrip
             // 
-            this.mainToolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createToolStripButton,
-            this.openToolStripButton,
-            this.saveToolStripButton,
-            this.toolStripSeparator1,
-            this.clearToolStripButton,
-            this.refreshToolStripButton,
-            this.toolStripSeparator2,
-            this.createLauncherToolStripButton,
-            this.runPortableToolStripButton,
-            this.viewDebugLogToolStripButton,
-            this.mergeListtoolStripComboBox,
-            this.editToolStripButton,
-            this.mergeCustomNSIToolStripButton,
-            this.toolStripSeparator3,
-            this.importAppVToolStripButton,
-            this.importFolderToolStripButton,
-            this.importMiscToolStripButton,
-            this.toolStripSeparator4,
-            this.toolsToolStripSplitButton,
-            this.toolStripSplitTemplateButton,
-            this.foldersToolStripSplitButton,
-            this.quickLaunchRegToolStripDropDownButton});
-            this.mainToolStrip.Location = new System.Drawing.Point(0, 28);
-            this.mainToolStrip.Name = "mainToolStrip";
-            this.mainToolStrip.Size = new System.Drawing.Size(1757, 39);
-            this.mainToolStrip.TabIndex = 2;
-            this.mainToolStrip.Text = "Main Tools";
+            mainToolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { createToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator1, clearToolStripButton, refreshToolStripButton, toolStripSeparator2, createLauncherToolStripButton, runPortableToolStripButton, viewDebugLogToolStripButton, mergeListtoolStripComboBox, editToolStripButton, mergeCustomNSIToolStripButton, toolStripSeparator3, importAppVToolStripButton, importFolderToolStripButton, importMiscToolStripButton, toolStripSeparator4, toolsToolStripSplitButton, toolStripSplitTemplateButton, foldersToolStripSplitButton, quickLaunchRegToolStripDropDownButton });
+            mainToolStrip.Location = new System.Drawing.Point(0, 28);
+            mainToolStrip.Name = "mainToolStrip";
+            mainToolStrip.Size = new System.Drawing.Size(1757, 39);
+            mainToolStrip.TabIndex = 2;
+            mainToolStrip.Text = "Main Tools";
             // 
             // createToolStripButton
             // 
-            this.createToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.createToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("createToolStripButton.Image")));
-            this.createToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.createToolStripButton.Name = "createToolStripButton";
-            this.createToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.createToolStripButton.Text = "Create Portable App";
+            createToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            createToolStripButton.Image = (System.Drawing.Image)resources.GetObject("createToolStripButton.Image");
+            createToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            createToolStripButton.Name = "createToolStripButton";
+            createToolStripButton.Size = new System.Drawing.Size(36, 36);
+            createToolStripButton.Text = "Create Portable App";
             // 
             // openToolStripButton
             // 
-            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.openToolStripButton.Text = "Open Portable App";
+            openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            openToolStripButton.Image = (System.Drawing.Image)resources.GetObject("openToolStripButton.Image");
+            openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            openToolStripButton.Name = "openToolStripButton";
+            openToolStripButton.Size = new System.Drawing.Size(36, 36);
+            openToolStripButton.Text = "Open Portable App";
             // 
             // saveToolStripButton
             // 
-            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
-            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.saveToolStripButton.Text = "Save Portable App";
+            saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            saveToolStripButton.Image = (System.Drawing.Image)resources.GetObject("saveToolStripButton.Image");
+            saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            saveToolStripButton.Name = "saveToolStripButton";
+            saveToolStripButton.Size = new System.Drawing.Size(36, 36);
+            saveToolStripButton.Text = "Save Portable App";
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
             // clearToolStripButton
             // 
-            this.clearToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.clearToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("clearToolStripButton.Image")));
-            this.clearToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.clearToolStripButton.Name = "clearToolStripButton";
-            this.clearToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.clearToolStripButton.Text = "Clear Source Files and Registry";
+            clearToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            clearToolStripButton.Image = (System.Drawing.Image)resources.GetObject("clearToolStripButton.Image");
+            clearToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            clearToolStripButton.Name = "clearToolStripButton";
+            clearToolStripButton.Size = new System.Drawing.Size(36, 36);
+            clearToolStripButton.Text = "Clear Source Files and Registry";
             // 
             // refreshToolStripButton
             // 
-            this.refreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.refreshToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshToolStripButton.Image")));
-            this.refreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.refreshToolStripButton.Name = "refreshToolStripButton";
-            this.refreshToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.refreshToolStripButton.Text = "Refresh";
+            refreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            refreshToolStripButton.Image = (System.Drawing.Image)resources.GetObject("refreshToolStripButton.Image");
+            refreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            refreshToolStripButton.Name = "refreshToolStripButton";
+            refreshToolStripButton.Size = new System.Drawing.Size(36, 36);
+            refreshToolStripButton.Text = "Refresh";
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // createLauncherToolStripButton
             // 
-            this.createLauncherToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.createLauncherToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("createLauncherToolStripButton.Image")));
-            this.createLauncherToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.createLauncherToolStripButton.Name = "createLauncherToolStripButton";
-            this.createLauncherToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.createLauncherToolStripButton.Text = "Create Launcher";
+            createLauncherToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            createLauncherToolStripButton.Image = (System.Drawing.Image)resources.GetObject("createLauncherToolStripButton.Image");
+            createLauncherToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            createLauncherToolStripButton.Name = "createLauncherToolStripButton";
+            createLauncherToolStripButton.Size = new System.Drawing.Size(36, 36);
+            createLauncherToolStripButton.Text = "Create Launcher";
             // 
             // runPortableToolStripButton
             // 
-            this.runPortableToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.runPortableToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runWithProcMonToolStripMenuItem,
-            this.runWithRegMonToolStripMenuItem,
-            this.runWithTracerToolStripMenuItem});
-            this.runPortableToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("runPortableToolStripButton.Image")));
-            this.runPortableToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.runPortableToolStripButton.Name = "runPortableToolStripButton";
-            this.runPortableToolStripButton.Size = new System.Drawing.Size(51, 36);
-            this.runPortableToolStripButton.Text = "Run Portable";
+            runPortableToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            runPortableToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { runWithProcMonToolStripMenuItem, runWithRegMonToolStripMenuItem, runWithTracerToolStripMenuItem });
+            runPortableToolStripButton.Image = (System.Drawing.Image)resources.GetObject("runPortableToolStripButton.Image");
+            runPortableToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            runPortableToolStripButton.Name = "runPortableToolStripButton";
+            runPortableToolStripButton.Size = new System.Drawing.Size(51, 36);
+            runPortableToolStripButton.Text = "Run Portable";
             // 
             // runWithProcMonToolStripMenuItem
             // 
-            this.runWithProcMonToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runWithProcMonToolStripMenuItem.Image")));
-            this.runWithProcMonToolStripMenuItem.Name = "runWithProcMonToolStripMenuItem";
-            this.runWithProcMonToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.runWithProcMonToolStripMenuItem.Text = "Run With ProcMon";
+            runWithProcMonToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("runWithProcMonToolStripMenuItem.Image");
+            runWithProcMonToolStripMenuItem.Name = "runWithProcMonToolStripMenuItem";
+            runWithProcMonToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            runWithProcMonToolStripMenuItem.Text = "Run With ProcMon";
             // 
             // runWithRegMonToolStripMenuItem
             // 
-            this.runWithRegMonToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runWithRegMonToolStripMenuItem.Image")));
-            this.runWithRegMonToolStripMenuItem.Name = "runWithRegMonToolStripMenuItem";
-            this.runWithRegMonToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.runWithRegMonToolStripMenuItem.Text = "Run With RegMon";
-            this.runWithRegMonToolStripMenuItem.Visible = false;
+            runWithRegMonToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("runWithRegMonToolStripMenuItem.Image");
+            runWithRegMonToolStripMenuItem.Name = "runWithRegMonToolStripMenuItem";
+            runWithRegMonToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            runWithRegMonToolStripMenuItem.Text = "Run With RegMon";
+            runWithRegMonToolStripMenuItem.Visible = false;
             // 
             // runWithTracerToolStripMenuItem
             // 
-            this.runWithTracerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runWithTracerToolStripMenuItem.Image")));
-            this.runWithTracerToolStripMenuItem.Name = "runWithTracerToolStripMenuItem";
-            this.runWithTracerToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
-            this.runWithTracerToolStripMenuItem.Text = "Run With Tracer";
+            runWithTracerToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("runWithTracerToolStripMenuItem.Image");
+            runWithTracerToolStripMenuItem.Name = "runWithTracerToolStripMenuItem";
+            runWithTracerToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
+            runWithTracerToolStripMenuItem.Text = "Run With Tracer";
             // 
             // viewDebugLogToolStripButton
             // 
-            this.viewDebugLogToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.viewDebugLogToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("viewDebugLogToolStripButton.Image")));
-            this.viewDebugLogToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.viewDebugLogToolStripButton.Name = "viewDebugLogToolStripButton";
-            this.viewDebugLogToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.viewDebugLogToolStripButton.Text = "View Debug Log Files";
+            viewDebugLogToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            viewDebugLogToolStripButton.Image = (System.Drawing.Image)resources.GetObject("viewDebugLogToolStripButton.Image");
+            viewDebugLogToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            viewDebugLogToolStripButton.Name = "viewDebugLogToolStripButton";
+            viewDebugLogToolStripButton.Size = new System.Drawing.Size(36, 36);
+            viewDebugLogToolStripButton.Text = "View Debug Log Files";
             // 
             // mergeListtoolStripComboBox
             // 
-            this.mergeListtoolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mergeListtoolStripComboBox.Name = "mergeListtoolStripComboBox";
-            this.mergeListtoolStripComboBox.Size = new System.Drawing.Size(265, 39);
-            this.mergeListtoolStripComboBox.ToolTipText = "Importan files that can be editable";
+            mergeListtoolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            mergeListtoolStripComboBox.Name = "mergeListtoolStripComboBox";
+            mergeListtoolStripComboBox.Size = new System.Drawing.Size(265, 39);
+            mergeListtoolStripComboBox.ToolTipText = "Importan files that can be editable";
             // 
             // editToolStripButton
             // 
-            this.editToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.editToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripButton.Image")));
-            this.editToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.editToolStripButton.Name = "editToolStripButton";
-            this.editToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.editToolStripButton.Text = "Edit Selected File";
+            editToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            editToolStripButton.Image = (System.Drawing.Image)resources.GetObject("editToolStripButton.Image");
+            editToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            editToolStripButton.Name = "editToolStripButton";
+            editToolStripButton.Size = new System.Drawing.Size(36, 36);
+            editToolStripButton.Text = "Edit Selected File";
             // 
             // mergeCustomNSIToolStripButton
             // 
-            this.mergeCustomNSIToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mergeCustomNSIToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.compareToolStripMenuItem,
-            this.forceMergeToolStripMenuItem});
-            this.mergeCustomNSIToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("mergeCustomNSIToolStripButton.Image")));
-            this.mergeCustomNSIToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mergeCustomNSIToolStripButton.Name = "mergeCustomNSIToolStripButton";
-            this.mergeCustomNSIToolStripButton.Size = new System.Drawing.Size(51, 36);
-            this.mergeCustomNSIToolStripButton.Text = "Merge Custom.nsi";
+            mergeCustomNSIToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            mergeCustomNSIToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { compareToolStripMenuItem, forceMergeToolStripMenuItem });
+            mergeCustomNSIToolStripButton.Image = (System.Drawing.Image)resources.GetObject("mergeCustomNSIToolStripButton.Image");
+            mergeCustomNSIToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            mergeCustomNSIToolStripButton.Name = "mergeCustomNSIToolStripButton";
+            mergeCustomNSIToolStripButton.Size = new System.Drawing.Size(51, 36);
+            mergeCustomNSIToolStripButton.Text = "Merge Custom.nsi";
             // 
             // compareToolStripMenuItem
             // 
-            this.compareToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("compareToolStripMenuItem.Image")));
-            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
-            this.compareToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
-            this.compareToolStripMenuItem.Text = "Compare";
+            compareToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("compareToolStripMenuItem.Image");
+            compareToolStripMenuItem.Name = "compareToolStripMenuItem";
+            compareToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            compareToolStripMenuItem.Text = "Compare";
             // 
             // forceMergeToolStripMenuItem
             // 
-            this.forceMergeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("forceMergeToolStripMenuItem.Image")));
-            this.forceMergeToolStripMenuItem.Name = "forceMergeToolStripMenuItem";
-            this.forceMergeToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
-            this.forceMergeToolStripMenuItem.Text = "Force Merge";
+            forceMergeToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("forceMergeToolStripMenuItem.Image");
+            forceMergeToolStripMenuItem.Name = "forceMergeToolStripMenuItem";
+            forceMergeToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            forceMergeToolStripMenuItem.Text = "Force Merge";
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             // 
             // importAppVToolStripButton
             // 
-            this.importAppVToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importAppVToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("importAppVToolStripButton.Image")));
-            this.importAppVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.importAppVToolStripButton.Name = "importAppVToolStripButton";
-            this.importAppVToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.importAppVToolStripButton.Text = "Import App-V";
+            importAppVToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            importAppVToolStripButton.Image = (System.Drawing.Image)resources.GetObject("importAppVToolStripButton.Image");
+            importAppVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            importAppVToolStripButton.Name = "importAppVToolStripButton";
+            importAppVToolStripButton.Size = new System.Drawing.Size(36, 36);
+            importAppVToolStripButton.Text = "Import App-V";
             // 
             // importFolderToolStripButton
             // 
-            this.importFolderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importFolderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("importFolderToolStripButton.Image")));
-            this.importFolderToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.importFolderToolStripButton.Name = "importFolderToolStripButton";
-            this.importFolderToolStripButton.Size = new System.Drawing.Size(36, 36);
-            this.importFolderToolStripButton.Text = "Import Folder";
+            importFolderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            importFolderToolStripButton.Image = (System.Drawing.Image)resources.GetObject("importFolderToolStripButton.Image");
+            importFolderToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            importFolderToolStripButton.Name = "importFolderToolStripButton";
+            importFolderToolStripButton.Size = new System.Drawing.Size(36, 36);
+            importFolderToolStripButton.Text = "Import Folder";
             // 
             // importMiscToolStripButton
             // 
-            this.importMiscToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importMiscToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importXRegshotToolStripButtonDropMenuItem,
-            this.importThinAppToolStripButtonDropMenuItem,
-            this.importRegFileToolStripButtonDropMenuItem,
-            this.importRegshotToolStripButtonDropMenuItem,
-            this.importRegClipboardToolStripMenuItem});
-            this.importMiscToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("importMiscToolStripButton.Image")));
-            this.importMiscToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.importMiscToolStripButton.Name = "importMiscToolStripButton";
-            this.importMiscToolStripButton.Size = new System.Drawing.Size(46, 36);
-            this.importMiscToolStripButton.Text = "Import Captures";
+            importMiscToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            importMiscToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { importXRegshotToolStripButtonDropMenuItem, importThinAppToolStripButtonDropMenuItem, importRegFileToolStripButtonDropMenuItem, importRegshotToolStripButtonDropMenuItem, importRegClipboardToolStripMenuItem });
+            importMiscToolStripButton.Image = (System.Drawing.Image)resources.GetObject("importMiscToolStripButton.Image");
+            importMiscToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            importMiscToolStripButton.Name = "importMiscToolStripButton";
+            importMiscToolStripButton.Size = new System.Drawing.Size(46, 36);
+            importMiscToolStripButton.Text = "Import Captures";
             // 
             // importXRegshotToolStripButtonDropMenuItem
             // 
-            this.importXRegshotToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importXRegshotToolStripButtonDropMenuItem.Image")));
-            this.importXRegshotToolStripButtonDropMenuItem.Name = "importXRegshotToolStripButtonDropMenuItem";
-            this.importXRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
-            this.importXRegshotToolStripButtonDropMenuItem.Text = "Import X-Regshot";
+            importXRegshotToolStripButtonDropMenuItem.Image = (System.Drawing.Image)resources.GetObject("importXRegshotToolStripButtonDropMenuItem.Image");
+            importXRegshotToolStripButtonDropMenuItem.Name = "importXRegshotToolStripButtonDropMenuItem";
+            importXRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
+            importXRegshotToolStripButtonDropMenuItem.Text = "Import X-Regshot";
             // 
             // importThinAppToolStripButtonDropMenuItem
             // 
-            this.importThinAppToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importThinAppToolStripButtonDropMenuItem.Image")));
-            this.importThinAppToolStripButtonDropMenuItem.Name = "importThinAppToolStripButtonDropMenuItem";
-            this.importThinAppToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
-            this.importThinAppToolStripButtonDropMenuItem.Text = "Import ThinApp";
+            importThinAppToolStripButtonDropMenuItem.Image = (System.Drawing.Image)resources.GetObject("importThinAppToolStripButtonDropMenuItem.Image");
+            importThinAppToolStripButtonDropMenuItem.Name = "importThinAppToolStripButtonDropMenuItem";
+            importThinAppToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
+            importThinAppToolStripButtonDropMenuItem.Text = "Import ThinApp";
             // 
             // importRegFileToolStripButtonDropMenuItem
             // 
-            this.importRegFileToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importRegFileToolStripButtonDropMenuItem.Image")));
-            this.importRegFileToolStripButtonDropMenuItem.Name = "importRegFileToolStripButtonDropMenuItem";
-            this.importRegFileToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
-            this.importRegFileToolStripButtonDropMenuItem.Text = "Import RegFile";
+            importRegFileToolStripButtonDropMenuItem.Image = (System.Drawing.Image)resources.GetObject("importRegFileToolStripButtonDropMenuItem.Image");
+            importRegFileToolStripButtonDropMenuItem.Name = "importRegFileToolStripButtonDropMenuItem";
+            importRegFileToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
+            importRegFileToolStripButtonDropMenuItem.Text = "Import RegFile";
             // 
             // importRegshotToolStripButtonDropMenuItem
             // 
-            this.importRegshotToolStripButtonDropMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importRegshotToolStripButtonDropMenuItem.Image")));
-            this.importRegshotToolStripButtonDropMenuItem.Name = "importRegshotToolStripButtonDropMenuItem";
-            this.importRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
-            this.importRegshotToolStripButtonDropMenuItem.Text = "Import Regshot";
+            importRegshotToolStripButtonDropMenuItem.Image = (System.Drawing.Image)resources.GetObject("importRegshotToolStripButtonDropMenuItem.Image");
+            importRegshotToolStripButtonDropMenuItem.Name = "importRegshotToolStripButtonDropMenuItem";
+            importRegshotToolStripButtonDropMenuItem.Size = new System.Drawing.Size(237, 26);
+            importRegshotToolStripButtonDropMenuItem.Text = "Import Regshot";
             // 
             // importRegClipboardToolStripMenuItem
             // 
-            this.importRegClipboardToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importRegClipboardToolStripMenuItem.Image")));
-            this.importRegClipboardToolStripMenuItem.Name = "importRegClipboardToolStripMenuItem";
-            this.importRegClipboardToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-            this.importRegClipboardToolStripMenuItem.Text = "Import Reg Clipboard";
+            importRegClipboardToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("importRegClipboardToolStripMenuItem.Image");
+            importRegClipboardToolStripMenuItem.Name = "importRegClipboardToolStripMenuItem";
+            importRegClipboardToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            importRegClipboardToolStripMenuItem.Text = "Import Reg Clipboard";
             // 
             // toolStripSeparator4
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
             // 
             // toolsToolStripSplitButton
             // 
-            this.toolsToolStripSplitButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolsToolStripSplitButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.whatChangedToolStripMenuItem,
-            this.regFromAppToolStripMenuItem,
-            this.registryChangesViewToolStripMenuItem,
-            this.fileActivityWatchToolStripMenuItem,
-            this.exeInfoToolStripMenuItem,
-            this.processExplorerToolStripMenuItem,
-            this.processMonitorToolStripMenuItem,
-            this.resourceHackerToolStripMenuItem,
-            this.tcpviewToolStripMenuItem,
-            this.smartSniffToolStripMenuItem,
-            this.iconsExtractToolStripMenuItem});
-            this.toolsToolStripSplitButton.Image = ((System.Drawing.Image)(resources.GetObject("toolsToolStripSplitButton.Image")));
-            this.toolsToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolsToolStripSplitButton.Name = "toolsToolStripSplitButton";
-            this.toolsToolStripSplitButton.Size = new System.Drawing.Size(46, 36);
-            this.toolsToolStripSplitButton.Text = "Tools";
+            toolsToolStripSplitButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolsToolStripSplitButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { whatChangedToolStripMenuItem, regFromAppToolStripMenuItem, registryChangesViewToolStripMenuItem, fileActivityWatchToolStripMenuItem, exeInfoToolStripMenuItem, processExplorerToolStripMenuItem, processMonitorToolStripMenuItem, resourceHackerToolStripMenuItem, tcpviewToolStripMenuItem, smartSniffToolStripMenuItem, iconsExtractToolStripMenuItem });
+            toolsToolStripSplitButton.Image = (System.Drawing.Image)resources.GetObject("toolsToolStripSplitButton.Image");
+            toolsToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolsToolStripSplitButton.Name = "toolsToolStripSplitButton";
+            toolsToolStripSplitButton.Size = new System.Drawing.Size(46, 36);
+            toolsToolStripSplitButton.Text = "Tools";
             // 
             // whatChangedToolStripMenuItem
             // 
-            this.whatChangedToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("whatChangedToolStripMenuItem.Image")));
-            this.whatChangedToolStripMenuItem.Name = "whatChangedToolStripMenuItem";
-            this.whatChangedToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.whatChangedToolStripMenuItem.Text = "What Changed";
+            whatChangedToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("whatChangedToolStripMenuItem.Image");
+            whatChangedToolStripMenuItem.Name = "whatChangedToolStripMenuItem";
+            whatChangedToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            whatChangedToolStripMenuItem.Text = "What Changed";
             // 
             // regFromAppToolStripMenuItem
             // 
-            this.regFromAppToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("regFromAppToolStripMenuItem.Image")));
-            this.regFromAppToolStripMenuItem.Name = "regFromAppToolStripMenuItem";
-            this.regFromAppToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.regFromAppToolStripMenuItem.Text = "RegFromApp";
+            regFromAppToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("regFromAppToolStripMenuItem.Image");
+            regFromAppToolStripMenuItem.Name = "regFromAppToolStripMenuItem";
+            regFromAppToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            regFromAppToolStripMenuItem.Text = "RegFromApp";
             // 
             // registryChangesViewToolStripMenuItem
             // 
-            this.registryChangesViewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("registryChangesViewToolStripMenuItem.Image")));
-            this.registryChangesViewToolStripMenuItem.Name = "registryChangesViewToolStripMenuItem";
-            this.registryChangesViewToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.registryChangesViewToolStripMenuItem.Text = "RegistryChangesView";
+            registryChangesViewToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("registryChangesViewToolStripMenuItem.Image");
+            registryChangesViewToolStripMenuItem.Name = "registryChangesViewToolStripMenuItem";
+            registryChangesViewToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            registryChangesViewToolStripMenuItem.Text = "RegistryChangesView";
             // 
             // fileActivityWatchToolStripMenuItem
             // 
-            this.fileActivityWatchToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fileActivityWatchToolStripMenuItem.Image")));
-            this.fileActivityWatchToolStripMenuItem.Name = "fileActivityWatchToolStripMenuItem";
-            this.fileActivityWatchToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.fileActivityWatchToolStripMenuItem.Text = "FileActivityWatch";
+            fileActivityWatchToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("fileActivityWatchToolStripMenuItem.Image");
+            fileActivityWatchToolStripMenuItem.Name = "fileActivityWatchToolStripMenuItem";
+            fileActivityWatchToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            fileActivityWatchToolStripMenuItem.Text = "FileActivityWatch";
             // 
             // exeInfoToolStripMenuItem
             // 
-            this.exeInfoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exeInfoToolStripMenuItem.Image")));
-            this.exeInfoToolStripMenuItem.Name = "exeInfoToolStripMenuItem";
-            this.exeInfoToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.exeInfoToolStripMenuItem.Text = "ExeInfo";
+            exeInfoToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("exeInfoToolStripMenuItem.Image");
+            exeInfoToolStripMenuItem.Name = "exeInfoToolStripMenuItem";
+            exeInfoToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            exeInfoToolStripMenuItem.Text = "ExeInfo";
             // 
             // processExplorerToolStripMenuItem
             // 
-            this.processExplorerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("processExplorerToolStripMenuItem.Image")));
-            this.processExplorerToolStripMenuItem.Name = "processExplorerToolStripMenuItem";
-            this.processExplorerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.processExplorerToolStripMenuItem.Text = "Process Explorer";
+            processExplorerToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("processExplorerToolStripMenuItem.Image");
+            processExplorerToolStripMenuItem.Name = "processExplorerToolStripMenuItem";
+            processExplorerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            processExplorerToolStripMenuItem.Text = "Process Explorer";
             // 
             // processMonitorToolStripMenuItem
             // 
-            this.processMonitorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("processMonitorToolStripMenuItem.Image")));
-            this.processMonitorToolStripMenuItem.Name = "processMonitorToolStripMenuItem";
-            this.processMonitorToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.processMonitorToolStripMenuItem.Text = "Process Monitor";
+            processMonitorToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("processMonitorToolStripMenuItem.Image");
+            processMonitorToolStripMenuItem.Name = "processMonitorToolStripMenuItem";
+            processMonitorToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            processMonitorToolStripMenuItem.Text = "Process Monitor";
             // 
             // resourceHackerToolStripMenuItem
             // 
-            this.resourceHackerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("resourceHackerToolStripMenuItem.Image")));
-            this.resourceHackerToolStripMenuItem.Name = "resourceHackerToolStripMenuItem";
-            this.resourceHackerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.resourceHackerToolStripMenuItem.Text = "Resource Hacker";
+            resourceHackerToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("resourceHackerToolStripMenuItem.Image");
+            resourceHackerToolStripMenuItem.Name = "resourceHackerToolStripMenuItem";
+            resourceHackerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            resourceHackerToolStripMenuItem.Text = "Resource Hacker";
             // 
             // tcpviewToolStripMenuItem
             // 
-            this.tcpviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("tcpviewToolStripMenuItem.Image")));
-            this.tcpviewToolStripMenuItem.Name = "tcpviewToolStripMenuItem";
-            this.tcpviewToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.tcpviewToolStripMenuItem.Text = "Tcpview";
+            tcpviewToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("tcpviewToolStripMenuItem.Image");
+            tcpviewToolStripMenuItem.Name = "tcpviewToolStripMenuItem";
+            tcpviewToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            tcpviewToolStripMenuItem.Text = "Tcpview";
             // 
             // smartSniffToolStripMenuItem
             // 
-            this.smartSniffToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("smartSniffToolStripMenuItem.Image")));
-            this.smartSniffToolStripMenuItem.Name = "smartSniffToolStripMenuItem";
-            this.smartSniffToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.smartSniffToolStripMenuItem.Text = "SmartSniff";
+            smartSniffToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("smartSniffToolStripMenuItem.Image");
+            smartSniffToolStripMenuItem.Name = "smartSniffToolStripMenuItem";
+            smartSniffToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            smartSniffToolStripMenuItem.Text = "SmartSniff";
             // 
             // iconsExtractToolStripMenuItem
             // 
-            this.iconsExtractToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("iconsExtractToolStripMenuItem.Image")));
-            this.iconsExtractToolStripMenuItem.Name = "iconsExtractToolStripMenuItem";
-            this.iconsExtractToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.iconsExtractToolStripMenuItem.Text = "IconsExtract";
+            iconsExtractToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("iconsExtractToolStripMenuItem.Image");
+            iconsExtractToolStripMenuItem.Name = "iconsExtractToolStripMenuItem";
+            iconsExtractToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            iconsExtractToolStripMenuItem.Text = "IconsExtract";
             // 
             // toolStripSplitTemplateButton
             // 
-            this.toolStripSplitTemplateButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitTemplateButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crossPlatformTemplateToolStripMenuItem,
-            this.opensourceTemplateToolStripMenuItem,
-            this.qTFrameworkTemplateToolStripMenuItem,
-            this.pythonApplicationTemplateToolStripMenuItem,
-            this.jAVAApplicationTemplateToolStripMenuItem});
-            this.toolStripSplitTemplateButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitTemplateButton.Image")));
-            this.toolStripSplitTemplateButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitTemplateButton.Name = "toolStripSplitTemplateButton";
-            this.toolStripSplitTemplateButton.Size = new System.Drawing.Size(46, 36);
-            this.toolStripSplitTemplateButton.Text = "Template";
+            toolStripSplitTemplateButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripSplitTemplateButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { crossPlatformTemplateToolStripMenuItem, opensourceTemplateToolStripMenuItem, qTFrameworkTemplateToolStripMenuItem, pythonApplicationTemplateToolStripMenuItem, jAVAApplicationTemplateToolStripMenuItem });
+            toolStripSplitTemplateButton.Image = (System.Drawing.Image)resources.GetObject("toolStripSplitTemplateButton.Image");
+            toolStripSplitTemplateButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripSplitTemplateButton.Name = "toolStripSplitTemplateButton";
+            toolStripSplitTemplateButton.Size = new System.Drawing.Size(46, 36);
+            toolStripSplitTemplateButton.Text = "Template";
             // 
             // crossPlatformTemplateToolStripMenuItem
             // 
-            this.crossPlatformTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("crossPlatformTemplateToolStripMenuItem.Image")));
-            this.crossPlatformTemplateToolStripMenuItem.Name = "crossPlatformTemplateToolStripMenuItem";
-            this.crossPlatformTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
-            this.crossPlatformTemplateToolStripMenuItem.Text = "CrossPlatform";
+            crossPlatformTemplateToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("crossPlatformTemplateToolStripMenuItem.Image");
+            crossPlatformTemplateToolStripMenuItem.Name = "crossPlatformTemplateToolStripMenuItem";
+            crossPlatformTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            crossPlatformTemplateToolStripMenuItem.Text = "CrossPlatform";
             // 
             // opensourceTemplateToolStripMenuItem
             // 
-            this.opensourceTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("opensourceTemplateToolStripMenuItem.Image")));
-            this.opensourceTemplateToolStripMenuItem.Name = "opensourceTemplateToolStripMenuItem";
-            this.opensourceTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
-            this.opensourceTemplateToolStripMenuItem.Text = "Opensource";
+            opensourceTemplateToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("opensourceTemplateToolStripMenuItem.Image");
+            opensourceTemplateToolStripMenuItem.Name = "opensourceTemplateToolStripMenuItem";
+            opensourceTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            opensourceTemplateToolStripMenuItem.Text = "Opensource";
             // 
             // qTFrameworkTemplateToolStripMenuItem
             // 
-            this.qTFrameworkTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("qTFrameworkTemplateToolStripMenuItem.Image")));
-            this.qTFrameworkTemplateToolStripMenuItem.Name = "qTFrameworkTemplateToolStripMenuItem";
-            this.qTFrameworkTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
-            this.qTFrameworkTemplateToolStripMenuItem.Text = "QTFramework";
+            qTFrameworkTemplateToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("qTFrameworkTemplateToolStripMenuItem.Image");
+            qTFrameworkTemplateToolStripMenuItem.Name = "qTFrameworkTemplateToolStripMenuItem";
+            qTFrameworkTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            qTFrameworkTemplateToolStripMenuItem.Text = "QTFramework";
             // 
             // pythonApplicationTemplateToolStripMenuItem
             // 
-            this.pythonApplicationTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pythonApplicationTemplateToolStripMenuItem.Image")));
-            this.pythonApplicationTemplateToolStripMenuItem.Name = "pythonApplicationTemplateToolStripMenuItem";
-            this.pythonApplicationTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
-            this.pythonApplicationTemplateToolStripMenuItem.Text = "PythonApplication";
+            pythonApplicationTemplateToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("pythonApplicationTemplateToolStripMenuItem.Image");
+            pythonApplicationTemplateToolStripMenuItem.Name = "pythonApplicationTemplateToolStripMenuItem";
+            pythonApplicationTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            pythonApplicationTemplateToolStripMenuItem.Text = "PythonApplication";
             // 
             // jAVAApplicationTemplateToolStripMenuItem
             // 
-            this.jAVAApplicationTemplateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("jAVAApplicationTemplateToolStripMenuItem.Image")));
-            this.jAVAApplicationTemplateToolStripMenuItem.Name = "jAVAApplicationTemplateToolStripMenuItem";
-            this.jAVAApplicationTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
-            this.jAVAApplicationTemplateToolStripMenuItem.Text = "JAVAApplication";
+            jAVAApplicationTemplateToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("jAVAApplicationTemplateToolStripMenuItem.Image");
+            jAVAApplicationTemplateToolStripMenuItem.Name = "jAVAApplicationTemplateToolStripMenuItem";
+            jAVAApplicationTemplateToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            jAVAApplicationTemplateToolStripMenuItem.Text = "JAVAApplication";
             // 
             // foldersToolStripSplitButton
             // 
-            this.foldersToolStripSplitButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.foldersToolStripSplitButton.Image = ((System.Drawing.Image)(resources.GetObject("foldersToolStripSplitButton.Image")));
-            this.foldersToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.foldersToolStripSplitButton.Name = "foldersToolStripSplitButton";
-            this.foldersToolStripSplitButton.Size = new System.Drawing.Size(46, 36);
-            this.foldersToolStripSplitButton.Text = "Common Folders";
+            foldersToolStripSplitButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            foldersToolStripSplitButton.Image = (System.Drawing.Image)resources.GetObject("foldersToolStripSplitButton.Image");
+            foldersToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            foldersToolStripSplitButton.Name = "foldersToolStripSplitButton";
+            foldersToolStripSplitButton.Size = new System.Drawing.Size(46, 36);
+            foldersToolStripSplitButton.Text = "Common Folders";
             // 
             // quickLaunchRegToolStripDropDownButton
             // 
-            this.quickLaunchRegToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.quickLaunchRegToolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("quickLaunchRegToolStripDropDownButton.Image")));
-            this.quickLaunchRegToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.quickLaunchRegToolStripDropDownButton.Name = "quickLaunchRegToolStripDropDownButton";
-            this.quickLaunchRegToolStripDropDownButton.Size = new System.Drawing.Size(46, 36);
-            this.quickLaunchRegToolStripDropDownButton.Text = "Quick Launch Registry";
-            this.quickLaunchRegToolStripDropDownButton.ToolTipText = "Quick Launch Registry";
+            quickLaunchRegToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            quickLaunchRegToolStripDropDownButton.Image = (System.Drawing.Image)resources.GetObject("quickLaunchRegToolStripDropDownButton.Image");
+            quickLaunchRegToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            quickLaunchRegToolStripDropDownButton.Name = "quickLaunchRegToolStripDropDownButton";
+            quickLaunchRegToolStripDropDownButton.Size = new System.Drawing.Size(46, 36);
+            quickLaunchRegToolStripDropDownButton.Text = "Quick Launch Registry";
+            quickLaunchRegToolStripDropDownButton.ToolTipText = "Quick Launch Registry";
             // 
             // mainStatus
             // 
-            this.mainStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabelMain,
-            this.statusLabelKeyPress});
-            this.mainStatus.Location = new System.Drawing.Point(0, 941);
-            this.mainStatus.Name = "mainStatus";
-            this.mainStatus.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.mainStatus.Size = new System.Drawing.Size(1757, 26);
-            this.mainStatus.TabIndex = 3;
+            mainStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
+            mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { statusLabelMain, statusLabelKeyPress });
+            mainStatus.Location = new System.Drawing.Point(0, 1183);
+            mainStatus.Name = "mainStatus";
+            mainStatus.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            mainStatus.Size = new System.Drawing.Size(1757, 26);
+            mainStatus.TabIndex = 3;
             // 
             // statusLabelMain
             // 
-            this.statusLabelMain.Name = "statusLabelMain";
-            this.statusLabelMain.Size = new System.Drawing.Size(1537, 20);
-            this.statusLabelMain.Spring = true;
-            this.statusLabelMain.Text = "statusLabelMain";
-            this.statusLabelMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            statusLabelMain.Name = "statusLabelMain";
+            statusLabelMain.Size = new System.Drawing.Size(1537, 20);
+            statusLabelMain.Spring = true;
+            statusLabelMain.Text = "statusLabelMain";
+            statusLabelMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // statusLabelKeyPress
             // 
-            this.statusLabelKeyPress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusLabelKeyPress.Name = "statusLabelKeyPress";
-            this.statusLabelKeyPress.Size = new System.Drawing.Size(200, 20);
-            this.statusLabelKeyPress.Text = "toolStripStatusLabelKeyPress";
-            this.statusLabelKeyPress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            statusLabelKeyPress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            statusLabelKeyPress.Name = "statusLabelKeyPress";
+            statusLabelKeyPress.Size = new System.Drawing.Size(200, 20);
+            statusLabelKeyPress.Text = "toolStripStatusLabelKeyPress";
+            statusLabelKeyPress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(105, 28);
+            contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { testToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(105, 28);
             // 
             // testToolStripMenuItem
             // 
-            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.test2ToolStripMenuItem});
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
-            this.testToolStripMenuItem.Text = "Test";
+            testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { test2ToolStripMenuItem });
+            testToolStripMenuItem.Name = "testToolStripMenuItem";
+            testToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            testToolStripMenuItem.Text = "Test";
             // 
             // test2ToolStripMenuItem
             // 
-            this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
-            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
-            this.test2ToolStripMenuItem.Text = "Test2";
+            test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
+            test2ToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
+            test2ToolStripMenuItem.Text = "Test2";
             // 
             // MainStudio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1757, 967);
-            this.Controls.Add(this.mainStatus);
-            this.Controls.Add(this.mainToolStrip);
-            this.Controls.Add(this.mainTab);
-            this.Controls.Add(this.mainMenu);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "MainStudio";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Portable App Studio";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Studio_FormClosing);
-            this.Load += new System.EventHandler(this.Studio_Load);
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
-            this.mainTab.ResumeLayout(false);
-            this.filesPage.ResumeLayout(false);
-            this.filesTableLayoutPanel.ResumeLayout(false);
-            this.registryTab.ResumeLayout(false);
-            this.registryTableLayoutPanel.ResumeLayout(false);
-            this.appInfoPage.ResumeLayout(false);
-            this.launchPage.ResumeLayout(false);
-            this.optionsPage.ResumeLayout(false);
-            this.groupBoxFileConvert.ResumeLayout(false);
-            this.registryGroupBox.ResumeLayout(false);
-            this.registryGroupBox.PerformLayout();
-            this.debugGroupBox.ResumeLayout(false);
-            this.debugGroupBox.PerformLayout();
-            this.mainToolStrip.ResumeLayout(false);
-            this.mainToolStrip.PerformLayout();
-            this.mainStatus.ResumeLayout(false);
-            this.mainStatus.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1757, 1209);
+            Controls.Add(mainStatus);
+            Controls.Add(mainToolStrip);
+            Controls.Add(mainTab);
+            Controls.Add(mainMenu);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = mainMenu;
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "MainStudio";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Portable App Studio";
+            FormClosing += Studio_FormClosing;
+            Load += Studio_Load;
+            mainMenu.ResumeLayout(false);
+            mainMenu.PerformLayout();
+            mainTab.ResumeLayout(false);
+            filesPage.ResumeLayout(false);
+            filesTableLayoutPanel.ResumeLayout(false);
+            registryTab.ResumeLayout(false);
+            registryTableLayoutPanel.ResumeLayout(false);
+            appInfoPage.ResumeLayout(false);
+            launchPage.ResumeLayout(false);
+            optionsPage.ResumeLayout(false);
+            groupBoxFileConvert.ResumeLayout(false);
+            registryGroupBox.ResumeLayout(false);
+            registryGroupBox.PerformLayout();
+            debugGroupBox.ResumeLayout(false);
+            debugGroupBox.PerformLayout();
+            mainToolStrip.ResumeLayout(false);
+            mainToolStrip.PerformLayout();
+            mainStatus.ResumeLayout(false);
+            mainStatus.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

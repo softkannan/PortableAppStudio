@@ -154,15 +154,14 @@ namespace PortableAppStudio.Controls
         object _selectedObject;
         public void SelectedObject(object selectedObject, string sectionName, string selectedProprtyName)
         {
-
             containerGroupBox.Controls.Clear();
+            this.SuspendLayout();
             _selectedObject = selectedObject;
 
             if (selectedObject == null)
             {
                 return;
             }
-
             var control = GetPropertyControl(selectedObject);
             if (control != null)
             {
@@ -170,10 +169,26 @@ namespace PortableAppStudio.Controls
                 containerGroupBox.Controls.Add(control);
                 ShowHelp(helpTextBox, sectionName, selectedProprtyName);
             }
+            UpdateControlsSize();
+            this.ResumeLayout();
+            this.Update();
+        }
+
+        private void UpdateControlsSize()
+        {
+            containerGroupBox.Width = this.Width;
+            containerGroupBox.Height = (this.Height / 2);
+            helpTextBox.Top = containerGroupBox.Height + helpTextBox.Margin.Top;
+            helpTextBox.Width = this.Width;
+            helpTextBox.Height = this.Height - helpTextBox.Top;
         }
 
         private void PropertyEditor_SizeChanged(object sender, EventArgs e)
         {
+            if (containerGroupBox.Controls.Count > 0)
+            {
+                UpdateControlsSize();
+            }
             //if (launchGroupBox.Controls.Count > 0)
             //{
             //    var control = launchGroupBox.Controls[0];

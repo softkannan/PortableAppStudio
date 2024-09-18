@@ -28,46 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.helpTextBox = new System.Windows.Forms.RichTextBox();
-            this.containerGroupBox = new System.Windows.Forms.GroupBox();
-            this.SuspendLayout();
+            helpTextBox = new System.Windows.Forms.RichTextBox();
+            containerGroupBox = new System.Windows.Forms.GroupBox();
+            SuspendLayout();
             // 
             // helpTextBox
             // 
-            this.helpTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.helpTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.helpTextBox.Location = new System.Drawing.Point(4, 403);
-            this.helpTextBox.Name = "helpTextBox";
-            this.helpTextBox.ReadOnly = true;
-            this.helpTextBox.ShortcutsEnabled = false;
-            this.helpTextBox.Size = new System.Drawing.Size(574, 283);
-            this.helpTextBox.TabIndex = 11;
-            this.helpTextBox.Text = "";
+            helpTextBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            helpTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            helpTextBox.Location = new System.Drawing.Point(5, 525);
+            helpTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            helpTextBox.Name = "helpTextBox";
+            helpTextBox.ReadOnly = true;
+            helpTextBox.ShortcutsEnabled = false;
+            helpTextBox.Size = new System.Drawing.Size(765, 530);
+            helpTextBox.TabIndex = 11;
+            helpTextBox.Text = "";
             // 
             // containerGroupBox
             // 
-            this.containerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.containerGroupBox.Location = new System.Drawing.Point(4, 5);
-            this.containerGroupBox.Name = "containerGroupBox";
-            this.containerGroupBox.Size = new System.Drawing.Size(574, 392);
-            this.containerGroupBox.TabIndex = 10;
-            this.containerGroupBox.TabStop = false;
+            containerGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            containerGroupBox.Location = new System.Drawing.Point(5, 8);
+            containerGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            containerGroupBox.Name = "containerGroupBox";
+            containerGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            containerGroupBox.Size = new System.Drawing.Size(765, 507);
+            containerGroupBox.TabIndex = 10;
+            containerGroupBox.TabStop = false;
             // 
-            // PropertyEditor
+            // PropertyEditorUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.helpTextBox);
-            this.Controls.Add(this.containerGroupBox);
-            this.Name = "PropertyEditor";
-            this.Size = new System.Drawing.Size(583, 694);
-            this.SizeChanged += new System.EventHandler(this.PropertyEditor_SizeChanged);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(helpTextBox);
+            Controls.Add(containerGroupBox);
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "PropertyEditorUserControl";
+            Size = new System.Drawing.Size(777, 1068);
+            SizeChanged += PropertyEditor_SizeChanged;
+            ResumeLayout(false);
         }
 
         #endregion
